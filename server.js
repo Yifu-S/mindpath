@@ -7,6 +7,10 @@ const sqlite3 = require('sqlite3').verbose();
 const crypto = require('crypto');
 const path = require('path');
 const fs = require('fs');
+
+// Trust the first proxy (Render, Heroku, etc.)
+app.set('trust proxy', 1); // '1' means trust the first proxy
+
 const rateLimit = require('express-rate-limit');
 const helmet = require('helmet');
 const compression = require('compression');
