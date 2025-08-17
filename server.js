@@ -7,10 +7,6 @@ const sqlite3 = require('sqlite3').verbose();
 const crypto = require('crypto');
 const path = require('path');
 const fs = require('fs');
-
-// Trust the first proxy (Render, Heroku, etc.)
-app.set('trust proxy', 1); // '1' means trust the first proxy
-
 const rateLimit = require('express-rate-limit');
 const helmet = require('helmet');
 const compression = require('compression');
@@ -20,9 +16,14 @@ const { OpenAI } = require('openai');
 require('dotenv').config();
 
 const app = express();
-const PORT = process.env.PORT || 3000;
+app.set('trust proxy', 1);
+const PORT = process.env.PORT || 3000;  // Render will provide PORT
 const JWT_SECRET = process.env.JWT_SECRET || crypto.randomBytes(64).toString('hex');
 const ENCRYPTION_KEY = process.env.ENCRYPTION_KEY || crypto.randomBytes(32).toString('hex');
+
+// Add production URL handling
+const isDevelopment = process.env.NODE_ENV === 'development';
+const BASE_URL = process.env.RENDER_EXTERNAL_URL || `http://localhost:${PORT}`;
 
 // OpenAI Configuration
 const openai = new OpenAI({
@@ -43,7 +44,7 @@ app.use(helmet({
 }));
 app.use(compression());
 app.use(cors({
-    origin: process.env.ALLOWED_ORIGINS?.split(',') || ['http://localhost:3000'],
+    origin: process.env.ALLOWED_ORIGINS?.split(',') || ['http://localhost:3000', 'https://mindpath-74e8.onrender.com'],
     credentials: true
 }));
 app.use(express.json({ limit: '10mb' }));
