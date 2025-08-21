@@ -1,0 +1,1229 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>MindPath - College Student Mental Health Platform</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      :root {
+        --primary: #8f7c4e;
+        --primary-dark: #6b5b3a;
+        --secondary: #a8c09a;
+        --accent: #d4a574;
+        --success: #7c9885;
+        --warning: #e6b17a;
+        --danger: #d67b7b;
+        --dark: #2c2c2c;
+        --gray: #6b6b6b;
+        --light: #f8f6f2;
+        --white: #ffffff;
+        --cream: #faf8f4;
+        --sage: #9caf88;
+        --warm-gray: #8a8a8a;
+        --shadow: 0 2px 8px rgba(0, 0, 0, 0.08), 0 1px 3px rgba(0, 0, 0, 0.12);
+        --shadow-lg:
+          0 8px 25px rgba(0, 0, 0, 0.12), 0 4px 10px rgba(0, 0, 0, 0.08);
+        --border-radius: 16px;
+        --border-radius-sm: 12px;
+      }
+
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      body {
+        font-family:
+          "Inter",
+          -apple-system,
+          BlinkMacSystemFont,
+          "Segoe UI",
+          Roboto,
+          Oxygen,
+          Ubuntu,
+          sans-serif;
+        background: linear-gradient(
+          135deg,
+          #f8f6f2 0%,
+          #e8e4d8 50%,
+          #d4c8b8 100%
+        );
+        color: #2c2c2c;
+        line-height: 1.6;
+        min-height: 100vh;
+      }
+
+      .presentation {
+        max-width: 1200px;
+        margin: 0 auto;
+        background: var(--white);
+        box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+        border-radius: 20px;
+        overflow: hidden;
+        border: 1px solid rgba(143, 124, 78, 0.1);
+      }
+
+      .slide {
+        min-height: 100vh;
+        padding: 60px;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        position: relative;
+        background: linear-gradient(
+          135deg,
+          #f8f6f2 0%,
+          #e8e4d8 50%,
+          #d4c8b8 100%
+        );
+      }
+
+      .slide:nth-child(even) {
+        background: linear-gradient(
+          135deg,
+          #faf8f4 0%,
+          #f0ede6 50%,
+          #e8e4d8 100%
+        );
+      }
+
+      .slide-header {
+        text-align: center;
+        margin-bottom: 40px;
+      }
+
+      .slide-title {
+        font-size: 3.5rem;
+        font-weight: 700;
+        color: var(--primary);
+        margin-bottom: 20px;
+        text-shadow: 2px 2px 4px rgba(143, 124, 78, 0.1);
+      }
+
+      .slide-subtitle {
+        font-size: 1.5rem;
+        color: var(--gray);
+        font-weight: 400;
+      }
+
+      .content {
+        flex: 1;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+      }
+
+      .grid-2 {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 40px;
+        align-items: center;
+      }
+
+      .grid-3 {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 30px;
+      }
+
+      .card {
+        background: var(--white);
+        padding: 30px;
+        border-radius: var(--border-radius);
+        box-shadow: var(--shadow);
+        border-left: 5px solid var(--primary);
+        border: 1px solid rgba(143, 124, 78, 0.1);
+        backdrop-filter: blur(10px);
+      }
+
+      .card h3 {
+        color: var(--primary);
+        margin-bottom: 15px;
+        font-size: 1.3rem;
+        font-weight: 600;
+      }
+
+      .card p {
+        color: var(--dark);
+        line-height: 1.6;
+      }
+
+      .highlight-box {
+        background: linear-gradient(
+          135deg,
+          var(--primary) 0%,
+          var(--accent) 50%,
+          var(--secondary) 100%
+        );
+        color: var(--white);
+        padding: 30px;
+        border-radius: var(--border-radius);
+        margin: 20px 0;
+        box-shadow: var(--shadow-lg);
+        border: 1px solid rgba(143, 124, 78, 0.1);
+        position: relative;
+      }
+
+      .highlight-box::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background: linear-gradient(
+          135deg,
+          rgba(143, 124, 78, 0.1) 0%,
+          rgba(168, 192, 154, 0.1) 100%
+        );
+        pointer-events: none;
+        border-radius: var(--border-radius);
+      }
+
+      .highlight-box > * {
+        position: relative;
+        z-index: 1;
+      }
+
+      .highlight-box h3 {
+        margin-bottom: 15px;
+        font-size: 1.5rem;
+      }
+
+      .feature-list {
+        list-style: none;
+        padding: 0;
+      }
+
+      .feature-list li {
+        padding: 10px 0;
+        border-bottom: 1px solid #eee;
+        display: flex;
+        align-items: center;
+      }
+
+      .feature-list li:before {
+        content: "✅";
+        margin-right: 15px;
+        font-size: 1.2rem;
+      }
+
+      .stats-grid {
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        gap: 20px;
+        margin: 30px 0;
+      }
+
+      .stat-card {
+        text-align: center;
+        background: var(--white);
+        padding: 20px;
+        border-radius: var(--border-radius-sm);
+        box-shadow: var(--shadow);
+        border: 1px solid rgba(143, 124, 78, 0.1);
+        backdrop-filter: blur(10px);
+      }
+
+      .stat-number {
+        font-size: 2.5rem;
+        font-weight: 700;
+        color: var(--primary);
+        display: block;
+      }
+
+      .stat-label {
+        color: var(--gray);
+        font-size: 0.9rem;
+        margin-top: 5px;
+      }
+
+      .comparison-table {
+        width: 100%;
+        border-collapse: collapse;
+        margin: 20px 0;
+        background: var(--white);
+        border-radius: var(--border-radius-sm);
+        overflow: hidden;
+        box-shadow: var(--shadow);
+        border: 1px solid rgba(143, 124, 78, 0.1);
+      }
+
+      .comparison-table th,
+      .comparison-table td {
+        padding: 15px;
+        text-align: left;
+        border-bottom: 1px solid var(--light);
+      }
+
+      .comparison-table th {
+        background: linear-gradient(
+          135deg,
+          var(--primary) 0%,
+          var(--primary-dark) 100%
+        );
+        color: var(--white);
+        font-weight: 600;
+      }
+
+      .comparison-table tr:nth-child(even) {
+        background: var(--cream);
+      }
+
+      .pros {
+        color: var(--success);
+        font-weight: 600;
+      }
+
+      .cons {
+        color: var(--danger);
+        font-weight: 600;
+      }
+
+      .demo-section {
+        background: linear-gradient(135deg, var(--dark) 0%, #3a3a3a 100%);
+        color: var(--white);
+        padding: 40px;
+        border-radius: var(--border-radius);
+        margin: 20px 0;
+        box-shadow: var(--shadow-lg);
+        border: 1px solid rgba(143, 124, 78, 0.1);
+      }
+
+      .demo-section h3 {
+        margin-bottom: 20px;
+        color: var(--accent);
+      }
+
+      .demo-features {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 20px;
+      }
+
+      .demo-feature {
+        background: rgba(255, 255, 255, 0.1);
+        padding: 20px;
+        border-radius: var(--border-radius-sm);
+        border-left: 4px solid var(--accent);
+        backdrop-filter: blur(10px);
+      }
+
+      .investment-section {
+        background: linear-gradient(135deg, var(--warning) 0%, #d4a574 100%);
+        color: var(--white);
+        padding: 40px;
+        border-radius: var(--border-radius);
+        margin: 20px 0;
+        box-shadow: var(--shadow-lg);
+        border: 1px solid rgba(143, 124, 78, 0.1);
+      }
+
+      .investment-section h3 {
+        margin-bottom: 20px;
+      }
+
+      .market-size {
+        font-size: 2rem;
+        font-weight: 700;
+        margin: 20px 0;
+      }
+
+      .navigation {
+        position: fixed;
+        bottom: 20px;
+        right: 20px;
+        display: flex;
+        gap: 10px;
+      }
+
+      .nav-btn {
+        background: linear-gradient(
+          135deg,
+          var(--primary) 0%,
+          var(--primary-dark) 100%
+        );
+        color: var(--white);
+        border: none;
+        padding: 10px 15px;
+        border-radius: 25px;
+        cursor: pointer;
+        font-weight: 600;
+        transition: all 0.3s ease;
+        box-shadow: var(--shadow);
+      }
+
+      .nav-btn:hover {
+        background: linear-gradient(
+          135deg,
+          var(--primary-dark) 0%,
+          var(--primary) 100%
+        );
+        transform: translateY(-2px);
+        box-shadow: var(--shadow-lg);
+      }
+
+      .slide-number {
+        position: absolute;
+        bottom: 20px;
+        left: 20px;
+        background: rgba(0, 0, 0, 0.1);
+        color: #666;
+        padding: 5px 15px;
+        border-radius: 15px;
+        font-size: 0.9rem;
+      }
+
+      .emoji {
+        font-size: 2rem;
+        margin-right: 10px;
+      }
+
+      .highlight {
+        background: linear-gradient(120deg, var(--cream) 0%, var(--light) 100%);
+        padding: 2px 8px;
+        border-radius: 4px;
+        font-weight: 600;
+        color: var(--primary);
+      }
+
+      @media (max-width: 768px) {
+        .slide {
+          padding: 30px;
+        }
+
+        .slide-title {
+          font-size: 2.5rem;
+        }
+
+        .grid-2,
+        .grid-3 {
+          grid-template-columns: 1fr;
+        }
+
+        .stats-grid {
+          grid-template-columns: repeat(2, 1fr);
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="presentation">
+      <!-- Slide 1: Title -->
+      <div class="slide">
+        <div class="slide-header">
+          <h1 class="slide-title">🧠 MindPath</h1>
+          <p class="slide-subtitle">
+            AI-Powered Privacy-First Mental Health Platform for College Students
+          </p>
+        </div>
+        <div class="content">
+          <div class="highlight-box">
+            <h3>🎯 Mission Statement</h3>
+            <p>
+              Empowering college students (ages 18-26) to achieve academic
+              success through intelligent emotional support while maintaining
+              complete privacy and anonymity.
+            </p>
+          </div>
+          <div class="stats-grid">
+            <div class="stat-card">
+              <span class="stat-number">20M+</span>
+              <span class="stat-label">College Students in US</span>
+            </div>
+            <div class="stat-card">
+              <span class="stat-number">75%</span>
+              <span class="stat-label">Report Mental Health Issues</span>
+            </div>
+            <div class="stat-card">
+              <span class="stat-number">$0</span>
+              <span class="stat-label">Privacy Risk</span>
+            </div>
+            <div class="stat-card">
+              <span class="stat-number">24/7</span>
+              <span class="stat-label">AI Support Available</span>
+            </div>
+          </div>
+        </div>
+        <div class="slide-number">1/12</div>
+      </div>
+
+      <!-- Slide 2: Problem Statement -->
+      <div class="slide">
+        <div class="slide-header">
+          <h1 class="slide-title">😰 The Problem</h1>
+          <p class="slide-subtitle">
+            College students face unique mental health challenges with limited
+            support options
+          </p>
+        </div>
+        <div class="content">
+          <div class="grid-2">
+            <div>
+              <h3>🚨 Current Challenges</h3>
+              <ul class="feature-list">
+                <li>Academic pressure and exam anxiety</li>
+                <li>Social isolation and homesickness</li>
+                <li>Financial stress and independence struggles</li>
+                <li>Privacy concerns about seeking help</li>
+                <li>Limited access to campus counseling</li>
+                <li>Stigma around mental health support</li>
+              </ul>
+            </div>
+            <div>
+              <h3>📊 Market Reality</h3>
+              <div class="card">
+                <h4>Traditional Solutions Fall Short:</h4>
+                <p>
+                  <strong>❌ Campus Counseling:</strong> Long wait times,
+                  limited sessions, academic record risk
+                </p>
+                <p>
+                  <strong>❌ Friends/Family:</strong> Limited availability,
+                  potential judgment, relationship strain
+                </p>
+                <p>
+                  <strong>❌ General Apps:</strong> Not designed for student
+                  life, privacy concerns
+                </p>
+                <p>
+                  <strong>❌ Social Media:</strong> Public exposure, comparison
+                  anxiety, privacy risks
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="slide-number">2/12</div>
+      </div>
+
+      <!-- Slide 3: JTBD Analysis -->
+      <div class="slide">
+        <div class="slide-header">
+          <h1 class="slide-title">🎯 JTBD Analysis</h1>
+          <p class="slide-subtitle">
+            Jobs-To-Be-Done Framework for College Student Mental Health
+          </p>
+        </div>
+        <div class="content">
+          <div class="highlight-box">
+            <h3>Core Job Statement</h3>
+            <p>
+              <strong>When</strong> I as a college student face academic
+              pressure, social challenges, financial stress, or emotional
+              difficulties, <strong>I want to</strong> have a completely private
+              and intelligent platform to track my emotions, receive
+              personalized guidance, and develop coping strategies,
+              <strong>So I can</strong> better understand my emotional patterns,
+              improve my academic performance, and maintain my mental wellbeing
+              without risking privacy breaches or social stigma.
+            </p>
+          </div>
+          <div class="grid-3">
+            <div class="card">
+              <h3>🔴 Push Forces</h3>
+              <ul class="feature-list">
+                <li>Academic Stressors</li>
+                <li>Social Challenges</li>
+                <li>Independence Struggles</li>
+                <li>Future Uncertainties</li>
+                <li>Privacy Concerns</li>
+              </ul>
+            </div>
+            <div class="card">
+              <h3>🟢 Pull Forces</h3>
+              <ul class="feature-list">
+                <li>Complete Privacy Protection</li>
+                <li>24/7 Accessibility</li>
+                <li>AI-Powered Personalization</li>
+                <li>Evidence-Based Support</li>
+                <li>Academic Context Awareness</li>
+              </ul>
+            </div>
+            <div class="card">
+              <h3>🟡 Anxiety Forces</h3>
+              <ul class="feature-list">
+                <li>Data Security Fears</li>
+                <li>AI Reliability Doubts</li>
+                <li>Over-Dependence Risk</li>
+                <li>Discovery Anxiety</li>
+                <li>Effectiveness Skepticism</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+        <div class="slide-number">3/12</div>
+      </div>
+
+      <!-- Slide 4: User Personas -->
+      <div class="slide">
+        <div class="slide-header">
+          <h1 class="slide-title">👥 User Personas</h1>
+          <p class="slide-subtitle">
+            Target users with specific needs and pain points
+          </p>
+        </div>
+        <div class="content">
+          <div class="grid-2">
+            <div class="card">
+              <h3>😰 Stressed Sarah (Age 20)</h3>
+              <p>
+                <strong>Background:</strong> Junior pre-med student at
+                competitive university
+              </p>
+              <p>
+                <strong>Primary Stressors:</strong> Organic chemistry, MCAT
+                prep, medical school applications
+              </p>
+              <p>
+                <strong>Privacy Concerns:</strong> Parents discovering academic
+                struggles, pre-med peer competition
+              </p>
+              <p>
+                <strong>Key Needs:</strong> Exam anxiety management,
+                perfectionism coping, study-life balance
+              </p>
+            </div>
+            <div class="card">
+              <h3>😔 Lonely Luke (Age 18)</h3>
+              <p>
+                <strong>Background:</strong> First-generation college student,
+                lives in dorms 800 miles from home
+              </p>
+              <p>
+                <strong>Primary Stressors:</strong> Homesickness, difficulty
+                making friends, academic transition
+              </p>
+              <p>
+                <strong>Privacy Concerns:</strong> Parents worrying about
+                adjustment, appearing weak to roommates
+              </p>
+              <p>
+                <strong>Key Needs:</strong> Social skill building, homesickness
+                management, identity development
+              </p>
+            </div>
+          </div>
+          <div class="grid-2">
+            <div class="card">
+              <h3>😰 Anxious Anna (Age 24)</h3>
+              <p>
+                <strong>Background:</strong> PhD student in counseling
+                psychology
+              </p>
+              <p>
+                <strong>Primary Stressors:</strong> Imposter syndrome,
+                dissertation pressure, advisor relationship
+              </p>
+              <p>
+                <strong>Privacy Concerns:</strong> Professional reputation,
+                academic community judgment
+              </p>
+              <p>
+                <strong>Key Needs:</strong> Imposter syndrome management,
+                research stress, career planning
+              </p>
+            </div>
+            <div class="card">
+              <h3>😤 Overwhelmed Omar (Age 22)</h3>
+              <p>
+                <strong>Background:</strong> First-generation immigrant, working
+                part-time, supporting family
+              </p>
+              <p>
+                <strong>Primary Stressors:</strong> Job search pressure,
+                financial stress, cultural expectations
+              </p>
+              <p>
+                <strong>Privacy Concerns:</strong> Family discovering struggles,
+                potential employer background checks
+              </p>
+              <p>
+                <strong>Key Needs:</strong> Career anxiety management, financial
+                stress coping, cultural identity support
+              </p>
+            </div>
+          </div>
+        </div>
+        <div class="slide-number">4/12</div>
+      </div>
+
+      <!-- Slide 5: Competitive Analysis -->
+      <div class="slide">
+        <div class="slide-header">
+          <h1 class="slide-title">⚔️ Competitive Advantage</h1>
+          <p class="slide-subtitle">
+            Why MindPath outperforms existing solutions
+          </p>
+        </div>
+        <div class="content">
+          <table class="comparison-table">
+            <thead>
+              <tr>
+                <th>Solution</th>
+                <th>Limitations</th>
+                <th>MindPath Advantage</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><strong>Campus Counseling</strong></td>
+                <td class="cons">
+                  • Weeks of waiting<br />• Academic record risk<br />• Limited
+                  sessions<br />• Social stigma
+                </td>
+                <td class="pros">
+                  • Instant access<br />• Zero institutional tracking<br />•
+                  24/7 availability<br />• Complete anonymity
+                </td>
+              </tr>
+              <tr>
+                <td><strong>Friends/Family</strong></td>
+                <td class="cons">
+                  • Limited availability<br />• Risk of gossip<br />• Biased
+                  advice<br />• Relationship strain
+                </td>
+                <td class="pros">
+                  • Always available<br />• Absolute confidentiality<br />•
+                  Evidence-based strategies<br />• Preserves relationships
+                </td>
+              </tr>
+              <tr>
+                <td><strong>General Mental Health Apps</strong></td>
+                <td class="cons">
+                  • Not student-specific<br />• Privacy concerns<br />• Generic
+                  advice<br />• No academic context
+                </td>
+                <td class="pros">
+                  • College-focused design<br />• Military-grade encryption<br />•
+                  Student-specific strategies<br />• Academic calendar
+                  integration
+                </td>
+              </tr>
+              <tr>
+                <td><strong>Social Media</strong></td>
+                <td class="cons">
+                  • Public exposure<br />• Comparison anxiety<br />• Privacy
+                  risks<br />• No professional guidance
+                </td>
+                <td class="pros">
+                  • Complete privacy<br />• Non-judgmental support<br />•
+                  Professional AI guidance<br />• Anonymous peer insights
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="slide-number">5/12</div>
+      </div>
+
+      <!-- Slide 6: Product Demo - Core Features -->
+      <div class="slide">
+        <div class="slide-header">
+          <h1 class="slide-title">🚀 Product Demo</h1>
+          <p class="slide-subtitle">
+            Live demonstration of MindPath's core features
+          </p>
+        </div>
+        <div class="content">
+          <div class="demo-section">
+            <h3>🎯 Core Features Showcase</h3>
+            <div class="demo-features">
+              <div class="demo-feature">
+                <h4>🔐 Privacy-First Architecture</h4>
+                <p>
+                  • End-to-end encryption<br />• Zero-knowledge design<br />•
+                  Local-first storage<br />• Anonymous authentication
+                </p>
+              </div>
+              <div class="demo-feature">
+                <h4>📊 Intelligent Mood Tracking</h4>
+                <p>
+                  • 1-10 scale with context<br />• 8 student-specific
+                  emotions<br />• 8 academic contexts<br />• Pattern recognition
+                </p>
+              </div>
+              <div class="demo-feature">
+                <h4>📝 AI-Powered Journaling</h4>
+                <p>
+                  • Encrypted entries<br />• Personalized AI responses<br />•
+                  30+ writing prompts<br />• Clickable content modal
+                </p>
+              </div>
+              <div class="demo-feature">
+                <h4>🎯 Personalized Strategies</h4>
+                <p>
+                  • Evidence-based techniques<br />• Emotion-context mapping<br />•
+                  Randomized recommendations<br />• Academic calendar awareness
+                </p>
+              </div>
+            </div>
+          </div>
+          <div class="highlight-box">
+            <h3>🌐 Live Demo URL</h3>
+            <p>
+              <strong>Production Environment:</strong>
+              <a
+                href="https://mindpath-74e8.onrender.com"
+                target="_blank"
+                style="color: white; text-decoration: underline"
+                >https://mindpath-74e8.onrender.com</a
+              >
+            </p>
+            <p>
+              <strong>Status:</strong> Fully functional with all features
+              implemented and tested
+            </p>
+          </div>
+        </div>
+        <div class="slide-number">6/12</div>
+      </div>
+
+      <!-- Slide 7: Technical Architecture -->
+      <div class="slide">
+        <div class="slide-header">
+          <h1 class="slide-title">🏗️ Technical Architecture</h1>
+          <p class="slide-subtitle">
+            Robust, scalable, and secure infrastructure
+          </p>
+        </div>
+        <div class="content">
+          <div class="grid-2">
+            <div>
+              <h3>🔒 Security & Privacy</h3>
+              <ul class="feature-list">
+                <li>AES-256-GCM encryption</li>
+                <li>Zero-knowledge architecture</li>
+                <li>Client-side encryption</li>
+                <li>JWT authentication</li>
+                <li>Rate limiting & CORS protection</li>
+                <li>Content Security Policy</li>
+              </ul>
+            </div>
+            <div>
+              <h3>⚡ Performance & Scalability</h3>
+              <ul class="feature-list">
+                <li>Node.js/Express backend</li>
+                <li>SQLite with encryption</li>
+                <li>Progressive Web App</li>
+                <li>Mobile-responsive design</li>
+                <li>Offline fallback capability</li>
+                <li>Real-time updates</li>
+              </ul>
+            </div>
+          </div>
+          <div class="card">
+            <h3>🤖 AI Integration</h3>
+            <p>
+              <strong>OpenAI API Integration:</strong> Personalized journal
+              responses, pattern analysis, and coping strategy generation
+            </p>
+            <p>
+              <strong>Strategy Pool System:</strong> 8 emotions × 8 contexts =
+              64 combinations with randomized strategies
+            </p>
+            <p>
+              <strong>Academic Context Awareness:</strong> Semester rhythms,
+              exam periods, and student-specific stressors
+            </p>
+          </div>
+        </div>
+        <div class="slide-number">7/12</div>
+      </div>
+
+      <!-- Slide 8: User Experience -->
+      <div class="slide">
+        <div class="slide-header">
+          <h1 class="slide-title">💎 User Experience</h1>
+          <p class="slide-subtitle">
+            Designed specifically for college student needs
+          </p>
+        </div>
+        <div class="content">
+          <div class="grid-3">
+            <div class="card">
+              <h3>📱 Mobile-First Design</h3>
+              <p>
+                • Optimized for smartphone usage<br />• Between-class
+                interactions<br />• Dorm-friendly interface<br />• Quick mood
+                check-ins
+              </p>
+            </div>
+            <div class="card">
+              <h3>🎨 Therapist-Like UI</h3>
+              <p>
+                • Calming color scheme<br />• Professional design<br />• Smooth
+                animations<br />• Glassmorphism effects
+              </p>
+            </div>
+            <div class="card">
+              <h3>⚡ Quick Interactions</h3>
+              <p>
+                • One-tap mood logging<br />• Auto-refresh insights<br />•
+                Clickable journal entries<br />• Instant strategy access
+              </p>
+            </div>
+          </div>
+          <div class="highlight-box">
+            <h3>🎯 Student-Specific Features</h3>
+            <div class="grid-2">
+              <div>
+                <p>
+                  <strong>Academic Integration:</strong> Semester awareness,
+                  exam stress management, assignment tracking
+                </p>
+                <p>
+                  <strong>Social Support:</strong> Loneliness management,
+                  roommate relationships, campus integration
+                </p>
+              </div>
+              <div>
+                <p>
+                  <strong>Privacy Controls:</strong> Granular permissions, data
+                  export, emergency wipe
+                </p>
+                <p>
+                  <strong>Crisis Support:</strong> Pattern detection, resource
+                  connections, professional referrals
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="slide-number">8/12</div>
+      </div>
+
+      <!-- Slide 9: Market Opportunity -->
+      <div class="slide">
+        <div class="slide-header">
+          <h1 class="slide-title">📈 Market Opportunity</h1>
+          <p class="slide-subtitle">
+            Massive untapped market with growing demand
+          </p>
+        </div>
+        <div class="content">
+          <div class="stats-grid">
+            <div class="stat-card">
+              <span class="stat-number">20M+</span>
+              <span class="stat-label">College Students in US</span>
+            </div>
+            <div class="stat-card">
+              <span class="stat-number">75%</span>
+              <span class="stat-label">Report Mental Health Issues</span>
+            </div>
+            <div class="stat-card">
+              <span class="stat-number">$2.5B</span>
+              <span class="stat-label">Mental Health App Market</span>
+            </div>
+            <div class="stat-card">
+              <span class="stat-number">15%</span>
+              <span class="stat-label">Annual Growth Rate</span>
+            </div>
+          </div>
+          <div class="grid-2">
+            <div class="card">
+              <h3>🎯 Target Market Segments</h3>
+              <ul class="feature-list">
+                <li>
+                  <strong>Undergraduate Students:</strong> 16.6M students (83%)
+                </li>
+                <li><strong>Graduate Students:</strong> 3.4M students (17%)</li>
+                <li>
+                  <strong>International Students:</strong> 1.1M students (5.5%)
+                </li>
+                <li>
+                  <strong>First-Generation:</strong> 5.7M students (28.5%)
+                </li>
+                <li><strong>Community College:</strong> 6.8M students (34%)</li>
+              </ul>
+            </div>
+            <div class="card">
+              <h3>💰 Revenue Potential</h3>
+              <ul class="feature-list">
+                <li>
+                  <strong>Freemium Model:</strong> $4.99/month premium features
+                </li>
+                <li>
+                  <strong>Campus Licensing:</strong> $2K-10K/year per
+                  institution
+                </li>
+                <li>
+                  <strong>Research Partnerships:</strong> Anonymized data
+                  licensing
+                </li>
+                <li>
+                  <strong>Corporate Wellness:</strong> Young professional
+                  adaptation
+                </li>
+                <li>
+                  <strong>International Expansion:</strong> Global student
+                  market
+                </li>
+              </ul>
+            </div>
+          </div>
+        </div>
+        <div class="slide-number">9/12</div>
+      </div>
+
+      <!-- Slide 10: Business Model -->
+      <div class="slide">
+        <div class="slide-header">
+          <h1 class="slide-title">💰 Business Model</h1>
+          <p class="slide-subtitle">
+            Sustainable revenue streams with social impact
+          </p>
+        </div>
+        <div class="content">
+          <div class="grid-2">
+            <div class="card">
+              <h3>🎯 Freemium Structure</h3>
+              <h4>Free Features:</h4>
+              <ul class="feature-list">
+                <li>Basic mood tracking</li>
+                <li>Essential journaling</li>
+                <li>Core privacy controls</li>
+                <li>Crisis detection</li>
+              </ul>
+              <h4>Premium Features ($4.99/month):</h4>
+              <ul class="feature-list">
+                <li>Advanced analytics</li>
+                <li>Extended history</li>
+                <li>Priority AI responses</li>
+                <li>Custom insights</li>
+              </ul>
+            </div>
+            <div class="card">
+              <h3>🏢 B2B Opportunities</h3>
+              <h4>Campus Partnerships ($2K-10K/year):</h4>
+              <ul class="feature-list">
+                <li>Anonymous institutional dashboards</li>
+                <li>Student mental health trends</li>
+                <li>Resource allocation insights</li>
+                <li>Early intervention data</li>
+              </ul>
+              <h4>Research Collaborations:</h4>
+              <ul class="feature-list">
+                <li>Anonymized data licensing</li>
+                <li>Academic research partnerships</li>
+                <li>Mental health studies</li>
+                <li>Policy development support</li>
+              </ul>
+            </div>
+          </div>
+          <div class="investment-section">
+            <h3>📊 Financial Projections</h3>
+            <div class="grid-2">
+              <div>
+                <p><strong>Year 1:</strong> 10K users, $50K revenue</p>
+                <p><strong>Year 2:</strong> 50K users, $300K revenue</p>
+                <p><strong>Year 3:</strong> 200K users, $1.2M revenue</p>
+              </div>
+              <div>
+                <p><strong>Conversion Rate:</strong> 15% free to premium</p>
+                <p><strong>Customer Acquisition Cost:</strong> $5</p>
+                <p><strong>Lifetime Value:</strong> $150</p>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="slide-number">10/12</div>
+      </div>
+
+      <!-- Slide 11: Investment Ask -->
+      <div class="slide">
+        <div class="slide-header">
+          <h1 class="slide-title">💼 Investment Opportunity</h1>
+          <p class="slide-subtitle">
+            Join us in revolutionizing student mental health support
+          </p>
+        </div>
+        <div class="content">
+          <div class="highlight-box">
+            <h3>🎯 Investment Ask</h3>
+            <p><strong>Seeking:</strong> $500K Seed Round</p>
+            <p>
+              <strong>Use of Funds:</strong> Product development, marketing,
+              team expansion, and market penetration
+            </p>
+            <p><strong>Valuation:</strong> $2.5M pre-money</p>
+          </div>
+          <div class="grid-3">
+            <div class="card">
+              <h3>🚀 Product Development (40%)</h3>
+              <ul class="feature-list">
+                <li>Advanced AI features</li>
+                <li>Mobile app development</li>
+                <li>Integration APIs</li>
+                <li>Performance optimization</li>
+              </ul>
+            </div>
+            <div class="card">
+              <h3>📢 Marketing & Growth (35%)</h3>
+              <ul class="feature-list">
+                <li>Campus partnerships</li>
+                <li>Digital marketing</li>
+                <li>User acquisition</li>
+                <li>Brand development</li>
+              </ul>
+            </div>
+            <div class="card">
+              <h3>👥 Team Expansion (25%)</h3>
+              <ul class="feature-list">
+                <li>Technical hires</li>
+                <li>Mental health experts</li>
+                <li>Sales & partnerships</li>
+                <li>Operations support</li>
+              </ul>
+            </div>
+          </div>
+          <div class="investment-section">
+            <h3>🌟 Why Invest in MindPath?</h3>
+            <div class="grid-2">
+              <div>
+                <p>
+                  <strong>✅ Proven Product:</strong> Fully functional platform
+                  with live deployment
+                </p>
+                <p>
+                  <strong>✅ Massive Market:</strong> 20M+ college students with
+                  growing mental health needs
+                </p>
+                <p>
+                  <strong>✅ Privacy-First:</strong> Unique competitive
+                  advantage with zero institutional risk
+                </p>
+              </div>
+              <div>
+                <p>
+                  <strong>✅ Strong Team:</strong> Technical expertise + mental
+                  health domain knowledge
+                </p>
+                <p>
+                  <strong>✅ Scalable Model:</strong> Freemium + B2B revenue
+                  streams
+                </p>
+                <p>
+                  <strong>✅ Social Impact:</strong> Addressing critical student
+                  mental health crisis
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="slide-number">11/12</div>
+      </div>
+
+      <!-- Slide 12: Call to Action -->
+      <div class="slide">
+        <div class="slide-header">
+          <h1 class="slide-title">🎯 Let's Build the Future</h1>
+          <p class="slide-subtitle">
+            Together, we can transform student mental health support
+          </p>
+        </div>
+        <div class="content">
+          <div class="highlight-box">
+            <h3>🌟 Vision Statement</h3>
+            <p>
+              <strong
+                >MindPath aspires to become the trusted mental health companion
+                for every college student, providing the privacy, understanding,
+                and intelligent support needed to thrive academically and
+                personally during one of life's most challenging and formative
+                periods.</strong
+              >
+            </p>
+          </div>
+          <div class="grid-2">
+            <div class="card">
+              <h3>🎯 Next Steps</h3>
+              <ul class="feature-list">
+                <li>Demo the live platform</li>
+                <li>Review technical architecture</li>
+                <li>Discuss partnership opportunities</li>
+                <li>Explore investment terms</li>
+                <li>Plan go-to-market strategy</li>
+              </ul>
+            </div>
+            <div class="card">
+              <h3>📞 Contact Information</h3>
+              <p>
+                <strong>Live Demo:</strong>
+                <a href="https://mindpath-74e8.onrender.com" target="_blank"
+                  >mindpath-74e8.onrender.com</a
+                >
+              </p>
+              <p><strong>GitHub:</strong> Complete source code available</p>
+              <p>
+                <strong>Documentation:</strong> Comprehensive technical docs
+              </p>
+              <p><strong>Team:</strong> Ready for partnership discussions</p>
+            </div>
+          </div>
+          <div class="investment-section">
+            <h3>🚀 Ready to Invest?</h3>
+            <p>
+              <strong
+                >Join us in building the future of student mental health
+                support.</strong
+              >
+            </p>
+            <p>
+              <strong
+                >Together, we can make a difference in millions of students'
+                lives while building a sustainable, profitable business.</strong
+              >
+            </p>
+          </div>
+        </div>
+        <div class="slide-number">12/12</div>
+      </div>
+    </div>
+
+    <div class="navigation">
+      <button class="nav-btn" onclick="previousSlide()">← Previous</button>
+      <button class="nav-btn" onclick="nextSlide()">Next →</button>
+    </div>
+
+    <script>
+      let currentSlide = 0;
+      const slides = document.querySelectorAll(".slide");
+
+      function showSlide(n) {
+        slides.forEach((slide, index) => {
+          slide.style.display = index === n ? "block" : "none";
+        });
+      }
+
+      function nextSlide() {
+        currentSlide = (currentSlide + 1) % slides.length;
+        showSlide(currentSlide);
+      }
+
+      function previousSlide() {
+        currentSlide = (currentSlide - 1 + slides.length) % slides.length;
+        showSlide(currentSlide);
+      }
+
+      // Keyboard navigation
+      document.addEventListener("keydown", (e) => {
+        if (e.key === "ArrowRight" || e.key === " ") {
+          nextSlide();
+        } else if (e.key === "ArrowLeft") {
+          previousSlide();
+        }
+      });
+
+      // Initialize
+      showSlide(0);
+    </script>
+  </body>
+</html>
