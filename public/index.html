@@ -191,6 +191,33 @@
         box-shadow: var(--shadow);
       }
 
+      .btn-logout {
+        background: linear-gradient(
+          135deg,
+          var(--primary) 0%,
+          var(--primary-dark) 100%
+        );
+        color: var(--white);
+        border: none;
+        padding: 12px 20px;
+        border-radius: var(--border-radius-sm);
+        font-size: 14px;
+        font-weight: 600;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        box-shadow: var(--shadow);
+      }
+
+      .btn-logout:hover {
+        background: linear-gradient(
+          135deg,
+          var(--primary-dark) 0%,
+          var(--primary) 100%
+        );
+        transform: translateY(-1px);
+        box-shadow: var(--shadow-lg);
+      }
+
       .btn-danger {
         background: var(--danger);
       }
@@ -1053,7 +1080,7 @@
               <span>Encrypted</span>
             </div>
             <button
-              class="btn btn-secondary"
+              class="btn btn-logout"
               style="width: auto"
               onclick="logout()"
             >
@@ -1929,6 +1956,29 @@
           "🌈 Describe a moment today that made you smile.",
           "📚 How are you balancing academics and self-care?",
           "🤝 How are your relationships affecting your wellbeing?",
+          "🌙 How has your sleep been affecting your mood lately?",
+          "🏃‍♀️ What physical activity or exercise made you feel good recently?",
+          "🍽️ How is your relationship with food and nutrition?",
+          "🎨 What creative outlet brings you joy?",
+          "📖 What book, movie, or music resonated with you recently?",
+          "🌱 What personal growth have you noticed in yourself?",
+          "🏠 How does your living environment impact your mental state?",
+          "💼 What work or academic challenges are you facing?",
+          "🎓 What are your biggest concerns about your education?",
+          "💰 How are financial worries affecting your wellbeing?",
+          "👥 Who are the people that support you the most?",
+          "🌍 What global or local events are on your mind?",
+          "🎭 What role or identity are you exploring right now?",
+          "🔮 What are your hopes and dreams for the future?",
+          "⚖️ How are you finding balance in your life?",
+          "🎪 What fun or exciting things are you looking forward to?",
+          "🧘‍♀️ What helps you feel calm and centered?",
+          "🎯 What's one thing you'd like to improve about yourself?",
+          "💝 What acts of kindness have you given or received?",
+          "🌅 What's your ideal morning routine?",
+          "🌃 What helps you wind down at the end of the day?",
+          "🎨 What would your perfect day look like?",
+          "🔍 What patterns have you noticed in your thoughts lately?",
         ];
 
         const randomPrompt =
