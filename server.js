@@ -950,27 +950,59 @@ app.get("/api/strategies", authenticateToken, async (req, res) => {
                 const lowerEmotion = emotion.toLowerCase();
                 if (
                   lowerEmotion.includes("anxious") ||
-                  lowerEmotion.includes("stress")
+                  lowerEmotion.includes("stress") ||
+                  lowerEmotion.includes("worried")
                 ) {
                   userPatterns.push("anxiety", "stress");
                 }
                 if (
                   lowerEmotion.includes("lonely") ||
-                  lowerEmotion.includes("alone")
+                  lowerEmotion.includes("alone") ||
+                  lowerEmotion.includes("isolated")
                 ) {
                   userPatterns.push("loneliness", "social");
                 }
                 if (
                   lowerEmotion.includes("overwhelm") ||
-                  lowerEmotion.includes("pressure")
+                  lowerEmotion.includes("pressure") ||
+                  lowerEmotion.includes("burdened")
                 ) {
                   userPatterns.push("stress", "anxiety");
                 }
                 if (
                   lowerEmotion.includes("tired") ||
-                  lowerEmotion.includes("exhaust")
+                  lowerEmotion.includes("exhaust") ||
+                  lowerEmotion.includes("fatigue")
                 ) {
                   userPatterns.push("sleep", "health");
+                }
+                if (
+                  lowerEmotion.includes("frustrated") ||
+                  lowerEmotion.includes("angry") ||
+                  lowerEmotion.includes("irritated")
+                ) {
+                  userPatterns.push("emotional", "stress");
+                }
+                if (
+                  lowerEmotion.includes("sad") ||
+                  lowerEmotion.includes("depressed") ||
+                  lowerEmotion.includes("down")
+                ) {
+                  userPatterns.push("emotional", "mood");
+                }
+                if (
+                  lowerEmotion.includes("excited") ||
+                  lowerEmotion.includes("happy") ||
+                  lowerEmotion.includes("joyful")
+                ) {
+                  userPatterns.push("gratitude", "positivity");
+                }
+                if (
+                  lowerEmotion.includes("confident") ||
+                  lowerEmotion.includes("motivated") ||
+                  lowerEmotion.includes("energetic")
+                ) {
+                  userPatterns.push("energy", "motivation");
                 }
               });
             }
@@ -981,15 +1013,52 @@ app.get("/api/strategies", authenticateToken, async (req, res) => {
               if (
                 lowerContext.includes("exam") ||
                 lowerContext.includes("test") ||
-                lowerContext.includes("assignment")
+                lowerContext.includes("assignment") ||
+                lowerContext.includes("study")
               ) {
                 userPatterns.push("academic", "focus");
               }
               if (
                 lowerContext.includes("social") ||
-                lowerContext.includes("relationship")
+                lowerContext.includes("relationship") ||
+                lowerContext.includes("friend")
               ) {
                 userPatterns.push("social", "connection");
+              }
+              if (
+                lowerContext.includes("money") ||
+                lowerContext.includes("financial") ||
+                lowerContext.includes("budget")
+              ) {
+                userPatterns.push("financial", "stress");
+              }
+              if (
+                lowerContext.includes("phone") ||
+                lowerContext.includes("screen") ||
+                lowerContext.includes("social media")
+              ) {
+                userPatterns.push("technology", "focus");
+              }
+              if (
+                lowerContext.includes("room") ||
+                lowerContext.includes("environment") ||
+                lowerContext.includes("space")
+              ) {
+                userPatterns.push("environment", "calm");
+              }
+              if (
+                lowerContext.includes("food") ||
+                lowerContext.includes("nutrition") ||
+                lowerContext.includes("diet")
+              ) {
+                userPatterns.push("nutrition", "health");
+              }
+              if (
+                lowerContext.includes("exercise") ||
+                lowerContext.includes("workout") ||
+                lowerContext.includes("physical")
+              ) {
+                userPatterns.push("physical", "energy");
               }
             }
 
@@ -1063,6 +1132,301 @@ app.get("/api/strategies", authenticateToken, async (req, res) => {
         "Be patient - friendships take time",
       ],
       tags: ["loneliness", "social", "connection"],
+    },
+    {
+      id: 5,
+      category: "physical",
+      title: "5-Minute Movement Break",
+      description: "Quick physical activity to boost mood and energy",
+      steps: [
+        "Stand up and stretch",
+        "Do 10 jumping jacks",
+        "Walk around your room",
+        "Do 5 push-ups or wall push-ups",
+        "Take 5 deep breaths",
+      ],
+      tags: ["energy", "mood", "physical", "quick"],
+    },
+    {
+      id: 6,
+      category: "mindfulness",
+      title: "Body Scan Meditation",
+      description: "Connect with your body and reduce tension",
+      steps: [
+        "Lie down or sit comfortably",
+        "Close your eyes",
+        "Focus on your toes, then feet",
+        "Move attention up your body",
+        "Notice any tension and release it",
+        "Continue to the top of your head",
+      ],
+      tags: ["anxiety", "stress", "mindfulness", "relaxation"],
+    },
+    {
+      id: 7,
+      category: "nutrition",
+      title: "Brain-Boosting Snacks",
+      description: "Foods that support mental clarity and mood",
+      steps: [
+        "Keep nuts and seeds handy",
+        "Eat dark chocolate (70%+)",
+        "Include fatty fish or omega-3s",
+        "Stay hydrated with water",
+        "Avoid sugary energy drinks",
+      ],
+      tags: ["energy", "focus", "nutrition", "health"],
+    },
+    {
+      id: 8,
+      category: "academic",
+      title: "Study Environment Optimization",
+      description: "Create a space that supports learning",
+      steps: [
+        "Clear your desk completely",
+        "Add natural light or good lighting",
+        "Keep water and healthy snacks nearby",
+        "Use noise-canceling headphones if needed",
+        "Set phone to Do Not Disturb",
+      ],
+      tags: ["focus", "productivity", "study", "environment"],
+    },
+    {
+      id: 9,
+      category: "emotional",
+      title: "Emotion Labeling Technique",
+      description: "Process and understand your feelings",
+      steps: [
+        "Name the emotion you're feeling",
+        "Rate its intensity (1-10)",
+        "Identify what triggered it",
+        "Notice where you feel it in your body",
+        "Remind yourself it's temporary",
+      ],
+      tags: ["emotions", "self-awareness", "processing"],
+    },
+    {
+      id: 10,
+      category: "social",
+      title: "Boundary Setting",
+      description: "Protect your mental health in relationships",
+      steps: [
+        "Identify what drains your energy",
+        "Practice saying 'no' to small things first",
+        "Communicate your needs clearly",
+        "Set time limits for social activities",
+        "Prioritize your own wellbeing",
+      ],
+      tags: ["boundaries", "social", "self-care"],
+    },
+    {
+      id: 11,
+      category: "creative",
+      title: "Creative Expression",
+      description: "Use art to process emotions",
+      steps: [
+        "Doodle or draw for 10 minutes",
+        "Write a poem or short story",
+        "Create a playlist for your mood",
+        "Take photos of things that bring you joy",
+        "Try a new creative hobby",
+      ],
+      tags: ["creativity", "emotions", "self-expression"],
+    },
+    {
+      id: 12,
+      category: "routine",
+      title: "Morning Routine Reset",
+      description: "Start your day with intention",
+      steps: [
+        "Wake up at the same time daily",
+        "Drink a glass of water first",
+        "Spend 5 minutes in silence",
+        "Write down 3 priorities for the day",
+        "Eat a nutritious breakfast",
+      ],
+      tags: ["routine", "morning", "productivity", "health"],
+    },
+    {
+      id: 13,
+      category: "financial",
+      title: "Financial Stress Management",
+      description: "Reduce money-related anxiety",
+      steps: [
+        "Track all expenses for one week",
+        "Create a simple budget",
+        "Look for student discounts",
+        "Consider part-time work or gigs",
+        "Talk to financial aid office",
+      ],
+      tags: ["financial", "stress", "planning"],
+    },
+    {
+      id: 14,
+      category: "technology",
+      title: "Digital Detox",
+      description: "Reduce screen time for better mental health",
+      steps: [
+        "Set app time limits on your phone",
+        "Turn off notifications for social media",
+        "Use grayscale mode to reduce appeal",
+        "Charge phone outside bedroom",
+        "Schedule tech-free hours daily",
+      ],
+      tags: ["technology", "stress", "focus", "sleep"],
+    },
+    {
+      id: 15,
+      category: "gratitude",
+      title: "Gratitude Practice",
+      description: "Shift focus to positive aspects of life",
+      steps: [
+        "Write down 3 things you're grateful for",
+        "Thank someone who helped you",
+        "Notice small moments of joy",
+        "Reflect on your progress",
+        "Share appreciation with others",
+      ],
+      tags: ["gratitude", "positivity", "mood"],
+    },
+    {
+      id: 16,
+      category: "academic",
+      title: "Test Anxiety Management",
+      description: "Prepare mentally for exams",
+      steps: [
+        "Review material in small chunks",
+        "Practice deep breathing before tests",
+        "Get adequate sleep the night before",
+        "Eat a light, nutritious meal",
+        "Arrive early to avoid rushing",
+      ],
+      tags: ["anxiety", "academic", "exams", "stress"],
+    },
+    {
+      id: 17,
+      category: "physical",
+      title: "Progressive Muscle Relaxation",
+      description: "Release physical tension systematically",
+      steps: [
+        "Start with your toes",
+        "Tense muscles for 5 seconds",
+        "Release and feel the relaxation",
+        "Move up to calves, thighs, stomach",
+        "Continue to shoulders and face",
+      ],
+      tags: ["relaxation", "tension", "physical", "stress"],
+    },
+    {
+      id: 18,
+      category: "social",
+      title: "Conflict Resolution",
+      description: "Handle disagreements constructively",
+      steps: [
+        "Take time to cool down first",
+        "Use 'I feel' statements",
+        "Listen without interrupting",
+        "Find common ground",
+        "Agree to disagree when needed",
+      ],
+      tags: ["conflict", "communication", "social"],
+    },
+    {
+      id: 19,
+      category: "environment",
+      title: "Study Space Transformation",
+      description: "Create a calming, productive environment",
+      steps: [
+        "Add plants or natural elements",
+        "Use calming colors (blue, green)",
+        "Organize supplies and materials",
+        "Add personal touches (photos, art)",
+        "Keep it clean and clutter-free",
+      ],
+      tags: ["environment", "calm", "productivity", "study"],
+    },
+    {
+      id: 20,
+      category: "mindfulness",
+      title: "Walking Meditation",
+      description: "Practice mindfulness while moving",
+      steps: [
+        "Walk slowly and deliberately",
+        "Focus on the sensation of walking",
+        "Notice your surroundings",
+        "Breathe naturally",
+        "Return to walking when mind wanders",
+      ],
+      tags: ["mindfulness", "movement", "meditation", "stress"],
+    },
+    {
+      id: 21,
+      category: "emotional",
+      title: "Self-Compassion Break",
+      description: "Be kind to yourself during difficult times",
+      steps: [
+        "Acknowledge your suffering",
+        "Remember you're not alone",
+        "Offer yourself kind words",
+        "Place hand on heart if helpful",
+        "Give yourself permission to struggle",
+      ],
+      tags: ["self-compassion", "kindness", "emotional"],
+    },
+    {
+      id: 22,
+      category: "academic",
+      title: "Note-Taking Strategy",
+      description: "Improve learning and reduce study stress",
+      steps: [
+        "Use the Cornell method",
+        "Write key points in your own words",
+        "Review notes within 24 hours",
+        "Create visual summaries",
+        "Teach concepts to others",
+      ],
+      tags: ["study", "learning", "academic", "organization"],
+    },
+    {
+      id: 23,
+      category: "sleep",
+      title: "Power Nap Protocol",
+      description: "Recharge without disrupting sleep cycle",
+      steps: [
+        "Set alarm for 20-30 minutes",
+        "Find a quiet, dark space",
+        "Lie down or recline comfortably",
+        "Focus on your breathing",
+        "Don't worry if you don't fall asleep",
+      ],
+      tags: ["sleep", "energy", "rest", "quick"],
+    },
+    {
+      id: 24,
+      category: "social",
+      title: "Active Listening",
+      description: "Improve relationships through better communication",
+      steps: [
+        "Maintain eye contact",
+        "Don't interrupt or plan responses",
+        "Ask clarifying questions",
+        "Reflect back what you heard",
+        "Show empathy and understanding",
+      ],
+      tags: ["communication", "social", "relationships"],
+    },
+    {
+      id: 25,
+      category: "creative",
+      title: "Vision Board Creation",
+      description: "Visualize your goals and aspirations",
+      steps: [
+        "Collect images that inspire you",
+        "Add words and quotes",
+        "Include academic and personal goals",
+        "Place where you'll see it daily",
+        "Update as goals evolve",
+      ],
+      tags: ["goals", "motivation", "creative", "planning"],
     },
   ];
 
