@@ -3921,7 +3921,7 @@ app.get("/api/strategies", authenticateToken, async (req, res) => {
 
   // Get the most recent mood entry to determine current emotion and context
   const recentMoodQuery = `
-    SELECT emotions, context FROM mood_entries 
+    SELECT encrypted_data, iv FROM mood_entries 
     WHERE user_id = ? 
     ORDER BY created_at DESC 
     LIMIT 1
@@ -3936,17 +3936,26 @@ app.get("/api/strategies", authenticateToken, async (req, res) => {
     }
 
     if (!row) {
+      console.log("❌ No mood entries found for user:", userId);
       return res.json([]);
     }
 
     try {
-      const decryptedEmotions = JSON.parse(CryptoUtils.decrypt(row.emotions));
-      const decryptedContext = CryptoUtils.decrypt(row.context);
+      // Decrypt the mood data
+      const decrypted = EncryptionService.decrypt(
+        row.encrypted_data,
+        row.iv,
+        req.user.username
+      );
+      const moodData = JSON.parse(decrypted);
+      
+      const decryptedEmotions = moodData.emotions;
+      const decryptedContext = moodData.context;
 
       // Get the first emotion (since only one is selected now)
       const emotion = decryptedEmotions[0]?.toLowerCase().trim();
       const context = decryptedContext.toLowerCase().trim();
-      
+
       console.log("🔍 Raw decrypted emotions:", decryptedEmotions);
       console.log("🔍 Raw decrypted context:", decryptedContext);
       console.log("🔍 Normalized emotion:", emotion);
@@ -3954,8 +3963,11 @@ app.get("/api/strategies", authenticateToken, async (req, res) => {
 
       console.log("🎯 Current emotion:", emotion);
       console.log("🎯 Current context:", context);
-      console.log("🔍 Available emotions in strategyPools:", Object.keys(strategyPools));
-      
+      console.log(
+        "🔍 Available emotions in strategyPools:",
+        Object.keys(strategyPools)
+      );
+
       // Find the appropriate strategy pools
       const emotionPools = strategyPools[emotion];
       if (!emotionPools) {
@@ -3964,19 +3976,25 @@ app.get("/api/strategies", authenticateToken, async (req, res) => {
         return res.json([]);
       }
 
-      console.log("🔍 Available contexts for emotion '", emotion, "':", Object.keys(emotionPools));
-      
+      console.log(
+        "🔍 Available contexts for emotion '",
+        emotion,
+        "':",
+        Object.keys(emotionPools)
+      );
+
       let contextPools = emotionPools[context];
       if (!contextPools) {
         console.log("❌ No exact match found for context:", context);
         console.log("🔍 Available contexts:", Object.keys(emotionPools));
-        
+
         // Try to find a similar context
         const availableContexts = Object.keys(emotionPools);
-        const similarContext = availableContexts.find(available => 
-          available.includes(context) || context.includes(available)
+        const similarContext = availableContexts.find(
+          (available) =>
+            available.includes(context) || context.includes(available)
         );
-        
+
         if (similarContext) {
           console.log("🔍 Found similar context:", similarContext);
           contextPools = emotionPools[similarContext];
@@ -4001,8 +4019,14 @@ app.get("/api/strategies", authenticateToken, async (req, res) => {
 
       const selectedStrategies = [...pool1Strategies, ...pool2Strategies];
 
-      console.log("📊 Pool 1 strategies:", pool1Strategies.map((s) => s.title));
-      console.log("📊 Pool 2 strategies:", pool2Strategies.map((s) => s.title));
+      console.log(
+        "📊 Pool 1 strategies:",
+        pool1Strategies.map((s) => s.title)
+      );
+      console.log(
+        "📊 Pool 2 strategies:",
+        pool2Strategies.map((s) => s.title)
+      );
       console.log(
         "📊 Final selected strategies:",
         selectedStrategies.map((s) => s.title)
