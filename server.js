@@ -122,16 +122,7 @@ db.serialize(() => {
         FOREIGN KEY (user_id) REFERENCES users (id)
     )`);
 
-  // Academic calendar events
-  db.run(`CREATE TABLE IF NOT EXISTS academic_events (
-        id INTEGER PRIMARY KEY AUTOINCREMENT,
-        user_id INTEGER NOT NULL,
-        event_type TEXT,
-        event_date DATE,
-        description TEXT,
-        created_at DATETIME DEFAULT CURRENT_TIMESTAMP,
-        FOREIGN KEY (user_id) REFERENCES users (id)
-    )`);
+
 });
 
 // Encryption utilities
@@ -905,7 +896,6 @@ app.delete("/api/privacy/delete-all", authenticateToken, (req, res) => {
     db.run(`DELETE FROM mood_entries WHERE user_id = ?`, [userId]);
     db.run(`DELETE FROM journal_entries WHERE user_id = ?`, [userId]);
     db.run(`DELETE FROM crisis_logs WHERE user_id = ?`, [userId]);
-    db.run(`DELETE FROM academic_events WHERE user_id = ?`, [userId]);
     db.run(`DELETE FROM users WHERE id = ?`, [userId], (err) => {
       if (err) {
         return res.status(500).json({ error: "Failed to delete data" });
@@ -1523,40 +1513,7 @@ app.get("/api/strategies", authenticateToken, async (req, res) => {
   res.json(personalizedStrategies.slice(0, 6));
 });
 
-// Academic Calendar Integration
-app.post("/api/calendar/event", authenticateToken, (req, res) => {
-  const { eventType, eventDate, description } = req.body;
-  const userId = req.user.id;
 
-  db.run(
-    `INSERT INTO academic_events (user_id, event_type, event_date, description) 
-         VALUES (?, ?, ?, ?)`,
-    [userId, eventType, eventDate, description],
-    function (err) {
-      if (err) {
-        return res.status(500).json({ error: "Failed to save event" });
-      }
-      res.json({ success: true, id: this.lastID });
-    }
-  );
-});
-
-app.get("/api/calendar/events", authenticateToken, (req, res) => {
-  const userId = req.user.id;
-
-  db.all(
-    `SELECT * FROM academic_events 
-         WHERE user_id = ? AND event_date >= date('now')
-         ORDER BY event_date ASC`,
-    [userId],
-    (err, rows) => {
-      if (err) {
-        return res.status(500).json({ error: "Failed to fetch events" });
-      }
-      res.json(rows);
-    }
-  );
-});
 
 // Crisis Resources (Static)
 app.get("/api/crisis/resources", (req, res) => {

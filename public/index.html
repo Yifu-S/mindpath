@@ -487,6 +487,83 @@
         transform: translateX(5px);
       }
 
+      .mood-history-container {
+        max-height: 600px;
+        overflow-y: auto;
+      }
+
+      .mood-history-item {
+        background: var(--light);
+        padding: 20px;
+        border-radius: 10px;
+        margin-bottom: 15px;
+        border-left: 4px solid var(--accent);
+        transition: all 0.3s ease;
+      }
+
+      .mood-history-item:hover {
+        transform: translateY(-2px);
+        box-shadow: var(--shadow-lg);
+      }
+
+      .mood-history-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 10px;
+      }
+
+      .mood-history-date {
+        font-weight: 600;
+        color: var(--text);
+      }
+
+      .mood-history-time {
+        color: var(--gray);
+        font-size: 14px;
+      }
+
+      .mood-history-rating {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        margin-bottom: 10px;
+      }
+
+      .mood-history-rating .mood-emoji {
+        font-size: 24px;
+      }
+
+      .mood-history-rating .mood-score {
+        font-weight: 600;
+        color: var(--primary);
+      }
+
+      .mood-history-emotions {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 8px;
+        margin-bottom: 10px;
+      }
+
+      .mood-history-emotion {
+        background: var(--accent);
+        color: var(--white);
+        padding: 4px 12px;
+        border-radius: 20px;
+        font-size: 12px;
+        font-weight: 500;
+      }
+
+      .mood-history-context {
+        background: var(--cream);
+        padding: 8px 12px;
+        border-radius: 8px;
+        font-size: 14px;
+        color: var(--text);
+        border-left: 3px solid var(--secondary);
+      }
+
       /* Insights */
       .chart-container {
         background: var(--light);
@@ -1099,8 +1176,8 @@
           <button class="nav-tab" onclick="switchTab('insights')">
             Insights
           </button>
-          <button class="nav-tab" onclick="switchTab('calendar')">
-            Academic Calendar
+          <button class="nav-tab" onclick="switchTab('history')">
+            Mood History
           </button>
           <button class="nav-tab" onclick="switchTab('strategies')">
             Coping Strategies
@@ -1288,45 +1365,17 @@
           </div>
         </div>
 
-        <!-- Academic Calendar Tab -->
-        <div id="calendarTab" class="tab-content">
-          <h3>Academic Calendar</h3>
+        <!-- Mood History Tab -->
+        <div id="historyTab" class="tab-content">
+          <h3>Mood History</h3>
           <p style="color: var(--gray); margin-bottom: 20px">
-            Track important academic events and deadlines
+            View your past mood entries and track your emotional journey
           </p>
 
-          <div class="form-group" style="margin-bottom: 30px">
-            <h4>Add New Event</h4>
-            <div
-              style="
-                display: grid;
-                grid-template-columns: 1fr 1fr 1fr;
-                gap: 15px;
-                margin-bottom: 15px;
-              "
-            >
-              <input
-                type="text"
-                id="eventType"
-                placeholder="Event Type (e.g., Exam, Assignment)"
-              />
-              <input type="date" id="eventDate" />
-              <button class="btn" onclick="addCalendarEvent()">
-                Add Event
-              </button>
-            </div>
-            <textarea
-              id="eventDescription"
-              placeholder="Description (optional)"
-              style="height: 80px"
-            ></textarea>
-          </div>
-
-          <h4>Upcoming Events</h4>
-          <div id="calendarEvents" class="pattern-cards">
+          <div class="mood-history-container" id="moodHistoryContainer">
             <div class="pattern-card">
-              <h4>📅 Loading Events...</h4>
-              <p>Loading your academic calendar...</p>
+              <h4>📊 Loading Mood History...</h4>
+              <p>Loading your past mood entries...</p>
             </div>
           </div>
         </div>
@@ -1725,7 +1774,7 @@
         updateJournalPrompt();
         loadInsights();
         loadStrategies();
-        loadCalendarEvents();
+        loadMoodHistory();
       }
 
       // Tab Navigation
@@ -2691,115 +2740,75 @@
         ];
       }
 
-      // Calendar Functions
-      async function loadCalendarEvents() {
+      // Mood History Functions
+      async function loadMoodHistory() {
         try {
           const token = localStorage.getItem("token");
           if (!token) return;
 
-          const response = await fetch("/api/calendar/events", {
+          const response = await fetch("/api/mood/history", {
             headers: { Authorization: `Bearer ${token}` },
           });
 
           if (response.ok) {
-            const events = await response.json();
-            displayCalendarEvents(events);
+            const moodData = await response.json();
+            displayMoodHistory(moodData);
           }
         } catch (error) {
-          console.error("Error loading calendar events:", error);
-          displayCalendarEvents([]);
+          console.error("Error loading mood history:", error);
+          // Fallback to local data
+          displayMoodHistory([]);
         }
       }
 
-      function displayCalendarEvents(events) {
-        const container = document.getElementById("calendarEvents");
+      function displayMoodHistory(moodData) {
+        const container = document.getElementById("moodHistoryContainer");
         if (!container) return;
 
-        if (events.length === 0) {
+        if (moodData.length === 0) {
           container.innerHTML = `
                     <div class="pattern-card">
-                        <h4>📅 No Events</h4>
-                        <p>Add academic events and deadlines to track them here.</p>
+                        <h4>📊 No Mood History</h4>
+                        <p>Start tracking your mood to see your emotional journey!</p>
                     </div>
                 `;
           return;
         }
 
-        container.innerHTML = events
-          .map((event) => {
-            const eventDate = new Date(event.event_date);
-            const daysUntil = Math.ceil(
-              (eventDate - new Date()) / (1000 * 60 * 60 * 24)
-            );
-            const daysText =
-              daysUntil === 0
-                ? "Today"
-                : daysUntil === 1
-                  ? "Tomorrow"
-                  : daysUntil < 0
-                    ? `${Math.abs(daysUntil)} days ago`
-                    : `${daysUntil} days`;
-
+        container.innerHTML = moodData
+          .map((entry) => {
+            const date = new Date(entry.created_at || entry.timestamp);
+            const moodEmoji = getMoodEmoji(entry.mood);
+            
             return `
-                    <div class="pattern-card">
-                        <h4>📅 ${event.event_type}</h4>
-                        <p><strong>Date:</strong> ${eventDate.toLocaleDateString()}</p>
-                        <p><strong>Time until:</strong> ${daysText}</p>
-                        ${
-                          event.description
-                            ? `<p><strong>Description:</strong> ${event.description}</p>`
-                            : ""
-                        }
+                    <div class="mood-history-item">
+                        <div class="mood-history-header">
+                            <div class="mood-history-date">${date.toLocaleDateString()}</div>
+                            <div class="mood-history-time">${date.toLocaleTimeString()}</div>
+                        </div>
+                        <div class="mood-history-rating">
+                            <span class="mood-emoji">${moodEmoji}</span>
+                            <span class="mood-score">Mood: ${entry.mood}/10</span>
+                        </div>
+                        ${entry.emotions && entry.emotions.length > 0 ? `
+                            <div class="mood-history-emotions">
+                                ${entry.emotions.map(emotion => `<span class="mood-history-emotion">${emotion}</span>`).join('')}
+                            </div>
+                        ` : ''}
+                        ${entry.context ? `
+                            <div class="mood-history-context">
+                                <strong>Context:</strong> ${entry.context}
+                            </div>
+                        ` : ''}
                     </div>
                 `;
           })
           .join("");
       }
 
-      async function addCalendarEvent() {
-        const eventType = document.getElementById("eventType").value;
-        const eventDate = document.getElementById("eventDate").value;
-        const description = document.getElementById("eventDescription").value;
-
-        if (!eventType || !eventDate) {
-          showError("Please fill in event type and date");
-          return;
-        }
-
-        try {
-          const token = localStorage.getItem("token");
-          if (!token) {
-            showError("Please log in to add events");
-            return;
-          }
-
-          const response = await fetch("/api/calendar/event", {
-            method: "POST",
-            headers: {
-              "Content-Type": "application/json",
-              Authorization: `Bearer ${token}`,
-            },
-            body: JSON.stringify({
-              eventType,
-              eventDate,
-              description,
-            }),
-          });
-
-          if (response.ok) {
-            showSuccess("Event added successfully!");
-            document.getElementById("eventType").value = "";
-            document.getElementById("eventDate").value = "";
-            document.getElementById("eventDescription").value = "";
-            loadCalendarEvents();
-          } else {
-            const data = await response.json();
-            showError(data.error || "Failed to add event");
-          }
-        } catch (error) {
-          console.error("Error adding event:", error);
-          showError("Failed to add event");
-        }
+      function getMoodEmoji(mood) {
+        const emojis = ['😔', '😟', '😕', '😐', '🙂', '😊', '😄', '😃', '😁', '🤩'];
+        return emojis[Math.max(0, Math.min(mood - 1, emojis.length - 1))] || '😐';
       }
 
       // Session Management
