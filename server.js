@@ -1002,7 +1002,7 @@ app.get("/api/strategies", authenticateToken, async (req, res) => {
                   lowerEmotion.includes("motivated") ||
                   lowerEmotion.includes("energetic")
                 ) {
-                  userPatterns.push("energy", "motivation");
+                  userPatterns.push("energy", "motivation", "confidence");
                 }
               });
             }
@@ -1017,6 +1017,14 @@ app.get("/api/strategies", authenticateToken, async (req, res) => {
                 lowerContext.includes("study")
               ) {
                 userPatterns.push("academic", "focus");
+              }
+              if (
+                lowerContext.includes("career") ||
+                lowerContext.includes("future") ||
+                lowerContext.includes("job") ||
+                lowerContext.includes("professional")
+              ) {
+                userPatterns.push("career", "future", "planning");
               }
               if (
                 lowerContext.includes("social") ||
@@ -1286,7 +1294,7 @@ app.get("/api/strategies", authenticateToken, async (req, res) => {
         "Reflect on your progress",
         "Share appreciation with others",
       ],
-      tags: ["gratitude", "positivity", "mood"],
+      tags: ["gratitude", "positivity", "mood", "confidence", "motivation"],
     },
     {
       id: 16,
@@ -1426,7 +1434,77 @@ app.get("/api/strategies", authenticateToken, async (req, res) => {
         "Place where you'll see it daily",
         "Update as goals evolve",
       ],
-      tags: ["goals", "motivation", "creative", "planning"],
+      tags: ["goals", "motivation", "creative", "planning", "confidence", "future", "career"],
+    },
+    {
+      id: 26,
+      category: "routine",
+      title: "Goal Achievement Framework",
+      description: "Turn confidence into concrete progress",
+      steps: [
+        "Break big goals into small, actionable steps",
+        "Set specific deadlines for each step",
+        "Track progress weekly",
+        "Celebrate small wins",
+        "Adjust goals as needed",
+      ],
+      tags: ["goals", "motivation", "confidence", "planning", "productivity"],
+    },
+    {
+      id: 27,
+      category: "academic",
+      title: "Career Development Planning",
+      description: "Build your professional future",
+      steps: [
+        "Research career paths in your field",
+        "Connect with professionals on LinkedIn",
+        "Attend career fairs and networking events",
+        "Develop relevant skills through courses",
+        "Create a professional portfolio",
+      ],
+      tags: ["career", "future", "planning", "motivation", "confidence"],
+    },
+    {
+      id: 28,
+      category: "social",
+      title: "Networking Confidence Builder",
+      description: "Build professional relationships with confidence",
+      steps: [
+        "Practice your elevator pitch",
+        "Prepare thoughtful questions to ask",
+        "Follow up with new connections",
+        "Join professional organizations",
+        "Attend industry meetups",
+      ],
+      tags: ["social", "confidence", "career", "networking", "motivation"],
+    },
+    {
+      id: 29,
+      category: "mindfulness",
+      title: "Confidence Meditation",
+      description: "Strengthen your self-assurance through mindfulness",
+      steps: [
+        "Sit comfortably and close your eyes",
+        "Focus on your breath",
+        "Recall a moment of success",
+        "Feel the confidence in your body",
+        "Affirm your capabilities",
+      ],
+      tags: ["confidence", "mindfulness", "motivation", "self-awareness"],
+    },
+    {
+      id: 30,
+      category: "physical",
+      title: "Power Pose Practice",
+      description: "Use body language to boost confidence",
+      steps: [
+        "Stand with feet shoulder-width apart",
+        "Place hands on hips",
+        "Lift your chin slightly",
+        "Take deep breaths",
+        "Hold for 2 minutes before important events",
+      ],
+      tags: ["confidence", "physical", "motivation", "energy"],
     },
   ];
 
@@ -1437,7 +1515,12 @@ app.get("/api/strategies", authenticateToken, async (req, res) => {
     return bRelevance - aRelevance;
   });
 
-  res.json(personalizedStrategies);
+  // Add debugging information
+  console.log("User patterns detected:", patterns);
+  console.log("Top 5 strategies:", personalizedStrategies.slice(0, 5).map(s => ({ title: s.title, tags: s.tags, relevance: s.tags.filter(tag => patterns.includes(tag)).length })));
+
+  // Return only top 6 strategies to ensure variety and prevent overwhelming
+  res.json(personalizedStrategies.slice(0, 6));
 });
 
 // Academic Calendar Integration
