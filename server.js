@@ -388,12 +388,15 @@ async function getAISupport(journalText, userId) {
         - Common stressors: ${userContext.commonStressors.join(', ')}
         
         Guidelines:
-        - Be empathetic and validating
-        - Provide specific, actionable coping strategies
-        - Reference academic context when relevant
-        - Suggest campus resources when appropriate
-        - Keep responses concise (2-3 paragraphs)
-        - If detecting crisis signs, gently suggest professional support`;
+        - Be empathetic and validating - acknowledge their feelings first
+        - Provide specific, actionable coping strategies tailored to college life
+        - Reference academic context when relevant (exams, assignments, social life)
+        - Suggest campus resources when appropriate (counseling, health services)
+        - Keep responses concise but warm (2-3 paragraphs)
+        - If detecting crisis signs, gently suggest professional support
+        - Use a supportive, non-judgmental tone
+        - Include practical tips that can be implemented immediately
+        - Reference the coping strategies available in the app when relevant`;
 
         const completion = await openai.chat.completions.create({
             model: "gpt-3.5-turbo",
@@ -538,6 +541,44 @@ app.get('/api/insights/patterns', authenticateToken, async (req, res) => {
     }
 });
 
+// Get journal insights
+app.get('/api/insights/journal', authenticateToken, (req, res) => {
+    const userId = req.user.id;
+
+    db.all(
+        `SELECT encrypted_data, iv, ai_response, created_at FROM journal_entries 
+         WHERE user_id = ? AND created_at >= datetime('now', '-30 days')
+         ORDER BY created_at DESC`,
+        [userId],
+        (err, rows) => {
+            if (err) {
+                return res.status(500).json({ error: 'Failed to fetch journal insights' });
+            }
+
+            const journalData = rows.map(row => {
+                try {
+                    const decrypted = EncryptionService.decrypt(
+                        row.encrypted_data,
+                        row.iv,
+                        req.user.username
+                    );
+                    return {
+                        ...JSON.parse(decrypted),
+                        ai_response: row.ai_response,
+                        created_at: row.created_at
+                    };
+                } catch (e) {
+                    return null;
+                }
+            }).filter(Boolean);
+
+            // Analyze journal patterns
+            const insights = analyzeJournalPatterns(journalData);
+            res.json(insights);
+        }
+    );
+});
+
 function analyzePatterns(moodData) {
     if (moodData.length === 0) {
         return { 
@@ -643,6 +684,71 @@ function generateRecommendations(avgMood, commonEmotions, stressPatterns) {
     }
 
     return recommendations;
+}
+
+function analyzeJournalPatterns(journalData) {
+    if (journalData.length === 0) {
+        return {
+            totalEntries: 0,
+            averageLength: 0,
+            commonThemes: [],
+            writingFrequency: 'none',
+            emotionalTrends: []
+        };
+    }
+
+    // Calculate average entry length
+    const totalLength = journalData.reduce((sum, entry) => sum + (entry.text?.length || 0), 0);
+    const averageLength = Math.round(totalLength / journalData.length);
+
+    // Analyze writing frequency
+    const entriesByDay = {};
+    journalData.forEach(entry => {
+        const date = new Date(entry.created_at).toDateString();
+        entriesByDay[date] = (entriesByDay[date] || 0) + 1;
+    });
+
+    const avgEntriesPerDay = Object.values(entriesByDay).reduce((a, b) => a + b, 0) / Object.keys(entriesByDay).length;
+    let writingFrequency = 'low';
+    if (avgEntriesPerDay >= 1) writingFrequency = 'daily';
+    else if (avgEntriesPerDay >= 0.5) writingFrequency = 'regular';
+    else if (avgEntriesPerDay >= 0.2) writingFrequency = 'occasional';
+
+    // Simple theme detection (keyword-based)
+    const themes = {
+        academic: ['study', 'exam', 'assignment', 'class', 'homework', 'grade'],
+        social: ['friend', 'roommate', 'relationship', 'social', 'party'],
+        stress: ['stress', 'anxiety', 'overwhelmed', 'pressure', 'worried'],
+        health: ['sleep', 'exercise', 'health', 'tired', 'sick'],
+        future: ['career', 'job', 'future', 'plan', 'goal']
+    };
+
+    const themeCounts = {};
+    journalData.forEach(entry => {
+        const text = entry.text?.toLowerCase() || '';
+        Object.entries(themes).forEach(([theme, keywords]) => {
+            if (keywords.some(keyword => text.includes(keyword))) {
+                themeCounts[theme] = (themeCounts[theme] || 0) + 1;
+            }
+        });
+    });
+
+    const commonThemes = Object.entries(themeCounts)
+        .sort((a, b) => b[1] - a[1])
+        .slice(0, 3)
+        .map(([theme, count]) => ({
+            theme,
+            frequency: count,
+            percentage: Math.round((count / journalData.length) * 100)
+        }));
+
+    return {
+        totalEntries: journalData.length,
+        averageLength,
+        commonThemes,
+        writingFrequency,
+        emotionalTrends: commonThemes
+    };
 }
 
 // Privacy and Data Management
@@ -899,42 +1005,44 @@ app.use((err, req, res, next) => {
     });
 });
 
-// Start server
-app.listen(PORT, () => {
-    console.log(`
-    🧠 MindPath Server Running
-    ========================
-    Port: ${PORT}
-    Environment: ${process.env.NODE_ENV || 'development'}
-    Database: ./mindpath.db
-    
-    Frontend: http://localhost:${PORT}
-    API: http://localhost:${PORT}/api
-    Health: http://localhost:${PORT}/api/health
-    
-    Security Features:
-    ✅ End-to-end encryption
-    ✅ JWT authentication
-    ✅ Rate limiting
-    ✅ CORS protection
-    ✅ SQL injection prevention
-    ✅ XSS protection
-    
-    To test the API:
-    curl http://localhost:${PORT}/api/health
-    `);
-});
+// Start server only if this file is run directly
+if (require.main === module) {
+    const server = app.listen(PORT, () => {
+        console.log(`
+        🧠 MindPath Server Running
+        ========================
+        Port: ${PORT}
+        Environment: ${process.env.NODE_ENV || 'development'}
+        Database: ./mindpath.db
+        
+        Frontend: http://localhost:${PORT}
+        API: http://localhost:${PORT}/api
+        Health: http://localhost:${PORT}/api/health
+        
+        Security Features:
+        ✅ End-to-end encryption
+        ✅ JWT authentication
+        ✅ Rate limiting
+        ✅ CORS protection
+        ✅ SQL injection prevention
+        ✅ XSS protection
+        
+        To test the API:
+        curl http://localhost:${PORT}/api/health
+        `);
+    });
 
-// Graceful shutdown
-process.on('SIGTERM', () => {
-    console.log('SIGTERM signal received: closing HTTP server');
-    app.close(() => {
-        console.log('HTTP server closed');
-        db.close(() => {
-            console.log('Database connection closed');
-            process.exit(0);
+    // Graceful shutdown
+    process.on('SIGTERM', () => {
+        console.log('SIGTERM signal received: closing HTTP server');
+        server.close(() => {
+            console.log('HTTP server closed');
+            db.close(() => {
+                console.log('Database connection closed');
+                process.exit(0);
+            });
         });
     });
-});
+}
 
 module.exports = app;
