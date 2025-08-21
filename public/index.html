@@ -487,6 +487,109 @@
         transform: translateX(5px);
       }
 
+      /* Journal Modal */
+      .modal-overlay {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(0, 0, 0, 0.5);
+        display: none;
+        justify-content: center;
+        align-items: center;
+        z-index: 10000;
+        backdrop-filter: blur(5px);
+      }
+
+      .modal-overlay.show {
+        display: flex;
+      }
+
+      .journal-modal {
+        background: var(--white);
+        border-radius: var(--border-radius);
+        box-shadow: var(--shadow-lg);
+        padding: 30px;
+        width: 90%;
+        max-width: 600px;
+        max-height: 80vh;
+        overflow-y: auto;
+        position: relative;
+        border: 1px solid rgba(143, 124, 78, 0.1);
+      }
+
+      .modal-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 20px;
+        padding-bottom: 15px;
+        border-bottom: 2px solid var(--light);
+      }
+
+      .modal-title {
+        font-size: 24px;
+        font-weight: 600;
+        color: var(--primary);
+      }
+
+      .modal-close {
+        background: none;
+        border: none;
+        font-size: 24px;
+        cursor: pointer;
+        color: var(--gray);
+        padding: 5px;
+        border-radius: 50%;
+        transition: all 0.3s;
+      }
+
+      .modal-close:hover {
+        background: var(--light);
+        color: var(--dark);
+      }
+
+      .journal-content {
+        margin-bottom: 25px;
+      }
+
+      .journal-date {
+        font-size: 14px;
+        color: var(--gray);
+        margin-bottom: 10px;
+      }
+
+      .journal-text {
+        background: var(--cream);
+        padding: 20px;
+        border-radius: var(--border-radius-sm);
+        line-height: 1.7;
+        color: var(--dark);
+        border-left: 4px solid var(--accent);
+      }
+
+      .ai-feedback {
+        background: linear-gradient(135deg, var(--light) 0%, #f0f4f0 100%);
+        padding: 20px;
+        border-radius: var(--border-radius-sm);
+        border-left: 4px solid var(--secondary);
+      }
+
+      .ai-feedback h4 {
+        color: var(--primary);
+        margin-bottom: 10px;
+        font-size: 18px;
+        display: flex;
+        align-items: center;
+        gap: 8px;
+      }
+
+      .ai-feedback-content {
+        color: var(--dark);
+        line-height: 1.6;
+      }
+
       .mood-history-container {
         max-height: 600px;
         overflow-y: auto;
@@ -1213,9 +1316,7 @@
               <button class="mood-button" onclick="selectMood(10)">🤩</button>
             </div>
 
-            <h4 style="margin-top: 30px">
-              What emotion are you experiencing?
-            </h4>
+            <h4 style="margin-top: 30px">What emotion are you experiencing?</h4>
             <div class="emotion-tags">
               <button class="emotion-tag" onclick="selectSingleEmotion(this)">
                 Anxious
@@ -1793,7 +1894,7 @@
         document.querySelectorAll(".emotion-tag").forEach((btn) => {
           btn.classList.remove("selected");
         });
-        
+
         // Select the clicked emotion
         element.classList.add("selected");
         const emotion = element.textContent.trim();
@@ -1847,20 +1948,10 @@
           if (response.ok) {
             showSuccess("Mood check-in saved securely!");
 
-            // Reset selections
-            currentMood = null;
-            selectedEmotions = [];
-            selectedContext = null;
-            document
-              .querySelectorAll(".mood-button, .emotion-tag")
-              .forEach((btn) => btn.classList.remove("selected"));
-
-            // Update chart and insights
-            generateMoodChart();
-            loadInsights();
-
-            // Check for concerning patterns
-            checkForConcerningPatterns(moodEntry);
+            // Refresh page to get up-to-date insights, mood history, and strategies
+            setTimeout(() => {
+              window.location.reload();
+            }, 1500); // Wait 1.5 seconds for user to see success message
           } else {
             showError(data.error || "Failed to save mood entry");
           }
@@ -1884,14 +1975,10 @@
           StorageManager.setItem(`user_${currentUser.username}`, userData);
           showSuccess("Mood check-in saved locally!");
 
-          // Reset and update
-          currentMood = null;
-          selectedEmotions = [];
-          selectedContext = null;
-          document
-            .querySelectorAll(".mood-button, .emotion-tag")
-            .forEach((btn) => btn.classList.remove("selected"));
-          generateMoodChart();
+          // Refresh page to get up-to-date insights, mood history, and strategies
+          setTimeout(() => {
+            window.location.reload();
+          }, 1500); // Wait 1.5 seconds for user to see success message
         }
       }
 
@@ -1939,6 +2026,10 @@
             date: new Date().toLocaleDateString(),
           };
 
+          // Generate AI response for local storage
+          const aiResponse = generateAIResponse(journalText);
+          journalEntry.ai_response = aiResponse;
+
           const userData = StorageManager.getItem(
             `user_${currentUser.username}`
           ) || { moods: [], journals: [] };
@@ -1950,7 +2041,6 @@
           StorageManager.setItem(`user_${currentUser.username}`, userData);
 
           // Provide local AI response
-          const aiResponse = generateAIResponse(journalText);
           document.getElementById("aiResponseText").textContent = aiResponse;
           document.getElementById("aiResponse").style.display = "block";
 
@@ -2073,6 +2163,12 @@
                     ${journal.text.substring(0, 100)}${journal.text.length > 100 ? "..." : ""}
                   </p>
                 `;
+
+                // Add click event to show journal details
+                journalItem.addEventListener("click", () => {
+                  showJournalModal(journal);
+                });
+
                 historyContainer.appendChild(journalItem);
               }
 
@@ -2109,6 +2205,12 @@
                 ${journal.text.substring(0, 100)}${journal.text.length > 100 ? "..." : ""}
               </p>
             `;
+
+            // Add click event to show journal details
+            journalItem.addEventListener("click", () => {
+              showJournalModal(journal);
+            });
+
             historyContainer.appendChild(journalItem);
           } catch (e) {
             console.error("Error decrypting journal entry");
@@ -2136,7 +2238,9 @@
         isGeneratingChart = true;
         chartGenerationCount++;
 
-        console.log(`🔄 Generating mood chart... (attempt #${chartGenerationCount})`);
+        console.log(
+          `🔄 Generating mood chart... (attempt #${chartGenerationCount})`
+        );
         chartContainer.innerHTML = "";
 
         // Get last 7 days
@@ -2261,7 +2365,9 @@
               ? dayMoods.reduce((a, b) => a + b, 0) / dayMoods.length
               : 0;
 
-          console.log(`📈 ${date}: ${dayMoods.length} entries, avg mood: ${avgMood}`);
+          console.log(
+            `📈 ${date}: ${dayMoods.length} entries, avg mood: ${avgMood}`
+          );
 
           const bar = document.createElement("div");
           bar.className = "chart-bar";
@@ -2776,7 +2882,7 @@
           .map((entry) => {
             const date = new Date(entry.created_at || entry.timestamp);
             const moodEmoji = getMoodEmoji(entry.mood);
-            
+
             return `
                     <div class="mood-history-item">
                         <div class="mood-history-header">
@@ -2787,16 +2893,24 @@
                             <span class="mood-emoji">${moodEmoji}</span>
                             <span class="mood-score">Mood: ${entry.mood}/10</span>
                         </div>
-                        ${entry.emotions && entry.emotions.length > 0 ? `
+                        ${
+                          entry.emotions && entry.emotions.length > 0
+                            ? `
                             <div class="mood-history-emotions">
-                                ${entry.emotions.map(emotion => `<span class="mood-history-emotion">${emotion}</span>`).join('')}
+                                ${entry.emotions.map((emotion) => `<span class="mood-history-emotion">${emotion}</span>`).join("")}
                             </div>
-                        ` : ''}
-                        ${entry.context ? `
+                        `
+                            : ""
+                        }
+                        ${
+                          entry.context
+                            ? `
                             <div class="mood-history-context">
                                 <strong>Context:</strong> ${entry.context}
                             </div>
-                        ` : ''}
+                        `
+                            : ""
+                        }
                     </div>
                 `;
           })
@@ -2804,9 +2918,84 @@
       }
 
       function getMoodEmoji(mood) {
-        const emojis = ['😔', '😟', '😕', '😐', '🙂', '😊', '😄', '😃', '😁', '🤩'];
-        return emojis[Math.max(0, Math.min(mood - 1, emojis.length - 1))] || '😐';
+        const emojis = [
+          "😔",
+          "😟",
+          "😕",
+          "😐",
+          "🙂",
+          "😊",
+          "😄",
+          "😃",
+          "😁",
+          "🤩",
+        ];
+        return (
+          emojis[Math.max(0, Math.min(mood - 1, emojis.length - 1))] || "😐"
+        );
       }
+
+      // Journal Modal Functions
+      function showJournalModal(journal) {
+        const modal = document.getElementById("journalModal");
+        const dateElement = document.getElementById("modalJournalDate");
+        const textElement = document.getElementById("modalJournalText");
+        const feedbackElement = document.getElementById("modalAIFeedback");
+
+        // Format date
+        const date = journal.created_at || journal.date;
+        const formattedDate = new Date(date).toLocaleDateString("en-US", {
+          weekday: "long",
+          year: "numeric",
+          month: "long",
+          day: "numeric",
+          hour: "2-digit",
+          minute: "2-digit",
+        });
+
+        // Set content
+        dateElement.textContent = formattedDate;
+        textElement.textContent = journal.text;
+
+        // Set AI feedback
+        if (journal.ai_response) {
+          feedbackElement.textContent = journal.ai_response;
+        } else {
+          feedbackElement.textContent =
+            "No AI feedback available for this entry.";
+        }
+
+        // Show modal
+        modal.classList.add("show");
+
+        // Prevent body scroll
+        document.body.style.overflow = "hidden";
+      }
+
+      function closeJournalModal() {
+        const modal = document.getElementById("journalModal");
+        modal.classList.remove("show");
+
+        // Restore body scroll
+        document.body.style.overflow = "auto";
+      }
+
+      // Close modal when clicking outside
+      document.addEventListener("DOMContentLoaded", () => {
+        const modal = document.getElementById("journalModal");
+        modal.addEventListener("click", (e) => {
+          if (e.target === modal) {
+            closeJournalModal();
+          }
+        });
+
+        // Close modal with Escape key
+        document.addEventListener("keydown", (e) => {
+          if (e.key === "Escape") {
+            closeJournalModal();
+          }
+        });
+      });
 
       // Session Management
       let inactivityTimer;
@@ -2841,5 +3030,25 @@
       // Initialize journal prompt (no periodic updates - user controls via toggle)
       updateJournalPrompt();
     </script>
+
+    <!-- Journal Modal -->
+    <div id="journalModal" class="modal-overlay">
+      <div class="journal-modal">
+        <div class="modal-header">
+          <h3 class="modal-title">📝 Journal Entry</h3>
+          <button class="modal-close" onclick="closeJournalModal()">
+            &times;
+          </button>
+        </div>
+        <div class="journal-content">
+          <div class="journal-date" id="modalJournalDate"></div>
+          <div class="journal-text" id="modalJournalText"></div>
+        </div>
+        <div class="ai-feedback">
+          <h4>🤖 AI Support Feedback</h4>
+          <div class="ai-feedback-content" id="modalAIFeedback"></div>
+        </div>
+      </div>
+    </div>
   </body>
 </html>
