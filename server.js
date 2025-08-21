@@ -934,129 +934,65 @@ app.get("/api/strategies", authenticateToken, async (req, res) => {
             );
             const moodData = JSON.parse(decrypted);
 
-            // Add emotions to patterns
+            // Add emotions to patterns (8 core emotions)
             if (moodData.emotions) {
+              console.log("😊 Processing emotions:", moodData.emotions);
               moodData.emotions.forEach((emotion) => {
                 const lowerEmotion = emotion.toLowerCase();
-                if (
-                  lowerEmotion.includes("anxious") ||
-                  lowerEmotion.includes("stress") ||
-                  lowerEmotion.includes("worried")
-                ) {
+                if (lowerEmotion.includes("anxious")) {
                   userPatterns.push("anxiety", "stress");
                 }
-                if (
-                  lowerEmotion.includes("lonely") ||
-                  lowerEmotion.includes("alone") ||
-                  lowerEmotion.includes("isolated")
-                ) {
-                  userPatterns.push("loneliness", "social");
-                }
-                if (
-                  lowerEmotion.includes("overwhelm") ||
-                  lowerEmotion.includes("pressure") ||
-                  lowerEmotion.includes("burdened")
-                ) {
+                if (lowerEmotion.includes("stressed")) {
                   userPatterns.push("stress", "anxiety");
                 }
-                if (
-                  lowerEmotion.includes("tired") ||
-                  lowerEmotion.includes("exhaust") ||
-                  lowerEmotion.includes("fatigue")
-                ) {
+                if (lowerEmotion.includes("lonely")) {
+                  userPatterns.push("loneliness", "social");
+                }
+                if (lowerEmotion.includes("exhausted")) {
                   userPatterns.push("sleep", "health");
                 }
-                if (
-                  lowerEmotion.includes("frustrated") ||
-                  lowerEmotion.includes("angry") ||
-                  lowerEmotion.includes("irritated")
-                ) {
-                  userPatterns.push("emotional", "stress");
+                if (lowerEmotion.includes("confident")) {
+                  userPatterns.push("confidence", "motivation");
                 }
-                if (
-                  lowerEmotion.includes("sad") ||
-                  lowerEmotion.includes("depressed") ||
-                  lowerEmotion.includes("down")
-                ) {
-                  userPatterns.push("emotional", "mood");
+                if (lowerEmotion.includes("motivated")) {
+                  userPatterns.push("motivation", "energy");
                 }
-                if (
-                  lowerEmotion.includes("excited") ||
-                  lowerEmotion.includes("happy") ||
-                  lowerEmotion.includes("joyful")
-                ) {
-                  userPatterns.push("gratitude", "positivity");
+                if (lowerEmotion.includes("excited")) {
+                  userPatterns.push("positivity", "energy");
                 }
-                if (
-                  lowerEmotion.includes("confident") ||
-                  lowerEmotion.includes("motivated") ||
-                  lowerEmotion.includes("energetic")
-                ) {
-                  userPatterns.push("energy", "motivation", "confidence");
+                if (lowerEmotion.includes("frustrated")) {
+                  userPatterns.push("stress", "emotional");
                 }
               });
             }
 
-            // Add context to patterns
+            // Add context to patterns (8 core contexts)
             if (moodData.context) {
+              console.log("🎯 Processing context:", moodData.context);
               const lowerContext = moodData.context.toLowerCase();
-              if (
-                lowerContext.includes("exam") ||
-                lowerContext.includes("test") ||
-                lowerContext.includes("assignment") ||
-                lowerContext.includes("study")
-              ) {
+              if (lowerContext.includes("exams") || lowerContext.includes("tests")) {
                 userPatterns.push("academic", "focus");
               }
-              if (
-                lowerContext.includes("career") ||
-                lowerContext.includes("future") ||
-                lowerContext.includes("job") ||
-                lowerContext.includes("professional")
-              ) {
-                userPatterns.push("career", "future", "planning");
+              if (lowerContext.includes("assignments")) {
+                userPatterns.push("academic", "focus");
               }
-              if (
-                lowerContext.includes("social") ||
-                lowerContext.includes("relationship") ||
-                lowerContext.includes("friend")
-              ) {
+              if (lowerContext.includes("social life")) {
                 userPatterns.push("social", "connection");
               }
-              if (
-                lowerContext.includes("money") ||
-                lowerContext.includes("financial") ||
-                lowerContext.includes("budget")
-              ) {
+              if (lowerContext.includes("relationships")) {
+                userPatterns.push("social", "connection");
+              }
+              if (lowerContext.includes("family")) {
+                userPatterns.push("social", "connection");
+              }
+              if (lowerContext.includes("financial")) {
                 userPatterns.push("financial", "stress");
               }
-              if (
-                lowerContext.includes("phone") ||
-                lowerContext.includes("screen") ||
-                lowerContext.includes("social media")
-              ) {
-                userPatterns.push("technology", "focus");
+              if (lowerContext.includes("career") || lowerContext.includes("future")) {
+                userPatterns.push("career", "future", "planning");
               }
-              if (
-                lowerContext.includes("room") ||
-                lowerContext.includes("environment") ||
-                lowerContext.includes("space")
-              ) {
-                userPatterns.push("environment", "calm");
-              }
-              if (
-                lowerContext.includes("food") ||
-                lowerContext.includes("nutrition") ||
-                lowerContext.includes("diet")
-              ) {
-                userPatterns.push("nutrition", "health");
-              }
-              if (
-                lowerContext.includes("exercise") ||
-                lowerContext.includes("workout") ||
-                lowerContext.includes("physical")
-              ) {
-                userPatterns.push("physical", "energy");
+              if (lowerContext.includes("health")) {
+                userPatterns.push("health", "sleep");
               }
             }
 
@@ -1070,7 +1006,10 @@ app.get("/api/strategies", authenticateToken, async (req, res) => {
         });
 
         // Remove duplicates and return unique patterns
-        resolve([...new Set(userPatterns)]);
+        const uniquePatterns = [...new Set(userPatterns)];
+        console.log("🔍 Detected patterns for user:", uniquePatterns);
+        console.log("📊 Raw mood data analyzed:", rows.length, "entries");
+        resolve(uniquePatterns);
       }
     );
   });
@@ -1101,7 +1040,7 @@ app.get("/api/strategies", authenticateToken, async (req, res) => {
         "Repeat 4 times",
         "15-30 minute long break",
       ],
-      tags: ["focus", "productivity", "study"],
+      tags: ["academic", "focus", "productivity"],
     },
     {
       id: 3,
@@ -1115,7 +1054,7 @@ app.get("/api/strategies", authenticateToken, async (req, res) => {
         "Avoid caffeine after 2 PM",
         "Consistent sleep schedule",
       ],
-      tags: ["sleep", "routine", "health"],
+      tags: ["sleep", "health", "exhausted"],
     },
     {
       id: 4,
@@ -1143,109 +1082,24 @@ app.get("/api/strategies", authenticateToken, async (req, res) => {
         "Do 5 push-ups or wall push-ups",
         "Take 5 deep breaths",
       ],
-      tags: ["energy", "mood", "physical", "quick"],
+      tags: ["motivated", "excited", "energy", "quick"],
     },
     {
       id: 6,
       category: "mindfulness",
-      title: "Body Scan Meditation",
-      description: "Connect with your body and reduce tension",
+      title: "Confidence Meditation",
+      description: "Strengthen your self-assurance through mindfulness",
       steps: [
-        "Lie down or sit comfortably",
-        "Close your eyes",
-        "Focus on your toes, then feet",
-        "Move attention up your body",
-        "Notice any tension and release it",
-        "Continue to the top of your head",
+        "Sit comfortably and close your eyes",
+        "Focus on your breath",
+        "Recall a moment of success",
+        "Feel the confidence in your body",
+        "Affirm your capabilities",
       ],
-      tags: ["anxiety", "stress", "mindfulness", "relaxation"],
+      tags: ["confidence", "mindfulness", "motivation"],
     },
     {
       id: 7,
-      category: "nutrition",
-      title: "Brain-Boosting Snacks",
-      description: "Foods that support mental clarity and mood",
-      steps: [
-        "Keep nuts and seeds handy",
-        "Eat dark chocolate (70%+)",
-        "Include fatty fish or omega-3s",
-        "Stay hydrated with water",
-        "Avoid sugary energy drinks",
-      ],
-      tags: ["energy", "focus", "nutrition", "health"],
-    },
-    {
-      id: 8,
-      category: "academic",
-      title: "Study Environment Optimization",
-      description: "Create a space that supports learning",
-      steps: [
-        "Clear your desk completely",
-        "Add natural light or good lighting",
-        "Keep water and healthy snacks nearby",
-        "Use noise-canceling headphones if needed",
-        "Set phone to Do Not Disturb",
-      ],
-      tags: ["focus", "productivity", "study", "environment"],
-    },
-    {
-      id: 9,
-      category: "emotional",
-      title: "Emotion Labeling Technique",
-      description: "Process and understand your feelings",
-      steps: [
-        "Name the emotion you're feeling",
-        "Rate its intensity (1-10)",
-        "Identify what triggered it",
-        "Notice where you feel it in your body",
-        "Remind yourself it's temporary",
-      ],
-      tags: ["emotions", "self-awareness", "processing"],
-    },
-    {
-      id: 10,
-      category: "social",
-      title: "Boundary Setting",
-      description: "Protect your mental health in relationships",
-      steps: [
-        "Identify what drains your energy",
-        "Practice saying 'no' to small things first",
-        "Communicate your needs clearly",
-        "Set time limits for social activities",
-        "Prioritize your own wellbeing",
-      ],
-      tags: ["boundaries", "social", "self-care"],
-    },
-    {
-      id: 11,
-      category: "creative",
-      title: "Creative Expression",
-      description: "Use art to process emotions",
-      steps: [
-        "Doodle or draw for 10 minutes",
-        "Write a poem or short story",
-        "Create a playlist for your mood",
-        "Take photos of things that bring you joy",
-        "Try a new creative hobby",
-      ],
-      tags: ["creativity", "emotions", "self-expression"],
-    },
-    {
-      id: 12,
-      category: "routine",
-      title: "Morning Routine Reset",
-      description: "Start your day with intention",
-      steps: [
-        "Wake up at the same time daily",
-        "Drink a glass of water first",
-        "Spend 5 minutes in silence",
-        "Write down 3 priorities for the day",
-        "Eat a nutritious breakfast",
-      ],
-      tags: ["routine", "morning", "productivity", "health"],
-    },
-    {
-      id: 13,
       category: "financial",
       title: "Financial Stress Management",
       description: "Reduce money-related anxiety",
@@ -1259,189 +1113,7 @@ app.get("/api/strategies", authenticateToken, async (req, res) => {
       tags: ["financial", "stress", "planning"],
     },
     {
-      id: 14,
-      category: "technology",
-      title: "Digital Detox",
-      description: "Reduce screen time for better mental health",
-      steps: [
-        "Set app time limits on your phone",
-        "Turn off notifications for social media",
-        "Use grayscale mode to reduce appeal",
-        "Charge phone outside bedroom",
-        "Schedule tech-free hours daily",
-      ],
-      tags: ["technology", "stress", "focus", "sleep"],
-    },
-    {
-      id: 15,
-      category: "gratitude",
-      title: "Gratitude Practice",
-      description: "Shift focus to positive aspects of life",
-      steps: [
-        "Write down 3 things you're grateful for",
-        "Thank someone who helped you",
-        "Notice small moments of joy",
-        "Reflect on your progress",
-        "Share appreciation with others",
-      ],
-      tags: ["gratitude", "positivity", "mood", "confidence", "motivation"],
-    },
-    {
-      id: 16,
-      category: "academic",
-      title: "Test Anxiety Management",
-      description: "Prepare mentally for exams",
-      steps: [
-        "Review material in small chunks",
-        "Practice deep breathing before tests",
-        "Get adequate sleep the night before",
-        "Eat a light, nutritious meal",
-        "Arrive early to avoid rushing",
-      ],
-      tags: ["anxiety", "academic", "exams", "stress"],
-    },
-    {
-      id: 17,
-      category: "physical",
-      title: "Progressive Muscle Relaxation",
-      description: "Release physical tension systematically",
-      steps: [
-        "Start with your toes",
-        "Tense muscles for 5 seconds",
-        "Release and feel the relaxation",
-        "Move up to calves, thighs, stomach",
-        "Continue to shoulders and face",
-      ],
-      tags: ["relaxation", "tension", "physical", "stress"],
-    },
-    {
-      id: 18,
-      category: "social",
-      title: "Conflict Resolution",
-      description: "Handle disagreements constructively",
-      steps: [
-        "Take time to cool down first",
-        "Use 'I feel' statements",
-        "Listen without interrupting",
-        "Find common ground",
-        "Agree to disagree when needed",
-      ],
-      tags: ["conflict", "communication", "social"],
-    },
-    {
-      id: 19,
-      category: "environment",
-      title: "Study Space Transformation",
-      description: "Create a calming, productive environment",
-      steps: [
-        "Add plants or natural elements",
-        "Use calming colors (blue, green)",
-        "Organize supplies and materials",
-        "Add personal touches (photos, art)",
-        "Keep it clean and clutter-free",
-      ],
-      tags: ["environment", "calm", "productivity", "study"],
-    },
-    {
-      id: 20,
-      category: "mindfulness",
-      title: "Walking Meditation",
-      description: "Practice mindfulness while moving",
-      steps: [
-        "Walk slowly and deliberately",
-        "Focus on the sensation of walking",
-        "Notice your surroundings",
-        "Breathe naturally",
-        "Return to walking when mind wanders",
-      ],
-      tags: ["mindfulness", "movement", "meditation", "stress"],
-    },
-    {
-      id: 21,
-      category: "emotional",
-      title: "Self-Compassion Break",
-      description: "Be kind to yourself during difficult times",
-      steps: [
-        "Acknowledge your suffering",
-        "Remember you're not alone",
-        "Offer yourself kind words",
-        "Place hand on heart if helpful",
-        "Give yourself permission to struggle",
-      ],
-      tags: ["self-compassion", "kindness", "emotional"],
-    },
-    {
-      id: 22,
-      category: "academic",
-      title: "Note-Taking Strategy",
-      description: "Improve learning and reduce study stress",
-      steps: [
-        "Use the Cornell method",
-        "Write key points in your own words",
-        "Review notes within 24 hours",
-        "Create visual summaries",
-        "Teach concepts to others",
-      ],
-      tags: ["study", "learning", "academic", "organization"],
-    },
-    {
-      id: 23,
-      category: "sleep",
-      title: "Power Nap Protocol",
-      description: "Recharge without disrupting sleep cycle",
-      steps: [
-        "Set alarm for 20-30 minutes",
-        "Find a quiet, dark space",
-        "Lie down or recline comfortably",
-        "Focus on your breathing",
-        "Don't worry if you don't fall asleep",
-      ],
-      tags: ["sleep", "energy", "rest", "quick"],
-    },
-    {
-      id: 24,
-      category: "social",
-      title: "Active Listening",
-      description: "Improve relationships through better communication",
-      steps: [
-        "Maintain eye contact",
-        "Don't interrupt or plan responses",
-        "Ask clarifying questions",
-        "Reflect back what you heard",
-        "Show empathy and understanding",
-      ],
-      tags: ["communication", "social", "relationships"],
-    },
-    {
-      id: 25,
-      category: "creative",
-      title: "Vision Board Creation",
-      description: "Visualize your goals and aspirations",
-      steps: [
-        "Collect images that inspire you",
-        "Add words and quotes",
-        "Include academic and personal goals",
-        "Place where you'll see it daily",
-        "Update as goals evolve",
-      ],
-      tags: ["goals", "motivation", "creative", "planning", "confidence", "future", "career"],
-    },
-    {
-      id: 26,
-      category: "routine",
-      title: "Goal Achievement Framework",
-      description: "Turn confidence into concrete progress",
-      steps: [
-        "Break big goals into small, actionable steps",
-        "Set specific deadlines for each step",
-        "Track progress weekly",
-        "Celebrate small wins",
-        "Adjust goals as needed",
-      ],
-      tags: ["goals", "motivation", "confidence", "planning", "productivity"],
-    },
-    {
-      id: 27,
+      id: 8,
       category: "academic",
       title: "Career Development Planning",
       description: "Build your professional future",
@@ -1452,49 +1124,7 @@ app.get("/api/strategies", authenticateToken, async (req, res) => {
         "Develop relevant skills through courses",
         "Create a professional portfolio",
       ],
-      tags: ["career", "future", "planning", "motivation", "confidence"],
-    },
-    {
-      id: 28,
-      category: "social",
-      title: "Networking Confidence Builder",
-      description: "Build professional relationships with confidence",
-      steps: [
-        "Practice your elevator pitch",
-        "Prepare thoughtful questions to ask",
-        "Follow up with new connections",
-        "Join professional organizations",
-        "Attend industry meetups",
-      ],
-      tags: ["social", "confidence", "career", "networking", "motivation"],
-    },
-    {
-      id: 29,
-      category: "mindfulness",
-      title: "Confidence Meditation",
-      description: "Strengthen your self-assurance through mindfulness",
-      steps: [
-        "Sit comfortably and close your eyes",
-        "Focus on your breath",
-        "Recall a moment of success",
-        "Feel the confidence in your body",
-        "Affirm your capabilities",
-      ],
-      tags: ["confidence", "mindfulness", "motivation", "self-awareness"],
-    },
-    {
-      id: 30,
-      category: "physical",
-      title: "Power Pose Practice",
-      description: "Use body language to boost confidence",
-      steps: [
-        "Stand with feet shoulder-width apart",
-        "Place hands on hips",
-        "Lift your chin slightly",
-        "Take deep breaths",
-        "Hold for 2 minutes before important events",
-      ],
-      tags: ["confidence", "physical", "motivation", "energy"],
+      tags: ["career", "future", "planning", "motivation"],
     },
   ];
 
@@ -1509,8 +1139,8 @@ app.get("/api/strategies", authenticateToken, async (req, res) => {
   console.log("User patterns detected:", patterns);
   console.log("Top 5 strategies:", personalizedStrategies.slice(0, 5).map(s => ({ title: s.title, tags: s.tags, relevance: s.tags.filter(tag => patterns.includes(tag)).length })));
 
-  // Return only top 6 strategies to ensure variety and prevent overwhelming
-  res.json(personalizedStrategies.slice(0, 6));
+  // Return only top 4 strategies to ensure variety and prevent overwhelming
+  res.json(personalizedStrategies.slice(0, 4));
 });
 
 
