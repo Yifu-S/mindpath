@@ -4,6 +4,9 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>MindPath - Private Mental Health Support for Students</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <style>
       * {
         margin: 0;
@@ -12,28 +15,35 @@
       }
 
       :root {
-        --primary: #6366f1;
-        --primary-dark: #4f46e5;
-        --secondary: #8b5cf6;
-        --success: #10b981;
-        --warning: #f59e0b;
-        --danger: #ef4444;
-        --dark: #1f2937;
-        --gray: #6b7280;
-        --light: #f3f4f6;
+        --primary: #8f7c4e;
+        --primary-dark: #6b5b3a;
+        --secondary: #a8c09a;
+        --accent: #d4a574;
+        --success: #7c9885;
+        --warning: #e6b17a;
+        --danger: #d67b7b;
+        --dark: #2c2c2c;
+        --gray: #6b6b6b;
+        --light: #f8f6f2;
         --white: #ffffff;
-        --shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
+        --cream: #faf8f4;
+        --sage: #9caf88;
+        --warm-gray: #8a8a8a;
+        --shadow: 0 2px 8px rgba(0, 0, 0, 0.08), 0 1px 3px rgba(0, 0, 0, 0.12);
         --shadow-lg:
-          0 10px 20px rgba(0, 0, 0, 0.19), 0 6px 6px rgba(0, 0, 0, 0.23);
+          0 8px 25px rgba(0, 0, 0, 0.12), 0 4px 10px rgba(0, 0, 0, 0.08);
+        --border-radius: 16px;
+        --border-radius-sm: 12px;
       }
 
       body {
         font-family:
-          -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu,
+          "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu,
           sans-serif;
-        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        background: linear-gradient(135deg, #f8f6f2 0%, #e8e4d8 50%, #d4c8b8 100%);
         min-height: 100vh;
         color: var(--dark);
+        line-height: 1.6;
       }
 
       .container {
@@ -51,25 +61,29 @@
         padding: 20px;
       }
 
-      .auth-card {
-        background: var(--white);
-        border-radius: 20px;
-        box-shadow: var(--shadow-lg);
-        padding: 40px;
-        width: 100%;
-        max-width: 400px;
-      }
+              .auth-card {
+            background: var(--white);
+            border-radius: var(--border-radius);
+            box-shadow: var(--shadow-lg);
+            padding: 50px 40px;
+            width: 100%;
+            max-width: 450px;
+            border: 1px solid rgba(143, 124, 78, 0.1);
+            backdrop-filter: blur(10px);
+        }
 
       .logo {
         text-align: center;
         margin-bottom: 30px;
       }
 
-      .logo h1 {
-        color: var(--primary);
-        font-size: 32px;
-        margin-bottom: 10px;
-      }
+              .logo h1 {
+            color: var(--primary);
+            font-size: 36px;
+            margin-bottom: 12px;
+            font-weight: 600;
+            letter-spacing: -0.5px;
+        }
 
       .logo p {
         color: var(--gray);
@@ -91,11 +105,14 @@
       textarea,
       select {
         width: 100%;
-        padding: 12px;
+        padding: 16px 18px;
         border: 2px solid var(--light);
-        border-radius: 10px;
+        border-radius: var(--border-radius-sm);
         font-size: 16px;
-        transition: all 0.3s;
+        transition: all 0.3s ease;
+        background: var(--cream);
+        color: var(--dark);
+        font-family: inherit;
       }
 
       input:focus,
@@ -103,26 +120,34 @@
       select:focus {
         outline: none;
         border-color: var(--primary);
-        background: #f9fafb;
+        background: var(--white);
+        box-shadow: 0 0 0 3px rgba(143, 124, 78, 0.1);
       }
 
       .btn {
-        background: var(--primary);
+        background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
         color: var(--white);
         border: none;
-        padding: 12px 24px;
-        border-radius: 10px;
+        padding: 16px 28px;
+        border-radius: var(--border-radius-sm);
         font-size: 16px;
         font-weight: 600;
         cursor: pointer;
-        transition: all 0.3s;
+        transition: all 0.3s ease;
         width: 100%;
+        box-shadow: var(--shadow);
+        position: relative;
+        overflow: hidden;
       }
 
       .btn:hover {
-        background: var(--primary-dark);
         transform: translateY(-2px);
-        box-shadow: var(--shadow);
+        box-shadow: var(--shadow-lg);
+        background: linear-gradient(135deg, var(--primary-dark) 0%, var(--primary) 100%);
+      }
+
+      .btn:active {
+        transform: translateY(0);
       }
 
       .btn-secondary {
@@ -137,23 +162,42 @@
       .app-container {
         display: none;
         background: var(--white);
-        border-radius: 20px;
+        border-radius: var(--border-radius);
         box-shadow: var(--shadow-lg);
         margin-top: 20px;
         overflow: hidden;
+        border: 1px solid rgba(143, 124, 78, 0.1);
       }
 
       .app-header {
         background: linear-gradient(
           135deg,
           var(--primary) 0%,
+          var(--accent) 50%,
           var(--secondary) 100%
         );
         color: var(--white);
-        padding: 20px;
+        padding: 25px 30px;
         display: flex;
         justify-content: space-between;
         align-items: center;
+        position: relative;
+      }
+
+      .app-header::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background: linear-gradient(135deg, rgba(143, 124, 78, 0.1) 0%, rgba(168, 192, 154, 0.1) 100%);
+        pointer-events: none;
+      }
+
+      .app-header > * {
+        position: relative;
+        z-index: 1;
       }
 
       .user-info {
@@ -174,32 +218,43 @@
 
       .nav-tabs {
         display: flex;
-        background: var(--light);
-        border-bottom: 2px solid #e5e7eb;
+        background: var(--cream);
+        border-bottom: 2px solid rgba(143, 124, 78, 0.1);
         overflow-x: auto;
+        padding: 0 20px;
       }
 
       .nav-tab {
-        padding: 15px 25px;
+        padding: 18px 28px;
         background: none;
         border: none;
         cursor: pointer;
         font-weight: 600;
-        color: var(--gray);
-        transition: all 0.3s;
+        color: var(--warm-gray);
+        transition: all 0.3s ease;
         white-space: nowrap;
+        position: relative;
+        border-radius: var(--border-radius-sm) var(--border-radius-sm) 0 0;
+        margin: 0 2px;
+      }
+
+      .nav-tab:hover {
+        color: var(--primary);
+        background: rgba(143, 124, 78, 0.05);
       }
 
       .nav-tab.active {
         color: var(--primary);
         background: var(--white);
         border-bottom: 3px solid var(--primary);
+        box-shadow: 0 -2px 8px rgba(0, 0, 0, 0.05);
       }
 
       .tab-content {
         display: none;
-        padding: 30px;
-        animation: fadeIn 0.5s;
+        padding: 40px;
+        animation: fadeIn 0.5s ease-out;
+        background: var(--white);
       }
 
       .tab-content.active {
@@ -234,25 +289,30 @@
       }
 
       .mood-button {
-        width: 50px;
-        height: 50px;
+        width: 60px;
+        height: 60px;
         border-radius: 50%;
         border: 3px solid var(--light);
         background: var(--white);
         cursor: pointer;
-        font-size: 20px;
-        transition: all 0.3s;
+        font-size: 24px;
+        transition: all 0.3s ease;
+        box-shadow: var(--shadow);
+        position: relative;
+        overflow: hidden;
       }
 
       .mood-button:hover {
         transform: scale(1.1);
         border-color: var(--primary);
+        box-shadow: var(--shadow-lg);
       }
 
       .mood-button.selected {
         border-color: var(--primary);
-        background: var(--primary);
+        background: linear-gradient(135deg, var(--primary) 0%, var(--accent) 100%);
         color: var(--white);
+        box-shadow: 0 4px 15px rgba(143, 124, 78, 0.3);
       }
 
       .emotion-tags {
@@ -264,18 +324,30 @@
       }
 
       .emotion-tag {
-        padding: 8px 16px;
-        border-radius: 20px;
+        padding: 12px 20px;
+        border-radius: 25px;
         border: 2px solid var(--light);
         background: var(--white);
         cursor: pointer;
-        transition: all 0.3s;
+        transition: all 0.3s ease;
+        font-weight: 500;
+        box-shadow: var(--shadow);
+        position: relative;
+        overflow: hidden;
+      }
+
+      .emotion-tag:hover {
+        transform: translateY(-1px);
+        box-shadow: var(--shadow-lg);
+        border-color: var(--sage);
       }
 
       .emotion-tag.selected {
-        background: var(--secondary);
+        background: linear-gradient(135deg, var(--secondary) 0%, var(--sage) 100%);
         color: var(--white);
         border-color: var(--secondary);
+        box-shadow: 0 4px 15px rgba(168, 192, 154, 0.3);
+        transform: translateY(-1px);
       }
 
       /* Journal */
@@ -284,12 +356,14 @@
       }
 
       .journal-prompt {
-        background: var(--light);
-        padding: 15px;
-        border-radius: 10px;
-        margin-bottom: 15px;
+        background: linear-gradient(135deg, var(--cream) 0%, var(--light) 100%);
+        padding: 20px;
+        border-radius: var(--border-radius-sm);
+        margin-bottom: 20px;
         font-style: italic;
-        color: var(--gray);
+        color: var(--primary);
+        border-left: 4px solid var(--accent);
+        box-shadow: var(--shadow);
       }
 
       textarea.journal-input {
@@ -298,11 +372,25 @@
       }
 
       .ai-response {
-        background: linear-gradient(135deg, #f3f4f6 0%, #e5e7eb 100%);
-        padding: 20px;
-        border-radius: 10px;
-        margin-top: 20px;
-        border-left: 4px solid var(--primary);
+        background: linear-gradient(135deg, var(--cream) 0%, var(--light) 100%);
+        padding: 25px;
+        border-radius: var(--border-radius-sm);
+        margin-top: 25px;
+        border-left: 4px solid var(--secondary);
+        box-shadow: var(--shadow);
+        position: relative;
+      }
+
+      .ai-response::before {
+        content: '💭';
+        position: absolute;
+        top: -10px;
+        left: 20px;
+        background: var(--white);
+        padding: 5px 10px;
+        border-radius: 15px;
+        font-size: 14px;
+        box-shadow: var(--shadow);
       }
 
       .journal-history {
@@ -340,15 +428,18 @@
       }
 
       .chart-bar {
-        background: linear-gradient(to top, var(--primary), var(--secondary));
-        border-radius: 5px 5px 0 0;
-        width: 40px;
-        transition: all 0.3s;
+        background: linear-gradient(to top, var(--primary) 0%, var(--accent) 50%, var(--secondary) 100%);
+        border-radius: 8px 8px 0 0;
+        width: 45px;
+        transition: all 0.3s ease;
         position: relative;
+        box-shadow: var(--shadow);
       }
 
       .chart-bar:hover {
-        opacity: 0.8;
+        opacity: 0.9;
+        transform: scale(1.05);
+        box-shadow: var(--shadow-lg);
       }
 
       .chart-label {
@@ -368,10 +459,30 @@
 
       .pattern-card {
         background: var(--white);
-        padding: 20px;
-        border-radius: 10px;
+        padding: 25px;
+        border-radius: var(--border-radius-sm);
         box-shadow: var(--shadow);
         border-left: 4px solid var(--primary);
+        transition: all 0.3s ease;
+        border: 1px solid rgba(143, 124, 78, 0.1);
+        position: relative;
+        overflow: hidden;
+      }
+
+      .pattern-card:hover {
+        transform: translateY(-2px);
+        box-shadow: var(--shadow-lg);
+        border-color: rgba(143, 124, 78, 0.2);
+      }
+
+      .pattern-card::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 4px;
+        height: 100%;
+        background: linear-gradient(135deg, var(--primary) 0%, var(--accent) 100%);
       }
 
       .pattern-card h4 {
@@ -381,10 +492,12 @@
 
       /* Privacy Settings */
       .privacy-section {
-        background: var(--light);
-        padding: 20px;
-        border-radius: 10px;
-        margin-bottom: 20px;
+        background: linear-gradient(135deg, var(--cream) 0%, var(--light) 100%);
+        padding: 25px;
+        border-radius: var(--border-radius-sm);
+        margin-bottom: 25px;
+        border: 1px solid rgba(143, 124, 78, 0.1);
+        box-shadow: var(--shadow);
       }
 
       .privacy-option {
@@ -430,12 +543,31 @@
 
       /* Crisis Support */
       .crisis-banner {
-        background: linear-gradient(135deg, var(--danger) 0%, #dc2626 100%);
+        background: linear-gradient(135deg, var(--danger) 0%, #c55a5a 50%, #b44a4a 100%);
         color: var(--white);
-        padding: 20px;
-        border-radius: 10px;
-        margin-bottom: 20px;
+        padding: 30px;
+        border-radius: var(--border-radius-sm);
+        margin-bottom: 25px;
         text-align: center;
+        box-shadow: var(--shadow-lg);
+        position: relative;
+        overflow: hidden;
+      }
+
+      .crisis-banner::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background: linear-gradient(135deg, rgba(255,255,255,0.1) 0%, rgba(255,255,255,0.05) 100%);
+        pointer-events: none;
+      }
+
+      .crisis-banner > * {
+        position: relative;
+        z-index: 1;
       }
 
       .crisis-banner h3 {
@@ -451,10 +583,18 @@
 
       .resource-card {
         background: var(--white);
-        padding: 15px;
-        border-radius: 10px;
+        padding: 20px;
+        border-radius: var(--border-radius-sm);
         text-align: center;
         box-shadow: var(--shadow);
+        border: 1px solid rgba(143, 124, 78, 0.1);
+        transition: all 0.3s ease;
+      }
+
+      .resource-card:hover {
+        transform: translateY(-2px);
+        box-shadow: var(--shadow-lg);
+        border-color: rgba(143, 124, 78, 0.2);
       }
 
       .resource-card h4 {
@@ -501,67 +641,83 @@
               /* Mobile Responsive */
         @media (max-width: 768px) {
             .container {
-                padding: 10px;
+                padding: 15px;
             }
 
             .auth-card {
-                padding: 25px;
+                padding: 30px 25px;
+                margin: 10px;
             }
 
             .mood-scale {
                 flex-wrap: wrap;
-                gap: 5px;
+                gap: 8px;
             }
 
             .mood-button {
-                width: 40px;
-                height: 40px;
-                font-size: 16px;
+                width: 50px;
+                height: 50px;
+                font-size: 20px;
             }
 
             .pattern-cards {
                 grid-template-columns: 1fr;
+                gap: 15px;
             }
 
             .nav-tabs {
                 overflow-x: scroll;
                 -webkit-overflow-scrolling: touch;
                 font-size: 14px;
+                padding: 0 15px;
             }
 
             .nav-tab {
-                padding: 12px 15px;
+                padding: 15px 20px;
                 white-space: nowrap;
+                font-size: 13px;
             }
 
             .emotion-tags {
-                gap: 8px;
+                gap: 10px;
             }
 
             .emotion-tag {
-                padding: 6px 12px;
+                padding: 10px 16px;
                 font-size: 14px;
             }
 
             .tab-content {
-                padding: 20px;
+                padding: 25px;
             }
 
             .app-header {
-                padding: 15px;
+                padding: 20px;
                 flex-direction: column;
-                gap: 10px;
+                gap: 15px;
                 text-align: center;
             }
 
             .user-info {
                 flex-direction: column;
-                gap: 10px;
+                gap: 15px;
             }
 
             .privacy-badge {
-                font-size: 10px;
-                padding: 3px 8px;
+                font-size: 11px;
+                padding: 5px 10px;
+            }
+
+            .pattern-card {
+                padding: 20px;
+            }
+
+            .journal-prompt {
+                padding: 15px;
+            }
+
+            .ai-response {
+                padding: 20px;
             }
         }
 
