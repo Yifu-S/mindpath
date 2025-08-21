@@ -4,9 +4,12 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>MindPath - Private Mental Health Support for Students</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
     <style>
       * {
         margin: 0;
@@ -38,9 +41,20 @@
 
       body {
         font-family:
-          "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu,
+          "Inter",
+          -apple-system,
+          BlinkMacSystemFont,
+          "Segoe UI",
+          Roboto,
+          Oxygen,
+          Ubuntu,
           sans-serif;
-        background: linear-gradient(135deg, #f8f6f2 0%, #e8e4d8 50%, #d4c8b8 100%);
+        background: linear-gradient(
+          135deg,
+          #f8f6f2 0%,
+          #e8e4d8 50%,
+          #d4c8b8 100%
+        );
         min-height: 100vh;
         color: var(--dark);
         line-height: 1.6;
@@ -61,29 +75,29 @@
         padding: 20px;
       }
 
-              .auth-card {
-            background: var(--white);
-            border-radius: var(--border-radius);
-            box-shadow: var(--shadow-lg);
-            padding: 50px 40px;
-            width: 100%;
-            max-width: 450px;
-            border: 1px solid rgba(143, 124, 78, 0.1);
-            backdrop-filter: blur(10px);
-        }
+      .auth-card {
+        background: var(--white);
+        border-radius: var(--border-radius);
+        box-shadow: var(--shadow-lg);
+        padding: 50px 40px;
+        width: 100%;
+        max-width: 450px;
+        border: 1px solid rgba(143, 124, 78, 0.1);
+        backdrop-filter: blur(10px);
+      }
 
       .logo {
         text-align: center;
         margin-bottom: 30px;
       }
 
-              .logo h1 {
-            color: var(--primary);
-            font-size: 36px;
-            margin-bottom: 12px;
-            font-weight: 600;
-            letter-spacing: -0.5px;
-        }
+      .logo h1 {
+        color: var(--primary);
+        font-size: 36px;
+        margin-bottom: 12px;
+        font-weight: 600;
+        letter-spacing: -0.5px;
+      }
 
       .logo p {
         color: var(--gray);
@@ -125,7 +139,11 @@
       }
 
       .btn {
-        background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
+        background: linear-gradient(
+          135deg,
+          var(--primary) 0%,
+          var(--primary-dark) 100%
+        );
         color: var(--white);
         border: none;
         padding: 16px 28px;
@@ -143,7 +161,11 @@
       .btn:hover {
         transform: translateY(-2px);
         box-shadow: var(--shadow-lg);
-        background: linear-gradient(135deg, var(--primary-dark) 0%, var(--primary) 100%);
+        background: linear-gradient(
+          135deg,
+          var(--primary-dark) 0%,
+          var(--primary) 100%
+        );
       }
 
       .btn:active {
@@ -185,13 +207,17 @@
       }
 
       .app-header::before {
-        content: '';
+        content: "";
         position: absolute;
         top: 0;
         left: 0;
         right: 0;
         bottom: 0;
-        background: linear-gradient(135deg, rgba(143, 124, 78, 0.1) 0%, rgba(168, 192, 154, 0.1) 100%);
+        background: linear-gradient(
+          135deg,
+          rgba(143, 124, 78, 0.1) 0%,
+          rgba(168, 192, 154, 0.1) 100%
+        );
         pointer-events: none;
       }
 
@@ -310,7 +336,11 @@
 
       .mood-button.selected {
         border-color: var(--primary);
-        background: linear-gradient(135deg, var(--primary) 0%, var(--accent) 100%);
+        background: linear-gradient(
+          135deg,
+          var(--primary) 0%,
+          var(--accent) 100%
+        );
         color: var(--white);
         box-shadow: 0 4px 15px rgba(143, 124, 78, 0.3);
       }
@@ -343,7 +373,11 @@
       }
 
       .emotion-tag.selected {
-        background: linear-gradient(135deg, var(--secondary) 0%, var(--sage) 100%);
+        background: linear-gradient(
+          135deg,
+          var(--secondary) 0%,
+          var(--sage) 100%
+        );
         color: var(--white);
         border-color: var(--secondary);
         box-shadow: 0 4px 15px rgba(168, 192, 154, 0.3);
@@ -382,7 +416,7 @@
       }
 
       .ai-response::before {
-        content: '💭';
+        content: "💭";
         position: absolute;
         top: -10px;
         left: 20px;
@@ -428,7 +462,12 @@
       }
 
       .chart-bar {
-        background: linear-gradient(to top, var(--primary) 0%, var(--accent) 50%, var(--secondary) 100%);
+        background: linear-gradient(
+          to top,
+          var(--primary) 0%,
+          var(--accent) 50%,
+          var(--secondary) 100%
+        );
         border-radius: 8px 8px 0 0;
         width: 45px;
         transition: all 0.3s ease;
@@ -476,13 +515,17 @@
       }
 
       .pattern-card::before {
-        content: '';
+        content: "";
         position: absolute;
         top: 0;
         left: 0;
         width: 4px;
         height: 100%;
-        background: linear-gradient(135deg, var(--primary) 0%, var(--accent) 100%);
+        background: linear-gradient(
+          135deg,
+          var(--primary) 0%,
+          var(--accent) 100%
+        );
       }
 
       .pattern-card h4 {
@@ -543,7 +586,12 @@
 
       /* Crisis Support */
       .crisis-banner {
-        background: linear-gradient(135deg, var(--danger) 0%, #c55a5a 50%, #b44a4a 100%);
+        background: linear-gradient(
+          135deg,
+          var(--danger) 0%,
+          #c55a5a 50%,
+          #b44a4a 100%
+        );
         color: var(--white);
         padding: 30px;
         border-radius: var(--border-radius-sm);
@@ -555,13 +603,17 @@
       }
 
       .crisis-banner::before {
-        content: '';
+        content: "";
         position: absolute;
         top: 0;
         left: 0;
         right: 0;
         bottom: 0;
-        background: linear-gradient(135deg, rgba(255,255,255,0.1) 0%, rgba(255,255,255,0.05) 100%);
+        background: linear-gradient(
+          135deg,
+          rgba(255, 255, 255, 0.1) 0%,
+          rgba(255, 255, 255, 0.05) 100%
+        );
         pointer-events: none;
       }
 
@@ -624,132 +676,164 @@
         border-radius: 10px;
         margin-bottom: 20px;
         display: none;
+        font-weight: 500;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+        z-index: 1000;
       }
 
       .alert.success {
         background: #d1fae5;
         color: #065f46;
         border-left: 4px solid var(--success);
+        position: fixed;
+        top: 20px;
+        right: 20px;
+        min-width: 300px;
+        max-width: 400px;
       }
 
       .alert.error {
-        background: #fee2e2;
-        color: #991b1b;
-        border-left: 4px solid var(--danger);
+        background: #dc2626;
+        color: white;
+        border: 3px solid #991b1b;
+        position: fixed;
+        top: 20px;
+        right: 20px;
+        min-width: 350px;
+        max-width: 450px;
+        z-index: 99999;
+        font-weight: 700;
+        font-size: 16px;
+        padding: 25px;
+        border-radius: 12px;
+        box-shadow: 0 10px 30px rgba(220, 38, 38, 0.4);
+        animation: slideIn 0.3s ease-out;
+        text-align: center;
       }
 
-              /* Mobile Responsive */
-        @media (max-width: 768px) {
-            .container {
-                padding: 15px;
-            }
+      @keyframes slideIn {
+        from {
+          transform: translateX(100%);
+          opacity: 0;
+        }
+        to {
+          transform: translateX(0);
+          opacity: 1;
+        }
+      }
 
-            .auth-card {
-                padding: 30px 25px;
-                margin: 10px;
-            }
-
-            .mood-scale {
-                flex-wrap: wrap;
-                gap: 8px;
-            }
-
-            .mood-button {
-                width: 50px;
-                height: 50px;
-                font-size: 20px;
-            }
-
-            .pattern-cards {
-                grid-template-columns: 1fr;
-                gap: 15px;
-            }
-
-            .nav-tabs {
-                overflow-x: scroll;
-                -webkit-overflow-scrolling: touch;
-                font-size: 14px;
-                padding: 0 15px;
-            }
-
-            .nav-tab {
-                padding: 15px 20px;
-                white-space: nowrap;
-                font-size: 13px;
-            }
-
-            .emotion-tags {
-                gap: 10px;
-            }
-
-            .emotion-tag {
-                padding: 10px 16px;
-                font-size: 14px;
-            }
-
-            .tab-content {
-                padding: 25px;
-            }
-
-            .app-header {
-                padding: 20px;
-                flex-direction: column;
-                gap: 15px;
-                text-align: center;
-            }
-
-            .user-info {
-                flex-direction: column;
-                gap: 15px;
-            }
-
-            .privacy-badge {
-                font-size: 11px;
-                padding: 5px 10px;
-            }
-
-            .pattern-card {
-                padding: 20px;
-            }
-
-            .journal-prompt {
-                padding: 15px;
-            }
-
-            .ai-response {
-                padding: 20px;
-            }
+      /* Mobile Responsive */
+      @media (max-width: 768px) {
+        .container {
+          padding: 15px;
         }
 
-        @media (max-width: 480px) {
-            .auth-card {
-                padding: 20px;
-                margin: 10px;
-            }
-
-            .mood-scale {
-                gap: 3px;
-            }
-
-            .mood-button {
-                width: 35px;
-                height: 35px;
-                font-size: 14px;
-            }
-
-            .nav-tab {
-                padding: 10px 12px;
-                font-size: 12px;
-            }
-
-            .tab-content {
-                padding: 15px;
-            }
-
-            .pattern-card {
-                padding: 15px;
-            }
+        .auth-card {
+          padding: 30px 25px;
+          margin: 10px;
         }
+
+        .mood-scale {
+          flex-wrap: wrap;
+          gap: 8px;
+        }
+
+        .mood-button {
+          width: 50px;
+          height: 50px;
+          font-size: 20px;
+        }
+
+        .pattern-cards {
+          grid-template-columns: 1fr;
+          gap: 15px;
+        }
+
+        .nav-tabs {
+          overflow-x: scroll;
+          -webkit-overflow-scrolling: touch;
+          font-size: 14px;
+          padding: 0 15px;
+        }
+
+        .nav-tab {
+          padding: 15px 20px;
+          white-space: nowrap;
+          font-size: 13px;
+        }
+
+        .emotion-tags {
+          gap: 10px;
+        }
+
+        .emotion-tag {
+          padding: 10px 16px;
+          font-size: 14px;
+        }
+
+        .tab-content {
+          padding: 25px;
+        }
+
+        .app-header {
+          padding: 20px;
+          flex-direction: column;
+          gap: 15px;
+          text-align: center;
+        }
+
+        .user-info {
+          flex-direction: column;
+          gap: 15px;
+        }
+
+        .privacy-badge {
+          font-size: 11px;
+          padding: 5px 10px;
+        }
+
+        .pattern-card {
+          padding: 20px;
+        }
+
+        .journal-prompt {
+          padding: 15px;
+        }
+
+        .ai-response {
+          padding: 20px;
+        }
+      }
+
+      @media (max-width: 480px) {
+        .auth-card {
+          padding: 20px;
+          margin: 10px;
+        }
+
+        .mood-scale {
+          gap: 3px;
+        }
+
+        .mood-button {
+          width: 35px;
+          height: 35px;
+          font-size: 14px;
+        }
+
+        .nav-tab {
+          padding: 10px 12px;
+          font-size: 12px;
+        }
+
+        .tab-content {
+          padding: 15px;
+        }
+
+        .pattern-card {
+          padding: 15px;
+        }
+      }
 
       /* Animations */
       .pulse {
@@ -789,7 +873,34 @@
     <div id="authContainer" class="auth-container">
       <div class="auth-card">
         <div class="logo">
-          <h1>🧠 MindPath</h1>
+          <h1
+            style="
+              display: flex;
+              align-items: center;
+              justify-content: center;
+              gap: 15px;
+              margin-bottom: 10px;
+            "
+          >
+            <div
+              style="
+                width: 48px;
+                height: 48px;
+                background: linear-gradient(135deg, #8f7c4e 0%, #a8c09a 100%);
+                border-radius: 12px;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                box-shadow: 0 4px 12px rgba(143, 124, 78, 0.3);
+                font-size: 24px;
+                color: white;
+                font-weight: bold;
+              "
+            >
+              M
+            </div>
+            MindPath
+          </h1>
           <p>Your Private Mental Health Companion</p>
         </div>
 
@@ -817,9 +928,10 @@
               (encrypted)
             </label>
           </div>
-          <button type="button" class="btn" onclick="login()">
+          <button type="button" class="btn" onclick="login();">
             Enter MindPath
           </button>
+
           <p style="text-align: center; margin-top: 20px; color: var(--gray)">
             New here?
             <a
@@ -896,7 +1008,26 @@
       <div id="appContainer" class="app-container">
         <div class="app-header">
           <div>
-            <h2>🧠 MindPath</h2>
+            <h2 style="display: flex; align-items: center; gap: 12px">
+              <div
+                style="
+                  width: 32px;
+                  height: 32px;
+                  background: linear-gradient(135deg, #8f7c4e 0%, #a8c09a 100%);
+                  border-radius: 8px;
+                  display: flex;
+                  align-items: center;
+                  justify-content: center;
+                  box-shadow: 0 2px 8px rgba(143, 124, 78, 0.3);
+                  font-size: 16px;
+                  color: white;
+                  font-weight: bold;
+                "
+              >
+                M
+              </div>
+              MindPath
+            </h2>
             <p style="opacity: 0.9; font-size: 14px">
               Your mental health, your privacy
             </p>
@@ -1105,40 +1236,59 @@
           </div>
         </div>
 
-                    <!-- Academic Calendar Tab -->
-            <div id="calendarTab" class="tab-content">
-                <h3>Academic Calendar</h3>
-                <p style="color: var(--gray); margin-bottom: 20px;">Track important academic events and deadlines</p>
-                
-                <div class="form-group" style="margin-bottom: 30px;">
-                    <h4>Add New Event</h4>
-                    <div style="display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 15px; margin-bottom: 15px;">
-                        <input type="text" id="eventType" placeholder="Event Type (e.g., Exam, Assignment)">
-                        <input type="date" id="eventDate">
-                        <button class="btn" onclick="addCalendarEvent()">Add Event</button>
-                    </div>
-                    <textarea id="eventDescription" placeholder="Description (optional)" style="height: 80px;"></textarea>
-                </div>
+        <!-- Academic Calendar Tab -->
+        <div id="calendarTab" class="tab-content">
+          <h3>Academic Calendar</h3>
+          <p style="color: var(--gray); margin-bottom: 20px">
+            Track important academic events and deadlines
+          </p>
 
-                <h4>Upcoming Events</h4>
-                <div id="calendarEvents" class="pattern-cards">
-                    <div class="pattern-card">
-                        <h4>📅 Loading Events...</h4>
-                        <p>Loading your academic calendar...</p>
-                    </div>
-                </div>
+          <div class="form-group" style="margin-bottom: 30px">
+            <h4>Add New Event</h4>
+            <div
+              style="
+                display: grid;
+                grid-template-columns: 1fr 1fr 1fr;
+                gap: 15px;
+                margin-bottom: 15px;
+              "
+            >
+              <input
+                type="text"
+                id="eventType"
+                placeholder="Event Type (e.g., Exam, Assignment)"
+              />
+              <input type="date" id="eventDate" />
+              <button class="btn" onclick="addCalendarEvent()">
+                Add Event
+              </button>
             </div>
+            <textarea
+              id="eventDescription"
+              placeholder="Description (optional)"
+              style="height: 80px"
+            ></textarea>
+          </div>
 
-            <!-- Coping Strategies Tab -->
-            <div id="strategiesTab" class="tab-content">
-                <h3>Personalized Coping Strategies</h3>
-                <div class="pattern-cards" id="strategiesContainer">
-                    <div class="pattern-card">
-                        <h4>🧘 Loading Strategies...</h4>
-                        <p>Finding personalized coping techniques for you...</p>
-                    </div>
-                </div>
+          <h4>Upcoming Events</h4>
+          <div id="calendarEvents" class="pattern-cards">
+            <div class="pattern-card">
+              <h4>📅 Loading Events...</h4>
+              <p>Loading your academic calendar...</p>
             </div>
+          </div>
+        </div>
+
+        <!-- Coping Strategies Tab -->
+        <div id="strategiesTab" class="tab-content">
+          <h3>Personalized Coping Strategies</h3>
+          <div class="pattern-cards" id="strategiesContainer">
+            <div class="pattern-card">
+              <h4>🧘 Loading Strategies...</h4>
+              <p>Finding personalized coping techniques for you...</p>
+            </div>
+          </div>
+        </div>
 
         <!-- Privacy Settings Tab -->
         <div id="privacyTab" class="tab-content">
@@ -1270,12 +1420,12 @@
             </p>
           </div>
         </div>
-
-        <!-- Alerts -->
-        <div class="alert success" id="successAlert"></div>
-        <div class="alert error" id="errorAlert"></div>
       </div>
     </div>
+
+    <!-- Global Alerts - Outside all containers -->
+    <div class="alert success" id="successAlert"></div>
+    <div class="alert error" id="errorAlert"></div>
 
     <script>
       // Encryption utilities
@@ -1384,6 +1534,9 @@
         const username = document.getElementById("username").value;
         const password = document.getElementById("password").value;
 
+        console.log("Username:", username);
+        console.log("Password length:", password.length);
+
         if (!username || !password) {
           showError("Please enter username and password");
           return false;
@@ -1391,6 +1544,8 @@
 
         try {
           console.log("Attempting login for:", username);
+          console.log("Making API call to /api/auth/login");
+
           // Call API for authentication
           const response = await fetch("/api/auth/login", {
             method: "POST",
@@ -1403,8 +1558,19 @@
             }),
           });
 
-          const data = await response.json();
-          console.log("Login response:", response.status, data);
+          console.log("Response status:", response.status);
+          console.log("Response ok:", response.ok);
+
+          let data;
+          try {
+            data = await response.json();
+            console.log("Login response:", response.status, data);
+          } catch (parseError) {
+            console.log("Response is not JSON, getting text instead");
+            const textResponse = await response.text();
+            console.log("Text response:", textResponse);
+            data = { error: textResponse };
+          }
 
           if (response.ok) {
             // Store token and user info
@@ -1419,13 +1585,22 @@
             showApp();
             showSuccess("Login successful!");
           } else {
+            console.log(
+              "Login failed, calling showError with:",
+              data.error || "Login failed"
+            );
             showError(data.error || "Login failed");
+            console.log("showError call completed");
           }
         } catch (error) {
           console.error("Login error:", error);
-          showError(
-            "Connection error. Please check if the server is running on port 3000."
-          );
+          if (error.message.includes("JSON")) {
+            showError("Server returned an invalid response. Please try again.");
+          } else {
+            showError(
+              "Connection error. Please check if the server is running on port 10000."
+            );
+          }
         }
         return false;
       }
@@ -1477,7 +1652,7 @@
         } catch (error) {
           console.error("Signup error:", error);
           showError(
-            "Connection error. Please check if the server is running on port 3000."
+            "Connection error. Please check if the server is running on port 10000."
           );
         }
         return false;
@@ -1589,12 +1764,12 @@
               .querySelectorAll(".mood-button, .emotion-tag")
               .forEach((btn) => btn.classList.remove("selected"));
 
-                                // Update chart and insights
-                    generateMoodChart();
-                    loadInsights();
-                    
-                    // Check for concerning patterns
-                    checkForConcerningPatterns(moodEntry);
+            // Update chart and insights
+            generateMoodChart();
+            loadInsights();
+
+            // Check for concerning patterns
+            checkForConcerningPatterns(moodEntry);
           } else {
             showError(data.error || "Failed to save mood entry");
           }
@@ -1739,7 +1914,7 @@
       async function loadJournalHistory() {
         const historyContainer = document.getElementById("journalHistory");
         if (!historyContainer) return;
-        
+
         historyContainer.innerHTML = "";
 
         try {
@@ -1754,7 +1929,7 @@
 
             if (response.ok) {
               const journalData = await response.json();
-              
+
               // Display last 5 journal entries
               const recentJournals = journalData.slice(-5).reverse();
               for (const journal of recentJournals) {
@@ -1784,7 +1959,7 @@
         const userData = StorageManager.getItem(
           `user_${currentUser.username}`
         ) || { moods: [], journals: [] };
-        
+
         const recentJournals = userData.journals.slice(-5).reverse();
         for (const encryptedJournal of recentJournals) {
           try {
@@ -2028,11 +2203,18 @@
 
       // Utility Functions
       function showSuccess(message) {
+        console.log("showSuccess called with:", message);
         const alert = document.getElementById("successAlert");
         if (alert) {
           alert.textContent = message;
           alert.style.display = "block";
-          setTimeout(() => (alert.style.display = "none"), 3000);
+          alert.style.visibility = "visible";
+          alert.style.opacity = "1";
+          console.log("Updated existing success alert");
+          setTimeout(() => {
+            alert.style.display = "none";
+            console.log("Hidden success alert after timeout");
+          }, 3000);
         } else {
           // Create alert if it doesn't exist
           const newAlert = document.createElement("div");
@@ -2040,32 +2222,56 @@
           newAlert.id = "successAlert";
           newAlert.textContent = message;
           newAlert.style.display = "block";
-          document.body.appendChild(newAlert);
-          setTimeout(() => (newAlert.style.display = "none"), 3000);
-        }
-      }
-
-      function showError(message) {
-        const alert = document.getElementById("errorAlert");
-        if (alert) {
-          alert.textContent = message;
-          alert.style.display = "block";
-          setTimeout(() => (alert.style.display = "none"), 3000);
-        } else {
-          // Create alert if it doesn't exist
-          const newAlert = document.createElement("div");
-          newAlert.className = "alert error";
-          newAlert.id = "errorAlert";
-          newAlert.textContent = message;
-          newAlert.style.display = "block";
+          newAlert.style.visibility = "visible";
+          newAlert.style.opacity = "1";
           newAlert.style.position = "fixed";
           newAlert.style.top = "20px";
           newAlert.style.right = "20px";
           newAlert.style.zIndex = "9999";
           document.body.appendChild(newAlert);
-          setTimeout(() => (newAlert.style.display = "none"), 3000);
+          console.log("Created new success alert");
+          setTimeout(() => {
+            newAlert.style.display = "none";
+            console.log("Hidden new success alert after timeout");
+          }, 3000);
         }
-        console.error("Error:", message);
+        console.log("Success displayed:", message);
+      }
+
+      function showError(message) {
+        console.log("showError called with:", message);
+        const alert = document.getElementById("errorAlert");
+        if (alert) {
+          alert.innerHTML = `❌ ${message}`;
+          alert.style.display = "block";
+          alert.style.visibility = "visible";
+          alert.style.opacity = "1";
+          console.log("Updated existing error alert");
+          setTimeout(() => {
+            alert.style.display = "none";
+            console.log("Hidden error alert after timeout");
+          }, 8000);
+        } else {
+          // Create alert if it doesn't exist
+          const newAlert = document.createElement("div");
+          newAlert.className = "alert error";
+          newAlert.id = "errorAlert";
+          newAlert.innerHTML = `❌ ${message}`;
+          newAlert.style.display = "block";
+          newAlert.style.visibility = "visible";
+          newAlert.style.opacity = "1";
+          newAlert.style.position = "fixed";
+          newAlert.style.top = "20px";
+          newAlert.style.right = "20px";
+          newAlert.style.zIndex = "99999";
+          document.body.appendChild(newAlert);
+          console.log("Created new error alert");
+          setTimeout(() => {
+            newAlert.style.display = "none";
+            console.log("Hidden new error alert after timeout");
+          }, 8000);
+        }
+        console.error("Error displayed:", message);
       }
 
       async function loadUserData() {
@@ -2359,16 +2565,17 @@
         container.innerHTML = events
           .map((event) => {
             const eventDate = new Date(event.event_date);
-            const daysUntil =
-              Math.ceil((eventDate - new Date()) / (1000 * 60 * 60 * 24));
+            const daysUntil = Math.ceil(
+              (eventDate - new Date()) / (1000 * 60 * 60 * 24)
+            );
             const daysText =
               daysUntil === 0
                 ? "Today"
                 : daysUntil === 1
-                ? "Tomorrow"
-                : daysUntil < 0
-                ? `${Math.abs(daysUntil)} days ago`
-                : `${daysUntil} days`;
+                  ? "Tomorrow"
+                  : daysUntil < 0
+                    ? `${Math.abs(daysUntil)} days ago`
+                    : `${daysUntil} days`;
 
             return `
                     <div class="pattern-card">
