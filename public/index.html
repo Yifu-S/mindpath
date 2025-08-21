@@ -2614,10 +2614,17 @@
 
           if (response.ok) {
             const strategies = await response.json();
+            console.log("📊 Received strategies from server:", strategies);
             displayStrategies(strategies);
+          } else {
+            console.error("❌ Server returned error status:", response.status);
+            const errorText = await response.text();
+            console.error("❌ Error response:", errorText);
+            throw new Error(`Server error: ${response.status}`);
           }
         } catch (error) {
           console.error("Error loading strategies:", error);
+          console.log("🔄 Falling back to static strategies due to error");
           // Fallback to static strategies
           displayStrategies(getFallbackStrategies());
         }

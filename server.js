@@ -1909,1141 +1909,2015 @@ app.get("/api/strategies", authenticateToken, async (req, res) => {
         ],
       },
     },
-     // Lonely emotion pools
-     "lonely": {
-       "exams/tests": {
-         pool1: [
-           {
-             id: 129,
-             category: "social",
-             title: "Study Group Formation",
-             description: "Connect with others while studying",
-             steps: ["Post in class group chats", "Ask classmates to study together", "Join existing study groups", "Create a study schedule with others", "Share notes and resources"],
-           },
-           {
-             id: 130,
-             category: "quick",
-             title: "Box Breathing (5 min)",
-             description: "A simple technique to calm your nervous system",
-             steps: ["Inhale for 4 counts", "Hold for 4 counts", "Exhale for 4 counts", "Hold for 4 counts", "Repeat 4-5 times"],
-           },
-           {
-             id: 131,
-             category: "mindfulness",
-             title: "Progressive Muscle Relaxation",
-             description: "Release physical tension systematically",
-             steps: ["Start with your toes", "Tense muscles for 5 seconds", "Release and feel the relaxation", "Move up to calves, thighs, stomach", "Continue to shoulders and face"],
-           },
-           {
-             id: 132,
-             category: "academic",
-             title: "Study Environment Optimization",
-             description: "Create a space that supports learning",
-             steps: ["Clear your desk completely", "Add natural light or good lighting", "Keep water and healthy snacks nearby", "Use noise-canceling headphones if needed", "Set phone to Do Not Disturb"],
-           }
-         ],
-         pool2: [
-           {
-             id: 133,
-             category: "academic",
-             title: "Pomodoro Technique",
-             description: "Improve focus and reduce study stress",
-             steps: ["25 minutes focused work", "5 minute break", "Repeat 4 times", "15-30 minute long break"],
-           },
-           {
-             id: 134,
-             category: "mindfulness",
-             title: "Body Scan Meditation",
-             description: "Connect with your body and reduce tension",
-             steps: ["Lie down or sit comfortably", "Close your eyes", "Focus on your toes, then feet", "Move attention up your body", "Notice any tension and release it", "Continue to the top of your head"],
-           },
-           {
-             id: 135,
-             category: "physical",
-             title: "5-Minute Movement Break",
-             description: "Quick physical activity to boost mood and energy",
-             steps: ["Stand up and stretch", "Do 10 jumping jacks", "Walk around your room", "Do 5 push-ups or wall push-ups", "Take 5 deep breaths"],
-           },
-           {
-             id: 136,
-             category: "academic",
-             title: "Note-Taking Strategy",
-             description: "Improve learning and reduce study stress",
-             steps: ["Use the Cornell method", "Write key points in your own words", "Review notes within 24 hours", "Create visual summaries", "Teach concepts to others"],
-           }
-         ]
-       },
-       "assignments": {
-         pool1: [
-           {
-             id: 137,
-             category: "social",
-             title: "Collaborative Assignment Work",
-             description: "Work on assignments with others",
-             steps: ["Find classmates working on similar assignments", "Set up virtual study sessions", "Share resources and ideas", "Give and receive feedback", "Celebrate completion together"],
-           },
-           {
-             id: 138,
-             category: "quick",
-             title: "Box Breathing (5 min)",
-             description: "A simple technique to calm your nervous system",
-             steps: ["Inhale for 4 counts", "Hold for 4 counts", "Exhale for 4 counts", "Hold for 4 counts", "Repeat 4-5 times"],
-           },
-           {
-             id: 139,
-             category: "academic",
-             title: "Study Environment Optimization",
-             description: "Create a space that supports learning",
-             steps: ["Clear your desk completely", "Add natural light or good lighting", "Keep water and healthy snacks nearby", "Use noise-canceling headphones if needed", "Set phone to Do Not Disturb"],
-           },
-           {
-             id: 140,
-             category: "mindfulness",
-             title: "Progressive Muscle Relaxation",
-             description: "Release physical tension systematically",
-             steps: ["Start with your toes", "Tense muscles for 5 seconds", "Release and feel the relaxation", "Move up to calves, thighs, stomach", "Continue to shoulders and face"],
-           }
-         ],
-         pool2: [
-           {
-             id: 141,
-             category: "academic",
-             title: "Pomodoro Technique",
-             description: "Improve focus and reduce study stress",
-             steps: ["25 minutes focused work", "5 minute break", "Repeat 4 times", "15-30 minute long break"],
-           },
-           {
-             id: 142,
-             category: "mindfulness",
-             title: "Body Scan Meditation",
-             description: "Connect with your body and reduce tension",
-             steps: ["Lie down or sit comfortably", "Close your eyes", "Focus on your toes, then feet", "Move attention up your body", "Notice any tension and release it", "Continue to the top of your head"],
-           },
-           {
-             id: 143,
-             category: "physical",
-             title: "5-Minute Movement Break",
-             description: "Quick physical activity to boost mood and energy",
-             steps: ["Stand up and stretch", "Do 10 jumping jacks", "Walk around your room", "Do 5 push-ups or wall push-ups", "Take 5 deep breaths"],
-           },
-           {
-             id: 144,
-             category: "academic",
-             title: "Note-Taking Strategy",
-             description: "Improve learning and reduce study stress",
-             steps: ["Use the Cornell method", "Write key points in your own words", "Review notes within 24 hours", "Create visual summaries", "Teach concepts to others"],
-           }
-         ]
-       },
-       "social life": {
-         pool1: [
-           {
-             id: 145,
-             category: "social",
-             title: "Social Connection Building",
-             description: "Combat loneliness and build friendships",
-             steps: ["Join one campus club or activity", "Study in common areas occasionally", "Reach out to one person per week", "Attend dorm/floor events", "Be patient - friendships take time"],
-           },
-           {
-             id: 146,
-             category: "quick",
-             title: "Box Breathing (5 min)",
-             description: "A simple technique to calm your nervous system",
-             steps: ["Inhale for 4 counts", "Hold for 4 counts", "Exhale for 4 counts", "Hold for 4 counts", "Repeat 4-5 times"],
-           },
-           {
-             id: 147,
-             category: "mindfulness",
-             title: "Progressive Muscle Relaxation",
-             description: "Release physical tension systematically",
-             steps: ["Start with your toes", "Tense muscles for 5 seconds", "Release and feel the relaxation", "Move up to calves, thighs, stomach", "Continue to shoulders and face"],
-           },
-           {
-             id: 148,
-             category: "social",
-             title: "Small Talk Preparation",
-             description: "Prepare for social interactions",
-             steps: ["Think of 3 conversation starters", "Practice asking follow-up questions", "Remember people love talking about themselves", "Have a few interesting topics ready", "Practice with a friend first"],
-           }
-         ],
-         pool2: [
-           {
-             id: 149,
-             category: "social",
-             title: "Active Listening",
-             description: "Improve relationships through better communication",
-             steps: ["Maintain eye contact", "Don't interrupt or plan responses", "Ask clarifying questions", "Reflect back what you heard", "Show empathy and understanding"],
-           },
-           {
-             id: 150,
-             category: "mindfulness",
-             title: "Body Scan Meditation",
-             description: "Connect with your body and reduce tension",
-             steps: ["Lie down or sit comfortably", "Close your eyes", "Focus on your toes, then feet", "Move attention up your body", "Notice any tension and release it", "Continue to the top of your head"],
-           },
-           {
-             id: 151,
-             category: "physical",
-             title: "5-Minute Movement Break",
-             description: "Quick physical activity to boost mood and energy",
-             steps: ["Stand up and stretch", "Do 10 jumping jacks", "Walk around your room", "Do 5 push-ups or wall push-ups", "Take 5 deep breaths"],
-           },
-           {
-             id: 152,
-             category: "social",
-             title: "Social Anxiety Coping",
-             description: "Manage social anxiety in group settings",
-             steps: ["Practice deep breathing before events", "Set realistic expectations", "Focus on listening rather than talking", "Have an exit plan if needed", "Remember everyone feels nervous sometimes"],
-           }
-         ]
-       },
-       "relationships": {
-         pool1: [
-           {
-             id: 153,
-             category: "social",
-             title: "Relationship Building",
-             description: "Build deeper connections with others",
-             steps: ["Be vulnerable and share your feelings", "Show genuine interest in others", "Spend quality time together", "Express appreciation regularly", "Be a good listener"],
-           },
-           {
-             id: 154,
-             category: "quick",
-             title: "Box Breathing (5 min)",
-             description: "A simple technique to calm your nervous system",
-             steps: ["Inhale for 4 counts", "Hold for 4 counts", "Exhale for 4 counts", "Hold for 4 counts", "Repeat 4-5 times"],
-           },
-           {
-             id: 155,
-             category: "mindfulness",
-             title: "Progressive Muscle Relaxation",
-             description: "Release physical tension systematically",
-             steps: ["Start with your toes", "Tense muscles for 5 seconds", "Release and feel the relaxation", "Move up to calves, thighs, stomach", "Continue to shoulders and face"],
-           },
-           {
-             id: 156,
-             category: "social",
-             title: "Conflict Resolution",
-             description: "Handle disagreements constructively",
-             steps: ["Take time to cool down first", "Use 'I feel' statements", "Listen without interrupting", "Find common ground", "Agree to disagree when needed"],
-           }
-         ],
-         pool2: [
-           {
-             id: 157,
-             category: "social",
-             title: "Social Connection Building",
-             description: "Combat loneliness and build friendships",
-             steps: ["Join one campus club or activity", "Study in common areas occasionally", "Reach out to one person per week", "Attend dorm/floor events", "Be patient - friendships take time"],
-           },
-           {
-             id: 158,
-             category: "mindfulness",
-             title: "Body Scan Meditation",
-             description: "Connect with your body and reduce tension",
-             steps: ["Lie down or sit comfortably", "Close your eyes", "Focus on your toes, then feet", "Move attention up your body", "Notice any tension and release it", "Continue to the top of your head"],
-           },
-           {
-             id: 159,
-             category: "physical",
-             title: "5-Minute Movement Break",
-             description: "Quick physical activity to boost mood and energy",
-             steps: ["Stand up and stretch", "Do 10 jumping jacks", "Walk around your room", "Do 5 push-ups or wall push-ups", "Take 5 deep breaths"],
-           },
-           {
-             id: 160,
-             category: "social",
-             title: "Active Listening",
-             description: "Improve relationships through better communication",
-             steps: ["Maintain eye contact", "Don't interrupt or plan responses", "Ask clarifying questions", "Reflect back what you heard", "Show empathy and understanding"],
-           }
-         ]
-       },
-       "family": {
-         pool1: [
-           {
-             id: 161,
-             category: "social",
-             title: "Family Communication",
-             description: "Improve communication with family",
-             steps: ["Set regular check-in times", "Be honest about your feelings", "Listen to their concerns", "Set healthy boundaries", "Express appreciation regularly"],
-           },
-           {
-             id: 162,
-             category: "quick",
-             title: "Box Breathing (5 min)",
-             description: "A simple technique to calm your nervous system",
-             steps: ["Inhale for 4 counts", "Hold for 4 counts", "Exhale for 4 counts", "Hold for 4 counts", "Repeat 4-5 times"],
-           },
-           {
-             id: 163,
-             category: "mindfulness",
-             title: "Progressive Muscle Relaxation",
-             description: "Release physical tension systematically",
-             steps: ["Start with your toes", "Tense muscles for 5 seconds", "Release and feel the relaxation", "Move up to calves, thighs, stomach", "Continue to shoulders and face"],
-           },
-           {
-             id: 164,
-             category: "social",
-             title: "Boundary Setting",
-             description: "Protect your mental health in relationships",
-             steps: ["Identify what drains your energy", "Practice saying 'no' to small things first", "Communicate your needs clearly", "Set time limits for social activities", "Prioritize your own wellbeing"],
-           }
-         ],
-         pool2: [
-           {
-             id: 165,
-             category: "social",
-             title: "Social Connection Building",
-             description: "Combat loneliness and build friendships",
-             steps: ["Join one campus club or activity", "Study in common areas occasionally", "Reach out to one person per week", "Attend dorm/floor events", "Be patient - friendships take time"],
-           },
-           {
-             id: 166,
-             category: "mindfulness",
-             title: "Body Scan Meditation",
-             description: "Connect with your body and reduce tension",
-             steps: ["Lie down or sit comfortably", "Close your eyes", "Focus on your toes, then feet", "Move attention up your body", "Notice any tension and release it", "Continue to the top of your head"],
-           },
-           {
-             id: 167,
-             category: "physical",
-             title: "5-Minute Movement Break",
-             description: "Quick physical activity to boost mood and energy",
-             steps: ["Stand up and stretch", "Do 10 jumping jacks", "Walk around your room", "Do 5 push-ups or wall push-ups", "Take 5 deep breaths"],
-           },
-           {
-             id: 168,
-             category: "social",
-             title: "Active Listening",
-             description: "Improve relationships through better communication",
-             steps: ["Maintain eye contact", "Don't interrupt or plan responses", "Ask clarifying questions", "Reflect back what you heard", "Show empathy and understanding"],
-           }
-         ]
-       },
-       "financial": {
-         pool1: [
-           {
-             id: 169,
-             category: "financial",
-             title: "Financial Stress Management",
-             description: "Reduce money-related anxiety",
-             steps: ["Track all expenses for one week", "Create a simple budget", "Look for student discounts", "Consider part-time work or gigs", "Talk to financial aid office"],
-           },
-           {
-             id: 170,
-             category: "quick",
-             title: "Box Breathing (5 min)",
-             description: "A simple technique to calm your nervous system",
-             steps: ["Inhale for 4 counts", "Hold for 4 counts", "Exhale for 4 counts", "Hold for 4 counts", "Repeat 4-5 times"],
-           },
-           {
-             id: 171,
-             category: "mindfulness",
-             title: "Progressive Muscle Relaxation",
-             description: "Release physical tension systematically",
-             steps: ["Start with your toes", "Tense muscles for 5 seconds", "Release and feel the relaxation", "Move up to calves, thighs, stomach", "Continue to shoulders and face"],
-           },
-           {
-             id: 172,
-             category: "financial",
-             title: "Budget Planning",
-             description: "Create a realistic student budget",
-             steps: ["List all income sources", "Track monthly expenses", "Set spending limits", "Plan for emergencies", "Review and adjust monthly"],
-           }
-         ],
-         pool2: [
-           {
-             id: 173,
-             category: "financial",
-             title: "Student Money Management",
-             description: "Smart financial strategies for students",
-             steps: ["Use student discounts everywhere", "Cook meals instead of eating out", "Share expenses with roommates", "Use public transportation", "Find free campus activities"],
-           },
-           {
-             id: 174,
-             category: "mindfulness",
-             title: "Body Scan Meditation",
-             description: "Connect with your body and reduce tension",
-             steps: ["Lie down or sit comfortably", "Close your eyes", "Focus on your toes, then feet", "Move attention up your body", "Notice any tension and release it", "Continue to the top of your head"],
-           },
-           {
-             id: 175,
-             category: "physical",
-             title: "5-Minute Movement Break",
-             description: "Quick physical activity to boost mood and energy",
-             steps: ["Stand up and stretch", "Do 10 jumping jacks", "Walk around your room", "Do 5 push-ups or wall push-ups", "Take 5 deep breaths"],
-           },
-           {
-             id: 176,
-             category: "financial",
-             title: "Financial Goal Setting",
-             description: "Set and achieve financial goals",
-             steps: ["Define short and long-term goals", "Break goals into smaller steps", "Track progress regularly", "Celebrate small wins", "Adjust goals as needed"],
-           }
-         ]
-       },
-       "career/future": {
-         pool1: [
-           {
-             id: 177,
-             category: "academic",
-             title: "Career Development Planning",
-             description: "Build your professional future",
-             steps: ["Research career paths in your field", "Connect with professionals on LinkedIn", "Attend career fairs and networking events", "Develop relevant skills through courses", "Create a professional portfolio"],
-           },
-           {
-             id: 178,
-             category: "quick",
-             title: "Box Breathing (5 min)",
-             description: "A simple technique to calm your nervous system",
-             steps: ["Inhale for 4 counts", "Hold for 4 counts", "Exhale for 4 counts", "Hold for 4 counts", "Repeat 4-5 times"],
-           },
-           {
-             id: 179,
-             category: "mindfulness",
-             title: "Progressive Muscle Relaxation",
-             description: "Release physical tension systematically",
-             steps: ["Start with your toes", "Tense muscles for 5 seconds", "Release and feel the relaxation", "Move up to calves, thighs, stomach", "Continue to shoulders and face"],
-           },
-           {
-             id: 180,
-             category: "academic",
-             title: "Networking Confidence Builder",
-             description: "Build professional relationships with confidence",
-             steps: ["Practice your elevator pitch", "Prepare thoughtful questions to ask", "Follow up with new connections", "Join professional organizations", "Attend industry meetups"],
-           }
-         ],
-         pool2: [
-           {
-             id: 181,
-             category: "academic",
-             title: "Skill Development Planning",
-             description: "Plan your skill development journey",
-             steps: ["Identify skills needed for your field", "Take online courses", "Practice skills through projects", "Seek feedback from mentors", "Update your resume regularly"],
-           },
-           {
-             id: 182,
-             category: "mindfulness",
-             title: "Body Scan Meditation",
-             description: "Connect with your body and reduce tension",
-             steps: ["Lie down or sit comfortably", "Close your eyes", "Focus on your toes, then feet", "Move attention up your body", "Notice any tension and release it", "Continue to the top of your head"],
-           },
-           {
-             id: 183,
-             category: "physical",
-             title: "5-Minute Movement Break",
-             description: "Quick physical activity to boost mood and energy",
-             steps: ["Stand up and stretch", "Do 10 jumping jacks", "Walk around your room", "Do 5 push-ups or wall push-ups", "Take 5 deep breaths"],
-           },
-           {
-             id: 184,
-             category: "academic",
-             title: "Career Anxiety Management",
-             description: "Handle anxiety about future career",
-             steps: ["Focus on what you can control", "Break career planning into small steps", "Practice self-compassion", "Seek career counseling", "Remember it's okay to change paths"],
-           }
-         ]
-       },
-       "health": {
-         pool1: [
-           {
-             id: 185,
-             category: "health",
-             title: "Health Anxiety Management",
-             description: "Manage anxiety about health",
-             steps: ["Focus on facts, not fears", "Practice good self-care", "Seek professional help if needed", "Limit health-related internet searches", "Build a support network"],
-           },
-           {
-             id: 186,
-             category: "quick",
-             title: "Box Breathing (5 min)",
-             description: "A simple technique to calm your nervous system",
-             steps: ["Inhale for 4 counts", "Hold for 4 counts", "Exhale for 4 counts", "Hold for 4 counts", "Repeat 4-5 times"],
-           },
-           {
-             id: 187,
-             category: "mindfulness",
-             title: "Progressive Muscle Relaxation",
-             description: "Release physical tension systematically",
-             steps: ["Start with your toes", "Tense muscles for 5 seconds", "Release and feel the relaxation", "Move up to calves, thighs, stomach", "Continue to shoulders and face"],
-           },
-           {
-             id: 188,
-             category: "health",
-             title: "Wellness Routine Building",
-             description: "Create a sustainable wellness routine",
-             steps: ["Start with small, manageable changes", "Include physical activity", "Prioritize sleep", "Eat nutritious foods", "Practice stress management"],
-           }
-         ],
-         pool2: [
-           {
-             id: 189,
-             category: "sleep",
-             title: "Sleep Hygiene for Students",
-             description: "Better sleep for better mental health",
-             steps: ["No screens 30 min before bed", "Keep room at 65-68°F", "Use white noise if needed", "Avoid caffeine after 2 PM", "Consistent sleep schedule"],
-           },
-           {
-             id: 190,
-             category: "mindfulness",
-             title: "Body Scan Meditation",
-             description: "Connect with your body and reduce tension",
-             steps: ["Lie down or sit comfortably", "Close your eyes", "Focus on your toes, then feet", "Move attention up your body", "Notice any tension and release it", "Continue to the top of your head"],
-           },
-           {
-             id: 191,
-             category: "physical",
-             title: "5-Minute Movement Break",
-             description: "Quick physical activity to boost mood and energy",
-             steps: ["Stand up and stretch", "Do 10 jumping jacks", "Walk around your room", "Do 5 push-ups or wall push-ups", "Take 5 deep breaths"],
-           },
-           {
-             id: 192,
-             category: "health",
-             title: "Stress Management Techniques",
-             description: "Comprehensive stress management approach",
-             steps: ["Identify stress triggers", "Practice regular relaxation", "Maintain healthy boundaries", "Seek social support", "Consider professional help if needed"],
-           }
-         ]
-       }
-     },
-     // Exhausted emotion pools
-     "exhausted": {
-       "exams/tests": {
-         pool1: [
-           {
-             id: 193,
-             category: "sleep",
-             title: "Sleep Hygiene for Students",
-             description: "Better sleep for better mental health",
-             steps: ["No screens 30 min before bed", "Keep room at 65-68°F", "Use white noise if needed", "Avoid caffeine after 2 PM", "Consistent sleep schedule"],
-           },
-           {
-             id: 194,
-             category: "quick",
-             title: "Box Breathing (5 min)",
-             description: "A simple technique to calm your nervous system",
-             steps: ["Inhale for 4 counts", "Hold for 4 counts", "Exhale for 4 counts", "Hold for 4 counts", "Repeat 4-5 times"],
-           },
-           {
-             id: 195,
-             category: "mindfulness",
-             title: "Progressive Muscle Relaxation",
-             description: "Release physical tension systematically",
-             steps: ["Start with your toes", "Tense muscles for 5 seconds", "Release and feel the relaxation", "Move up to calves, thighs, stomach", "Continue to shoulders and face"],
-           },
-           {
-             id: 196,
-             category: "academic",
-             title: "Study Environment Optimization",
-             description: "Create a space that supports learning",
-             steps: ["Clear your desk completely", "Add natural light or good lighting", "Keep water and healthy snacks nearby", "Use noise-canceling headphones if needed", "Set phone to Do Not Disturb"],
-           }
-         ],
-         pool2: [
-           {
-             id: 197,
-             category: "academic",
-             title: "Pomodoro Technique",
-             description: "Improve focus and reduce study stress",
-             steps: ["25 minutes focused work", "5 minute break", "Repeat 4 times", "15-30 minute long break"],
-           },
-           {
-             id: 198,
-             category: "mindfulness",
-             title: "Body Scan Meditation",
-             description: "Connect with your body and reduce tension",
-             steps: ["Lie down or sit comfortably", "Close your eyes", "Focus on your toes, then feet", "Move attention up your body", "Notice any tension and release it", "Continue to the top of your head"],
-           },
-           {
-             id: 199,
-             category: "physical",
-             title: "5-Minute Movement Break",
-             description: "Quick physical activity to boost mood and energy",
-             steps: ["Stand up and stretch", "Do 10 jumping jacks", "Walk around your room", "Do 5 push-ups or wall push-ups", "Take 5 deep breaths"],
-           },
-           {
-             id: 200,
-             category: "academic",
-             title: "Note-Taking Strategy",
-             description: "Improve learning and reduce study stress",
-             steps: ["Use the Cornell method", "Write key points in your own words", "Review notes within 24 hours", "Create visual summaries", "Teach concepts to others"],
-           }
-         ]
-       },
-       "financial": {
-         pool1: [
-           {
-             id: 201,
-             category: "financial",
-             title: "Financial Stress Management",
-             description: "Reduce money-related anxiety",
-             steps: ["Track all expenses for one week", "Create a simple budget", "Look for student discounts", "Consider part-time work or gigs", "Talk to financial aid office"],
-           },
-           {
-             id: 202,
-             category: "quick",
-             title: "Box Breathing (5 min)",
-             description: "A simple technique to calm your nervous system",
-             steps: ["Inhale for 4 counts", "Hold for 4 counts", "Exhale for 4 counts", "Hold for 4 counts", "Repeat 4-5 times"],
-           },
-           {
-             id: 203,
-             category: "mindfulness",
-             title: "Progressive Muscle Relaxation",
-             description: "Release physical tension systematically",
-             steps: ["Start with your toes", "Tense muscles for 5 seconds", "Release and feel the relaxation", "Move up to calves, thighs, stomach", "Continue to shoulders and face"],
-           },
-           {
-             id: 204,
-             category: "financial",
-             title: "Budget Planning",
-             description: "Create a realistic student budget",
-             steps: ["List all income sources", "Track monthly expenses", "Set spending limits", "Plan for emergencies", "Review and adjust monthly"],
-           }
-         ],
-         pool2: [
-           {
-             id: 205,
-             category: "financial",
-             title: "Student Money Management",
-             description: "Smart financial strategies for students",
-             steps: ["Use student discounts everywhere", "Cook meals instead of eating out", "Share expenses with roommates", "Use public transportation", "Find free campus activities"],
-           },
-           {
-             id: 206,
-             category: "mindfulness",
-             title: "Body Scan Meditation",
-             description: "Connect with your body and reduce tension",
-             steps: ["Lie down or sit comfortably", "Close your eyes", "Focus on your toes, then feet", "Move attention up your body", "Notice any tension and release it", "Continue to the top of your head"],
-           },
-           {
-             id: 207,
-             category: "physical",
-             title: "5-Minute Movement Break",
-             description: "Quick physical activity to boost mood and energy",
-             steps: ["Stand up and stretch", "Do 10 jumping jacks", "Walk around your room", "Do 5 push-ups or wall push-ups", "Take 5 deep breaths"],
-           },
-           {
-             id: 208,
-             category: "financial",
-             title: "Financial Goal Setting",
-             description: "Set and achieve financial goals",
-             steps: ["Define short and long-term goals", "Break goals into smaller steps", "Track progress regularly", "Celebrate small wins", "Adjust goals as needed"],
-           }
-         ]
-       }
-     },
-     // Confident emotion pools
-     "confident": {
-       "exams/tests": {
-         pool1: [
-           {
-             id: 209,
-             category: "academic",
-             title: "Test Confidence Building",
-             description: "Maintain confidence during exams",
-             steps: ["Review your preparation", "Use positive self-talk", "Focus on what you know", "Stay calm and composed", "Trust your abilities"],
-           },
-           {
-             id: 210,
-             category: "quick",
-             title: "Box Breathing (5 min)",
-             description: "A simple technique to calm your nervous system",
-             steps: ["Inhale for 4 counts", "Hold for 4 counts", "Exhale for 4 counts", "Hold for 4 counts", "Repeat 4-5 times"],
-           },
-           {
-             id: 211,
-             category: "mindfulness",
-             title: "Progressive Muscle Relaxation",
-             description: "Release physical tension systematically",
-             steps: ["Start with your toes", "Tense muscles for 5 seconds", "Release and feel the relaxation", "Move up to calves, thighs, stomach", "Continue to shoulders and face"],
-           },
-           {
-             id: 212,
-             category: "academic",
-             title: "Study Environment Optimization",
-             description: "Create a space that supports learning",
-             steps: ["Clear your desk completely", "Add natural light or good lighting", "Keep water and healthy snacks nearby", "Use noise-canceling headphones if needed", "Set phone to Do Not Disturb"],
-           }
-         ],
-         pool2: [
-           {
-             id: 213,
-             category: "academic",
-             title: "Pomodoro Technique",
-             description: "Improve focus and reduce study stress",
-             steps: ["25 minutes focused work", "5 minute break", "Repeat 4 times", "15-30 minute long break"],
-           },
-           {
-             id: 214,
-             category: "mindfulness",
-             title: "Body Scan Meditation",
-             description: "Connect with your body and reduce tension",
-             steps: ["Lie down or sit comfortably", "Close your eyes", "Focus on your toes, then feet", "Move attention up your body", "Notice any tension and release it", "Continue to the top of your head"],
-           },
-           {
-             id: 215,
-             category: "physical",
-             title: "5-Minute Movement Break",
-             description: "Quick physical activity to boost mood and energy",
-             steps: ["Stand up and stretch", "Do 10 jumping jacks", "Walk around your room", "Do 5 push-ups or wall push-ups", "Take 5 deep breaths"],
-           },
-           {
-             id: 216,
-             category: "academic",
-             title: "Note-Taking Strategy",
-             description: "Improve learning and reduce study stress",
-             steps: ["Use the Cornell method", "Write key points in your own words", "Review notes within 24 hours", "Create visual summaries", "Teach concepts to others"],
-           }
-         ]
-       },
-       "career/future": {
-         pool1: [
-           {
-             id: 217,
-             category: "academic",
-             title: "Career Development Planning",
-             description: "Build your professional future",
-             steps: ["Research career paths in your field", "Connect with professionals on LinkedIn", "Attend career fairs and networking events", "Develop relevant skills through courses", "Create a professional portfolio"],
-           },
-           {
-             id: 218,
-             category: "quick",
-             title: "Box Breathing (5 min)",
-             description: "A simple technique to calm your nervous system",
-             steps: ["Inhale for 4 counts", "Hold for 4 counts", "Exhale for 4 counts", "Hold for 4 counts", "Repeat 4-5 times"],
-           },
-           {
-             id: 219,
-             category: "mindfulness",
-             title: "Progressive Muscle Relaxation",
-             description: "Release physical tension systematically",
-             steps: ["Start with your toes", "Tense muscles for 5 seconds", "Release and feel the relaxation", "Move up to calves, thighs, stomach", "Continue to shoulders and face"],
-           },
-           {
-             id: 220,
-             category: "academic",
-             title: "Networking Confidence Builder",
-             description: "Build professional relationships with confidence",
-             steps: ["Practice your elevator pitch", "Prepare thoughtful questions to ask", "Follow up with new connections", "Join professional organizations", "Attend industry meetups"],
-           }
-         ],
-         pool2: [
-           {
-             id: 221,
-             category: "academic",
-             title: "Skill Development Planning",
-             description: "Plan your skill development journey",
-             steps: ["Identify skills needed for your field", "Take online courses", "Practice skills through projects", "Seek feedback from mentors", "Update your resume regularly"],
-           },
-           {
-             id: 222,
-             category: "mindfulness",
-             title: "Body Scan Meditation",
-             description: "Connect with your body and reduce tension",
-             steps: ["Lie down or sit comfortably", "Close your eyes", "Focus on your toes, then feet", "Move attention up your body", "Notice any tension and release it", "Continue to the top of your head"],
-           },
-           {
-             id: 223,
-             category: "physical",
-             title: "5-Minute Movement Break",
-             description: "Quick physical activity to boost mood and energy",
-             steps: ["Stand up and stretch", "Do 10 jumping jacks", "Walk around your room", "Do 5 push-ups or wall push-ups", "Take 5 deep breaths"],
-           },
-           {
-             id: 224,
-             category: "academic",
-             title: "Career Anxiety Management",
-             description: "Handle anxiety about future career",
-             steps: ["Focus on what you can control", "Break career planning into small steps", "Practice self-compassion", "Seek career counseling", "Remember it's okay to change paths"],
-           }
-         ]
-       }
-     },
-     // Motivated emotion pools
-     "motivated": {
-       "exams/tests": {
-         pool1: [
-           {
-             id: 225,
-             category: "academic",
-             title: "Study Momentum Building",
-             description: "Maintain motivation during study sessions",
-             steps: ["Set specific study goals", "Break tasks into smaller chunks", "Reward yourself for progress", "Track your achievements", "Stay focused on your goals"],
-           },
-           {
-             id: 226,
-             category: "quick",
-             title: "Box Breathing (5 min)",
-             description: "A simple technique to calm your nervous system",
-             steps: ["Inhale for 4 counts", "Hold for 4 counts", "Exhale for 4 counts", "Hold for 4 counts", "Repeat 4-5 times"],
-           },
-           {
-             id: 227,
-             category: "mindfulness",
-             title: "Progressive Muscle Relaxation",
-             description: "Release physical tension systematically",
-             steps: ["Start with your toes", "Tense muscles for 5 seconds", "Release and feel the relaxation", "Move up to calves, thighs, stomach", "Continue to shoulders and face"],
-           },
-           {
-             id: 228,
-             category: "academic",
-             title: "Study Environment Optimization",
-             description: "Create a space that supports learning",
-             steps: ["Clear your desk completely", "Add natural light or good lighting", "Keep water and healthy snacks nearby", "Use noise-canceling headphones if needed", "Set phone to Do Not Disturb"],
-           }
-         ],
-         pool2: [
-           {
-             id: 229,
-             category: "academic",
-             title: "Pomodoro Technique",
-             description: "Improve focus and reduce study stress",
-             steps: ["25 minutes focused work", "5 minute break", "Repeat 4 times", "15-30 minute long break"],
-           },
-           {
-             id: 230,
-             category: "mindfulness",
-             title: "Body Scan Meditation",
-             description: "Connect with your body and reduce tension",
-             steps: ["Lie down or sit comfortably", "Close your eyes", "Focus on your toes, then feet", "Move attention up your body", "Notice any tension and release it", "Continue to the top of your head"],
-           },
-           {
-             id: 231,
-             category: "physical",
-             title: "5-Minute Movement Break",
-             description: "Quick physical activity to boost mood and energy",
-             steps: ["Stand up and stretch", "Do 10 jumping jacks", "Walk around your room", "Do 5 push-ups or wall push-ups", "Take 5 deep breaths"],
-           },
-           {
-             id: 232,
-             category: "academic",
-             title: "Note-Taking Strategy",
-             description: "Improve learning and reduce study stress",
-             steps: ["Use the Cornell method", "Write key points in your own words", "Review notes within 24 hours", "Create visual summaries", "Teach concepts to others"],
-           }
-         ]
-       },
-       "career/future": {
-         pool1: [
-           {
-             id: 233,
-             category: "academic",
-             title: "Career Development Planning",
-             description: "Build your professional future",
-             steps: ["Research career paths in your field", "Connect with professionals on LinkedIn", "Attend career fairs and networking events", "Develop relevant skills through courses", "Create a professional portfolio"],
-           },
-           {
-             id: 234,
-             category: "quick",
-             title: "Box Breathing (5 min)",
-             description: "A simple technique to calm your nervous system",
-             steps: ["Inhale for 4 counts", "Hold for 4 counts", "Exhale for 4 counts", "Hold for 4 counts", "Repeat 4-5 times"],
-           },
-           {
-             id: 235,
-             category: "mindfulness",
-             title: "Progressive Muscle Relaxation",
-             description: "Release physical tension systematically",
-             steps: ["Start with your toes", "Tense muscles for 5 seconds", "Release and feel the relaxation", "Move up to calves, thighs, stomach", "Continue to shoulders and face"],
-           },
-           {
-             id: 236,
-             category: "academic",
-             title: "Networking Confidence Builder",
-             description: "Build professional relationships with confidence",
-             steps: ["Practice your elevator pitch", "Prepare thoughtful questions to ask", "Follow up with new connections", "Join professional organizations", "Attend industry meetups"],
-           }
-         ],
-         pool2: [
-           {
-             id: 237,
-             category: "academic",
-             title: "Skill Development Planning",
-             description: "Plan your skill development journey",
-             steps: ["Identify skills needed for your field", "Take online courses", "Practice skills through projects", "Seek feedback from mentors", "Update your resume regularly"],
-           },
-           {
-             id: 238,
-             category: "mindfulness",
-             title: "Body Scan Meditation",
-             description: "Connect with your body and reduce tension",
-             steps: ["Lie down or sit comfortably", "Close your eyes", "Focus on your toes, then feet", "Move attention up your body", "Notice any tension and release it", "Continue to the top of your head"],
-           },
-           {
-             id: 239,
-             category: "physical",
-             title: "5-Minute Movement Break",
-             description: "Quick physical activity to boost mood and energy",
-             steps: ["Stand up and stretch", "Do 10 jumping jacks", "Walk around your room", "Do 5 push-ups or wall push-ups", "Take 5 deep breaths"],
-           },
-           {
-             id: 240,
-             category: "academic",
-             title: "Career Anxiety Management",
-             description: "Handle anxiety about future career",
-             steps: ["Focus on what you can control", "Break career planning into small steps", "Practice self-compassion", "Seek career counseling", "Remember it's okay to change paths"],
-           }
-         ]
-       }
-     },
-     // Excited emotion pools
-     "excited": {
-       "exams/tests": {
-         pool1: [
-           {
-             id: 241,
-             category: "academic",
-             title: "Test Preparation Strategy",
-             description: "Channel excitement into effective preparation",
-             steps: ["Use your energy to review material", "Create study schedules", "Practice with sample questions", "Stay organized and focused", "Maintain positive momentum"],
-           },
-           {
-             id: 242,
-             category: "quick",
-             title: "Box Breathing (5 min)",
-             description: "A simple technique to calm your nervous system",
-             steps: ["Inhale for 4 counts", "Hold for 4 counts", "Exhale for 4 counts", "Hold for 4 counts", "Repeat 4-5 times"],
-           },
-           {
-             id: 243,
-             category: "mindfulness",
-             title: "Progressive Muscle Relaxation",
-             description: "Release physical tension systematically",
-             steps: ["Start with your toes", "Tense muscles for 5 seconds", "Release and feel the relaxation", "Move up to calves, thighs, stomach", "Continue to shoulders and face"],
-           },
-           {
-             id: 244,
-             category: "academic",
-             title: "Study Environment Optimization",
-             description: "Create a space that supports learning",
-             steps: ["Clear your desk completely", "Add natural light or good lighting", "Keep water and healthy snacks nearby", "Use noise-canceling headphones if needed", "Set phone to Do Not Disturb"],
-           }
-         ],
-         pool2: [
-           {
-             id: 245,
-             category: "academic",
-             title: "Pomodoro Technique",
-             description: "Improve focus and reduce study stress",
-             steps: ["25 minutes focused work", "5 minute break", "Repeat 4 times", "15-30 minute long break"],
-           },
-           {
-             id: 246,
-             category: "mindfulness",
-             title: "Body Scan Meditation",
-             description: "Connect with your body and reduce tension",
-             steps: ["Lie down or sit comfortably", "Close your eyes", "Focus on your toes, then feet", "Move attention up your body", "Notice any tension and release it", "Continue to the top of your head"],
-           },
-           {
-             id: 247,
-             category: "physical",
-             title: "5-Minute Movement Break",
-             description: "Quick physical activity to boost mood and energy",
-             steps: ["Stand up and stretch", "Do 10 jumping jacks", "Walk around your room", "Do 5 push-ups or wall push-ups", "Take 5 deep breaths"],
-           },
-           {
-             id: 248,
-             category: "academic",
-             title: "Note-Taking Strategy",
-             description: "Improve learning and reduce study stress",
-             steps: ["Use the Cornell method", "Write key points in your own words", "Review notes within 24 hours", "Create visual summaries", "Teach concepts to others"],
-           }
-         ]
-       },
-       "career/future": {
-         pool1: [
-           {
-             id: 249,
-             category: "academic",
-             title: "Career Development Planning",
-             description: "Build your professional future",
-             steps: ["Research career paths in your field", "Connect with professionals on LinkedIn", "Attend career fairs and networking events", "Develop relevant skills through courses", "Create a professional portfolio"],
-           },
-           {
-             id: 250,
-             category: "quick",
-             title: "Box Breathing (5 min)",
-             description: "A simple technique to calm your nervous system",
-             steps: ["Inhale for 4 counts", "Hold for 4 counts", "Exhale for 4 counts", "Hold for 4 counts", "Repeat 4-5 times"],
-           },
-           {
-             id: 251,
-             category: "mindfulness",
-             title: "Progressive Muscle Relaxation",
-             description: "Release physical tension systematically",
-             steps: ["Start with your toes", "Tense muscles for 5 seconds", "Release and feel the relaxation", "Move up to calves, thighs, stomach", "Continue to shoulders and face"],
-           },
-           {
-             id: 252,
-             category: "academic",
-             title: "Networking Confidence Builder",
-             description: "Build professional relationships with confidence",
-             steps: ["Practice your elevator pitch", "Prepare thoughtful questions to ask", "Follow up with new connections", "Join professional organizations", "Attend industry meetups"],
-           }
-         ],
-         pool2: [
-           {
-             id: 253,
-             category: "academic",
-             title: "Skill Development Planning",
-             description: "Plan your skill development journey",
-             steps: ["Identify skills needed for your field", "Take online courses", "Practice skills through projects", "Seek feedback from mentors", "Update your resume regularly"],
-           },
-           {
-             id: 254,
-             category: "mindfulness",
-             title: "Body Scan Meditation",
-             description: "Connect with your body and reduce tension",
-             steps: ["Lie down or sit comfortably", "Close your eyes", "Focus on your toes, then feet", "Move attention up your body", "Notice any tension and release it", "Continue to the top of your head"],
-           },
-           {
-             id: 255,
-             category: "physical",
-             title: "5-Minute Movement Break",
-             description: "Quick physical activity to boost mood and energy",
-             steps: ["Stand up and stretch", "Do 10 jumping jacks", "Walk around your room", "Do 5 push-ups or wall push-ups", "Take 5 deep breaths"],
-           },
-           {
-             id: 256,
-             category: "academic",
-             title: "Career Anxiety Management",
-             description: "Handle anxiety about future career",
-             steps: ["Focus on what you can control", "Break career planning into small steps", "Practice self-compassion", "Seek career counseling", "Remember it's okay to change paths"],
-           }
-         ]
-       }
-     },
-     // Frustrated emotion pools
-     "frustrated": {
-       "exams/tests": {
-         pool1: [
-           {
-             id: 257,
-             category: "academic",
-             title: "Frustration Management",
-             description: "Handle academic frustration constructively",
-             steps: ["Take a short break to cool down", "Break the problem into smaller parts", "Ask for help from classmates or tutors", "Focus on what you can control", "Practice self-compassion"],
-           },
-           {
-             id: 258,
-             category: "quick",
-             title: "Box Breathing (5 min)",
-             description: "A simple technique to calm your nervous system",
-             steps: ["Inhale for 4 counts", "Hold for 4 counts", "Exhale for 4 counts", "Hold for 4 counts", "Repeat 4-5 times"],
-           },
-           {
-             id: 259,
-             category: "mindfulness",
-             title: "Progressive Muscle Relaxation",
-             description: "Release physical tension systematically",
-             steps: ["Start with your toes", "Tense muscles for 5 seconds", "Release and feel the relaxation", "Move up to calves, thighs, stomach", "Continue to shoulders and face"],
-           },
-           {
-             id: 260,
-             category: "academic",
-             title: "Study Environment Optimization",
-             description: "Create a space that supports learning",
-             steps: ["Clear your desk completely", "Add natural light or good lighting", "Keep water and healthy snacks nearby", "Use noise-canceling headphones if needed", "Set phone to Do Not Disturb"],
-           }
-         ],
-         pool2: [
-           {
-             id: 261,
-             category: "academic",
-             title: "Pomodoro Technique",
-             description: "Improve focus and reduce study stress",
-             steps: ["25 minutes focused work", "5 minute break", "Repeat 4 times", "15-30 minute long break"],
-           },
-           {
-             id: 262,
-             category: "mindfulness",
-             title: "Body Scan Meditation",
-             description: "Connect with your body and reduce tension",
-             steps: ["Lie down or sit comfortably", "Close your eyes", "Focus on your toes, then feet", "Move attention up your body", "Notice any tension and release it", "Continue to the top of your head"],
-           },
-           {
-             id: 263,
-             category: "physical",
-             title: "5-Minute Movement Break",
-             description: "Quick physical activity to boost mood and energy",
-             steps: ["Stand up and stretch", "Do 10 jumping jacks", "Walk around your room", "Do 5 push-ups or wall push-ups", "Take 5 deep breaths"],
-           },
-           {
-             id: 264,
-             category: "academic",
-             title: "Note-Taking Strategy",
-             description: "Improve learning and reduce study stress",
-             steps: ["Use the Cornell method", "Write key points in your own words", "Review notes within 24 hours", "Create visual summaries", "Teach concepts to others"],
-           }
-         ]
-       },
-       "assignments": {
-         pool1: [
-           {
-             id: 265,
-             category: "academic",
-             title: "Assignment Breakdown Method",
-             description: "Break large assignments into manageable pieces",
-             steps: ["List all requirements", "Break into smaller tasks", "Set deadlines for each task", "Start with easiest part first", "Review and revise"],
-           },
-           {
-             id: 266,
-             category: "quick",
-             title: "Box Breathing (5 min)",
-             description: "A simple technique to calm your nervous system",
-             steps: ["Inhale for 4 counts", "Hold for 4 counts", "Exhale for 4 counts", "Hold for 4 counts", "Repeat 4-5 times"],
-           },
-           {
-             id: 267,
-             category: "academic",
-             title: "Study Environment Optimization",
-             description: "Create a space that supports learning",
-             steps: ["Clear your desk completely", "Add natural light or good lighting", "Keep water and healthy snacks nearby", "Use noise-canceling headphones if needed", "Set phone to Do Not Disturb"],
-           },
-           {
-             id: 268,
-             category: "mindfulness",
-             title: "Progressive Muscle Relaxation",
-             description: "Release physical tension systematically",
-             steps: ["Start with your toes", "Tense muscles for 5 seconds", "Release and feel the relaxation", "Move up to calves, thighs, stomach", "Continue to shoulders and face"],
-           }
-         ],
-         pool2: [
-           {
-             id: 269,
-             category: "academic",
-             title: "Pomodoro Technique",
-             description: "Improve focus and reduce study stress",
-             steps: ["25 minutes focused work", "5 minute break", "Repeat 4 times", "15-30 minute long break"],
-           },
-           {
-             id: 270,
-             category: "mindfulness",
-             title: "Body Scan Meditation",
-             description: "Connect with your body and reduce tension",
-             steps: ["Lie down or sit comfortably", "Close your eyes", "Focus on your toes, then feet", "Move attention up your body", "Notice any tension and release it", "Continue to the top of your head"],
-           },
-           {
-             id: 271,
-             category: "physical",
-             title: "5-Minute Movement Break",
-             description: "Quick physical activity to boost mood and energy",
-             steps: ["Stand up and stretch", "Do 10 jumping jacks", "Walk around your room", "Do 5 push-ups or wall push-ups", "Take 5 deep breaths"],
-           },
-           {
-             id: 272,
-             category: "academic",
-             title: "Note-Taking Strategy",
-             description: "Improve learning and reduce study stress",
-             steps: ["Use the Cornell method", "Write key points in your own words", "Review notes within 24 hours", "Create visual summaries", "Teach concepts to others"],
-           }
-         ]
-       }
-     }
-   };
+    // Lonely emotion pools
+    lonely: {
+      "exams/tests": {
+        pool1: [
+          {
+            id: 129,
+            category: "social",
+            title: "Study Group Formation",
+            description: "Connect with others while studying",
+            steps: [
+              "Post in class group chats",
+              "Ask classmates to study together",
+              "Join existing study groups",
+              "Create a study schedule with others",
+              "Share notes and resources",
+            ],
+          },
+          {
+            id: 130,
+            category: "quick",
+            title: "Box Breathing (5 min)",
+            description: "A simple technique to calm your nervous system",
+            steps: [
+              "Inhale for 4 counts",
+              "Hold for 4 counts",
+              "Exhale for 4 counts",
+              "Hold for 4 counts",
+              "Repeat 4-5 times",
+            ],
+          },
+          {
+            id: 131,
+            category: "mindfulness",
+            title: "Progressive Muscle Relaxation",
+            description: "Release physical tension systematically",
+            steps: [
+              "Start with your toes",
+              "Tense muscles for 5 seconds",
+              "Release and feel the relaxation",
+              "Move up to calves, thighs, stomach",
+              "Continue to shoulders and face",
+            ],
+          },
+          {
+            id: 132,
+            category: "academic",
+            title: "Study Environment Optimization",
+            description: "Create a space that supports learning",
+            steps: [
+              "Clear your desk completely",
+              "Add natural light or good lighting",
+              "Keep water and healthy snacks nearby",
+              "Use noise-canceling headphones if needed",
+              "Set phone to Do Not Disturb",
+            ],
+          },
+        ],
+        pool2: [
+          {
+            id: 133,
+            category: "academic",
+            title: "Pomodoro Technique",
+            description: "Improve focus and reduce study stress",
+            steps: [
+              "25 minutes focused work",
+              "5 minute break",
+              "Repeat 4 times",
+              "15-30 minute long break",
+            ],
+          },
+          {
+            id: 134,
+            category: "mindfulness",
+            title: "Body Scan Meditation",
+            description: "Connect with your body and reduce tension",
+            steps: [
+              "Lie down or sit comfortably",
+              "Close your eyes",
+              "Focus on your toes, then feet",
+              "Move attention up your body",
+              "Notice any tension and release it",
+              "Continue to the top of your head",
+            ],
+          },
+          {
+            id: 135,
+            category: "physical",
+            title: "5-Minute Movement Break",
+            description: "Quick physical activity to boost mood and energy",
+            steps: [
+              "Stand up and stretch",
+              "Do 10 jumping jacks",
+              "Walk around your room",
+              "Do 5 push-ups or wall push-ups",
+              "Take 5 deep breaths",
+            ],
+          },
+          {
+            id: 136,
+            category: "academic",
+            title: "Note-Taking Strategy",
+            description: "Improve learning and reduce study stress",
+            steps: [
+              "Use the Cornell method",
+              "Write key points in your own words",
+              "Review notes within 24 hours",
+              "Create visual summaries",
+              "Teach concepts to others",
+            ],
+          },
+        ],
+      },
+      assignments: {
+        pool1: [
+          {
+            id: 137,
+            category: "social",
+            title: "Collaborative Assignment Work",
+            description: "Work on assignments with others",
+            steps: [
+              "Find classmates working on similar assignments",
+              "Set up virtual study sessions",
+              "Share resources and ideas",
+              "Give and receive feedback",
+              "Celebrate completion together",
+            ],
+          },
+          {
+            id: 138,
+            category: "quick",
+            title: "Box Breathing (5 min)",
+            description: "A simple technique to calm your nervous system",
+            steps: [
+              "Inhale for 4 counts",
+              "Hold for 4 counts",
+              "Exhale for 4 counts",
+              "Hold for 4 counts",
+              "Repeat 4-5 times",
+            ],
+          },
+          {
+            id: 139,
+            category: "academic",
+            title: "Study Environment Optimization",
+            description: "Create a space that supports learning",
+            steps: [
+              "Clear your desk completely",
+              "Add natural light or good lighting",
+              "Keep water and healthy snacks nearby",
+              "Use noise-canceling headphones if needed",
+              "Set phone to Do Not Disturb",
+            ],
+          },
+          {
+            id: 140,
+            category: "mindfulness",
+            title: "Progressive Muscle Relaxation",
+            description: "Release physical tension systematically",
+            steps: [
+              "Start with your toes",
+              "Tense muscles for 5 seconds",
+              "Release and feel the relaxation",
+              "Move up to calves, thighs, stomach",
+              "Continue to shoulders and face",
+            ],
+          },
+        ],
+        pool2: [
+          {
+            id: 141,
+            category: "academic",
+            title: "Pomodoro Technique",
+            description: "Improve focus and reduce study stress",
+            steps: [
+              "25 minutes focused work",
+              "5 minute break",
+              "Repeat 4 times",
+              "15-30 minute long break",
+            ],
+          },
+          {
+            id: 142,
+            category: "mindfulness",
+            title: "Body Scan Meditation",
+            description: "Connect with your body and reduce tension",
+            steps: [
+              "Lie down or sit comfortably",
+              "Close your eyes",
+              "Focus on your toes, then feet",
+              "Move attention up your body",
+              "Notice any tension and release it",
+              "Continue to the top of your head",
+            ],
+          },
+          {
+            id: 143,
+            category: "physical",
+            title: "5-Minute Movement Break",
+            description: "Quick physical activity to boost mood and energy",
+            steps: [
+              "Stand up and stretch",
+              "Do 10 jumping jacks",
+              "Walk around your room",
+              "Do 5 push-ups or wall push-ups",
+              "Take 5 deep breaths",
+            ],
+          },
+          {
+            id: 144,
+            category: "academic",
+            title: "Note-Taking Strategy",
+            description: "Improve learning and reduce study stress",
+            steps: [
+              "Use the Cornell method",
+              "Write key points in your own words",
+              "Review notes within 24 hours",
+              "Create visual summaries",
+              "Teach concepts to others",
+            ],
+          },
+        ],
+      },
+      "social life": {
+        pool1: [
+          {
+            id: 145,
+            category: "social",
+            title: "Social Connection Building",
+            description: "Combat loneliness and build friendships",
+            steps: [
+              "Join one campus club or activity",
+              "Study in common areas occasionally",
+              "Reach out to one person per week",
+              "Attend dorm/floor events",
+              "Be patient - friendships take time",
+            ],
+          },
+          {
+            id: 146,
+            category: "quick",
+            title: "Box Breathing (5 min)",
+            description: "A simple technique to calm your nervous system",
+            steps: [
+              "Inhale for 4 counts",
+              "Hold for 4 counts",
+              "Exhale for 4 counts",
+              "Hold for 4 counts",
+              "Repeat 4-5 times",
+            ],
+          },
+          {
+            id: 147,
+            category: "mindfulness",
+            title: "Progressive Muscle Relaxation",
+            description: "Release physical tension systematically",
+            steps: [
+              "Start with your toes",
+              "Tense muscles for 5 seconds",
+              "Release and feel the relaxation",
+              "Move up to calves, thighs, stomach",
+              "Continue to shoulders and face",
+            ],
+          },
+          {
+            id: 148,
+            category: "social",
+            title: "Small Talk Preparation",
+            description: "Prepare for social interactions",
+            steps: [
+              "Think of 3 conversation starters",
+              "Practice asking follow-up questions",
+              "Remember people love talking about themselves",
+              "Have a few interesting topics ready",
+              "Practice with a friend first",
+            ],
+          },
+        ],
+        pool2: [
+          {
+            id: 149,
+            category: "social",
+            title: "Active Listening",
+            description: "Improve relationships through better communication",
+            steps: [
+              "Maintain eye contact",
+              "Don't interrupt or plan responses",
+              "Ask clarifying questions",
+              "Reflect back what you heard",
+              "Show empathy and understanding",
+            ],
+          },
+          {
+            id: 150,
+            category: "mindfulness",
+            title: "Body Scan Meditation",
+            description: "Connect with your body and reduce tension",
+            steps: [
+              "Lie down or sit comfortably",
+              "Close your eyes",
+              "Focus on your toes, then feet",
+              "Move attention up your body",
+              "Notice any tension and release it",
+              "Continue to the top of your head",
+            ],
+          },
+          {
+            id: 151,
+            category: "physical",
+            title: "5-Minute Movement Break",
+            description: "Quick physical activity to boost mood and energy",
+            steps: [
+              "Stand up and stretch",
+              "Do 10 jumping jacks",
+              "Walk around your room",
+              "Do 5 push-ups or wall push-ups",
+              "Take 5 deep breaths",
+            ],
+          },
+          {
+            id: 152,
+            category: "social",
+            title: "Social Anxiety Coping",
+            description: "Manage social anxiety in group settings",
+            steps: [
+              "Practice deep breathing before events",
+              "Set realistic expectations",
+              "Focus on listening rather than talking",
+              "Have an exit plan if needed",
+              "Remember everyone feels nervous sometimes",
+            ],
+          },
+        ],
+      },
+      relationships: {
+        pool1: [
+          {
+            id: 153,
+            category: "social",
+            title: "Relationship Building",
+            description: "Build deeper connections with others",
+            steps: [
+              "Be vulnerable and share your feelings",
+              "Show genuine interest in others",
+              "Spend quality time together",
+              "Express appreciation regularly",
+              "Be a good listener",
+            ],
+          },
+          {
+            id: 154,
+            category: "quick",
+            title: "Box Breathing (5 min)",
+            description: "A simple technique to calm your nervous system",
+            steps: [
+              "Inhale for 4 counts",
+              "Hold for 4 counts",
+              "Exhale for 4 counts",
+              "Hold for 4 counts",
+              "Repeat 4-5 times",
+            ],
+          },
+          {
+            id: 155,
+            category: "mindfulness",
+            title: "Progressive Muscle Relaxation",
+            description: "Release physical tension systematically",
+            steps: [
+              "Start with your toes",
+              "Tense muscles for 5 seconds",
+              "Release and feel the relaxation",
+              "Move up to calves, thighs, stomach",
+              "Continue to shoulders and face",
+            ],
+          },
+          {
+            id: 156,
+            category: "social",
+            title: "Conflict Resolution",
+            description: "Handle disagreements constructively",
+            steps: [
+              "Take time to cool down first",
+              "Use 'I feel' statements",
+              "Listen without interrupting",
+              "Find common ground",
+              "Agree to disagree when needed",
+            ],
+          },
+        ],
+        pool2: [
+          {
+            id: 157,
+            category: "social",
+            title: "Social Connection Building",
+            description: "Combat loneliness and build friendships",
+            steps: [
+              "Join one campus club or activity",
+              "Study in common areas occasionally",
+              "Reach out to one person per week",
+              "Attend dorm/floor events",
+              "Be patient - friendships take time",
+            ],
+          },
+          {
+            id: 158,
+            category: "mindfulness",
+            title: "Body Scan Meditation",
+            description: "Connect with your body and reduce tension",
+            steps: [
+              "Lie down or sit comfortably",
+              "Close your eyes",
+              "Focus on your toes, then feet",
+              "Move attention up your body",
+              "Notice any tension and release it",
+              "Continue to the top of your head",
+            ],
+          },
+          {
+            id: 159,
+            category: "physical",
+            title: "5-Minute Movement Break",
+            description: "Quick physical activity to boost mood and energy",
+            steps: [
+              "Stand up and stretch",
+              "Do 10 jumping jacks",
+              "Walk around your room",
+              "Do 5 push-ups or wall push-ups",
+              "Take 5 deep breaths",
+            ],
+          },
+          {
+            id: 160,
+            category: "social",
+            title: "Active Listening",
+            description: "Improve relationships through better communication",
+            steps: [
+              "Maintain eye contact",
+              "Don't interrupt or plan responses",
+              "Ask clarifying questions",
+              "Reflect back what you heard",
+              "Show empathy and understanding",
+            ],
+          },
+        ],
+      },
+      family: {
+        pool1: [
+          {
+            id: 161,
+            category: "social",
+            title: "Family Communication",
+            description: "Improve communication with family",
+            steps: [
+              "Set regular check-in times",
+              "Be honest about your feelings",
+              "Listen to their concerns",
+              "Set healthy boundaries",
+              "Express appreciation regularly",
+            ],
+          },
+          {
+            id: 162,
+            category: "quick",
+            title: "Box Breathing (5 min)",
+            description: "A simple technique to calm your nervous system",
+            steps: [
+              "Inhale for 4 counts",
+              "Hold for 4 counts",
+              "Exhale for 4 counts",
+              "Hold for 4 counts",
+              "Repeat 4-5 times",
+            ],
+          },
+          {
+            id: 163,
+            category: "mindfulness",
+            title: "Progressive Muscle Relaxation",
+            description: "Release physical tension systematically",
+            steps: [
+              "Start with your toes",
+              "Tense muscles for 5 seconds",
+              "Release and feel the relaxation",
+              "Move up to calves, thighs, stomach",
+              "Continue to shoulders and face",
+            ],
+          },
+          {
+            id: 164,
+            category: "social",
+            title: "Boundary Setting",
+            description: "Protect your mental health in relationships",
+            steps: [
+              "Identify what drains your energy",
+              "Practice saying 'no' to small things first",
+              "Communicate your needs clearly",
+              "Set time limits for social activities",
+              "Prioritize your own wellbeing",
+            ],
+          },
+        ],
+        pool2: [
+          {
+            id: 165,
+            category: "social",
+            title: "Social Connection Building",
+            description: "Combat loneliness and build friendships",
+            steps: [
+              "Join one campus club or activity",
+              "Study in common areas occasionally",
+              "Reach out to one person per week",
+              "Attend dorm/floor events",
+              "Be patient - friendships take time",
+            ],
+          },
+          {
+            id: 166,
+            category: "mindfulness",
+            title: "Body Scan Meditation",
+            description: "Connect with your body and reduce tension",
+            steps: [
+              "Lie down or sit comfortably",
+              "Close your eyes",
+              "Focus on your toes, then feet",
+              "Move attention up your body",
+              "Notice any tension and release it",
+              "Continue to the top of your head",
+            ],
+          },
+          {
+            id: 167,
+            category: "physical",
+            title: "5-Minute Movement Break",
+            description: "Quick physical activity to boost mood and energy",
+            steps: [
+              "Stand up and stretch",
+              "Do 10 jumping jacks",
+              "Walk around your room",
+              "Do 5 push-ups or wall push-ups",
+              "Take 5 deep breaths",
+            ],
+          },
+          {
+            id: 168,
+            category: "social",
+            title: "Active Listening",
+            description: "Improve relationships through better communication",
+            steps: [
+              "Maintain eye contact",
+              "Don't interrupt or plan responses",
+              "Ask clarifying questions",
+              "Reflect back what you heard",
+              "Show empathy and understanding",
+            ],
+          },
+        ],
+      },
+      financial: {
+        pool1: [
+          {
+            id: 169,
+            category: "financial",
+            title: "Financial Stress Management",
+            description: "Reduce money-related anxiety",
+            steps: [
+              "Track all expenses for one week",
+              "Create a simple budget",
+              "Look for student discounts",
+              "Consider part-time work or gigs",
+              "Talk to financial aid office",
+            ],
+          },
+          {
+            id: 170,
+            category: "quick",
+            title: "Box Breathing (5 min)",
+            description: "A simple technique to calm your nervous system",
+            steps: [
+              "Inhale for 4 counts",
+              "Hold for 4 counts",
+              "Exhale for 4 counts",
+              "Hold for 4 counts",
+              "Repeat 4-5 times",
+            ],
+          },
+          {
+            id: 171,
+            category: "mindfulness",
+            title: "Progressive Muscle Relaxation",
+            description: "Release physical tension systematically",
+            steps: [
+              "Start with your toes",
+              "Tense muscles for 5 seconds",
+              "Release and feel the relaxation",
+              "Move up to calves, thighs, stomach",
+              "Continue to shoulders and face",
+            ],
+          },
+          {
+            id: 172,
+            category: "financial",
+            title: "Budget Planning",
+            description: "Create a realistic student budget",
+            steps: [
+              "List all income sources",
+              "Track monthly expenses",
+              "Set spending limits",
+              "Plan for emergencies",
+              "Review and adjust monthly",
+            ],
+          },
+        ],
+        pool2: [
+          {
+            id: 173,
+            category: "financial",
+            title: "Student Money Management",
+            description: "Smart financial strategies for students",
+            steps: [
+              "Use student discounts everywhere",
+              "Cook meals instead of eating out",
+              "Share expenses with roommates",
+              "Use public transportation",
+              "Find free campus activities",
+            ],
+          },
+          {
+            id: 174,
+            category: "mindfulness",
+            title: "Body Scan Meditation",
+            description: "Connect with your body and reduce tension",
+            steps: [
+              "Lie down or sit comfortably",
+              "Close your eyes",
+              "Focus on your toes, then feet",
+              "Move attention up your body",
+              "Notice any tension and release it",
+              "Continue to the top of your head",
+            ],
+          },
+          {
+            id: 175,
+            category: "physical",
+            title: "5-Minute Movement Break",
+            description: "Quick physical activity to boost mood and energy",
+            steps: [
+              "Stand up and stretch",
+              "Do 10 jumping jacks",
+              "Walk around your room",
+              "Do 5 push-ups or wall push-ups",
+              "Take 5 deep breaths",
+            ],
+          },
+          {
+            id: 176,
+            category: "financial",
+            title: "Financial Goal Setting",
+            description: "Set and achieve financial goals",
+            steps: [
+              "Define short and long-term goals",
+              "Break goals into smaller steps",
+              "Track progress regularly",
+              "Celebrate small wins",
+              "Adjust goals as needed",
+            ],
+          },
+        ],
+      },
+      "career/future": {
+        pool1: [
+          {
+            id: 177,
+            category: "academic",
+            title: "Career Development Planning",
+            description: "Build your professional future",
+            steps: [
+              "Research career paths in your field",
+              "Connect with professionals on LinkedIn",
+              "Attend career fairs and networking events",
+              "Develop relevant skills through courses",
+              "Create a professional portfolio",
+            ],
+          },
+          {
+            id: 178,
+            category: "quick",
+            title: "Box Breathing (5 min)",
+            description: "A simple technique to calm your nervous system",
+            steps: [
+              "Inhale for 4 counts",
+              "Hold for 4 counts",
+              "Exhale for 4 counts",
+              "Hold for 4 counts",
+              "Repeat 4-5 times",
+            ],
+          },
+          {
+            id: 179,
+            category: "mindfulness",
+            title: "Progressive Muscle Relaxation",
+            description: "Release physical tension systematically",
+            steps: [
+              "Start with your toes",
+              "Tense muscles for 5 seconds",
+              "Release and feel the relaxation",
+              "Move up to calves, thighs, stomach",
+              "Continue to shoulders and face",
+            ],
+          },
+          {
+            id: 180,
+            category: "academic",
+            title: "Networking Confidence Builder",
+            description: "Build professional relationships with confidence",
+            steps: [
+              "Practice your elevator pitch",
+              "Prepare thoughtful questions to ask",
+              "Follow up with new connections",
+              "Join professional organizations",
+              "Attend industry meetups",
+            ],
+          },
+        ],
+        pool2: [
+          {
+            id: 181,
+            category: "academic",
+            title: "Skill Development Planning",
+            description: "Plan your skill development journey",
+            steps: [
+              "Identify skills needed for your field",
+              "Take online courses",
+              "Practice skills through projects",
+              "Seek feedback from mentors",
+              "Update your resume regularly",
+            ],
+          },
+          {
+            id: 182,
+            category: "mindfulness",
+            title: "Body Scan Meditation",
+            description: "Connect with your body and reduce tension",
+            steps: [
+              "Lie down or sit comfortably",
+              "Close your eyes",
+              "Focus on your toes, then feet",
+              "Move attention up your body",
+              "Notice any tension and release it",
+              "Continue to the top of your head",
+            ],
+          },
+          {
+            id: 183,
+            category: "physical",
+            title: "5-Minute Movement Break",
+            description: "Quick physical activity to boost mood and energy",
+            steps: [
+              "Stand up and stretch",
+              "Do 10 jumping jacks",
+              "Walk around your room",
+              "Do 5 push-ups or wall push-ups",
+              "Take 5 deep breaths",
+            ],
+          },
+          {
+            id: 184,
+            category: "academic",
+            title: "Career Anxiety Management",
+            description: "Handle anxiety about future career",
+            steps: [
+              "Focus on what you can control",
+              "Break career planning into small steps",
+              "Practice self-compassion",
+              "Seek career counseling",
+              "Remember it's okay to change paths",
+            ],
+          },
+        ],
+      },
+      health: {
+        pool1: [
+          {
+            id: 185,
+            category: "health",
+            title: "Health Anxiety Management",
+            description: "Manage anxiety about health",
+            steps: [
+              "Focus on facts, not fears",
+              "Practice good self-care",
+              "Seek professional help if needed",
+              "Limit health-related internet searches",
+              "Build a support network",
+            ],
+          },
+          {
+            id: 186,
+            category: "quick",
+            title: "Box Breathing (5 min)",
+            description: "A simple technique to calm your nervous system",
+            steps: [
+              "Inhale for 4 counts",
+              "Hold for 4 counts",
+              "Exhale for 4 counts",
+              "Hold for 4 counts",
+              "Repeat 4-5 times",
+            ],
+          },
+          {
+            id: 187,
+            category: "mindfulness",
+            title: "Progressive Muscle Relaxation",
+            description: "Release physical tension systematically",
+            steps: [
+              "Start with your toes",
+              "Tense muscles for 5 seconds",
+              "Release and feel the relaxation",
+              "Move up to calves, thighs, stomach",
+              "Continue to shoulders and face",
+            ],
+          },
+          {
+            id: 188,
+            category: "health",
+            title: "Wellness Routine Building",
+            description: "Create a sustainable wellness routine",
+            steps: [
+              "Start with small, manageable changes",
+              "Include physical activity",
+              "Prioritize sleep",
+              "Eat nutritious foods",
+              "Practice stress management",
+            ],
+          },
+        ],
+        pool2: [
+          {
+            id: 189,
+            category: "sleep",
+            title: "Sleep Hygiene for Students",
+            description: "Better sleep for better mental health",
+            steps: [
+              "No screens 30 min before bed",
+              "Keep room at 65-68°F",
+              "Use white noise if needed",
+              "Avoid caffeine after 2 PM",
+              "Consistent sleep schedule",
+            ],
+          },
+          {
+            id: 190,
+            category: "mindfulness",
+            title: "Body Scan Meditation",
+            description: "Connect with your body and reduce tension",
+            steps: [
+              "Lie down or sit comfortably",
+              "Close your eyes",
+              "Focus on your toes, then feet",
+              "Move attention up your body",
+              "Notice any tension and release it",
+              "Continue to the top of your head",
+            ],
+          },
+          {
+            id: 191,
+            category: "physical",
+            title: "5-Minute Movement Break",
+            description: "Quick physical activity to boost mood and energy",
+            steps: [
+              "Stand up and stretch",
+              "Do 10 jumping jacks",
+              "Walk around your room",
+              "Do 5 push-ups or wall push-ups",
+              "Take 5 deep breaths",
+            ],
+          },
+          {
+            id: 192,
+            category: "health",
+            title: "Stress Management Techniques",
+            description: "Comprehensive stress management approach",
+            steps: [
+              "Identify stress triggers",
+              "Practice regular relaxation",
+              "Maintain healthy boundaries",
+              "Seek social support",
+              "Consider professional help if needed",
+            ],
+          },
+        ],
+      },
+    },
+    // Exhausted emotion pools
+    exhausted: {
+      "exams/tests": {
+        pool1: [
+          {
+            id: 193,
+            category: "sleep",
+            title: "Sleep Hygiene for Students",
+            description: "Better sleep for better mental health",
+            steps: [
+              "No screens 30 min before bed",
+              "Keep room at 65-68°F",
+              "Use white noise if needed",
+              "Avoid caffeine after 2 PM",
+              "Consistent sleep schedule",
+            ],
+          },
+          {
+            id: 194,
+            category: "quick",
+            title: "Box Breathing (5 min)",
+            description: "A simple technique to calm your nervous system",
+            steps: [
+              "Inhale for 4 counts",
+              "Hold for 4 counts",
+              "Exhale for 4 counts",
+              "Hold for 4 counts",
+              "Repeat 4-5 times",
+            ],
+          },
+          {
+            id: 195,
+            category: "mindfulness",
+            title: "Progressive Muscle Relaxation",
+            description: "Release physical tension systematically",
+            steps: [
+              "Start with your toes",
+              "Tense muscles for 5 seconds",
+              "Release and feel the relaxation",
+              "Move up to calves, thighs, stomach",
+              "Continue to shoulders and face",
+            ],
+          },
+          {
+            id: 196,
+            category: "academic",
+            title: "Study Environment Optimization",
+            description: "Create a space that supports learning",
+            steps: [
+              "Clear your desk completely",
+              "Add natural light or good lighting",
+              "Keep water and healthy snacks nearby",
+              "Use noise-canceling headphones if needed",
+              "Set phone to Do Not Disturb",
+            ],
+          },
+        ],
+        pool2: [
+          {
+            id: 197,
+            category: "academic",
+            title: "Pomodoro Technique",
+            description: "Improve focus and reduce study stress",
+            steps: [
+              "25 minutes focused work",
+              "5 minute break",
+              "Repeat 4 times",
+              "15-30 minute long break",
+            ],
+          },
+          {
+            id: 198,
+            category: "mindfulness",
+            title: "Body Scan Meditation",
+            description: "Connect with your body and reduce tension",
+            steps: [
+              "Lie down or sit comfortably",
+              "Close your eyes",
+              "Focus on your toes, then feet",
+              "Move attention up your body",
+              "Notice any tension and release it",
+              "Continue to the top of your head",
+            ],
+          },
+          {
+            id: 199,
+            category: "physical",
+            title: "5-Minute Movement Break",
+            description: "Quick physical activity to boost mood and energy",
+            steps: [
+              "Stand up and stretch",
+              "Do 10 jumping jacks",
+              "Walk around your room",
+              "Do 5 push-ups or wall push-ups",
+              "Take 5 deep breaths",
+            ],
+          },
+          {
+            id: 200,
+            category: "academic",
+            title: "Note-Taking Strategy",
+            description: "Improve learning and reduce study stress",
+            steps: [
+              "Use the Cornell method",
+              "Write key points in your own words",
+              "Review notes within 24 hours",
+              "Create visual summaries",
+              "Teach concepts to others",
+            ],
+          },
+        ],
+      },
+      financial: {
+        pool1: [
+          {
+            id: 201,
+            category: "financial",
+            title: "Financial Stress Management",
+            description: "Reduce money-related anxiety",
+            steps: [
+              "Track all expenses for one week",
+              "Create a simple budget",
+              "Look for student discounts",
+              "Consider part-time work or gigs",
+              "Talk to financial aid office",
+            ],
+          },
+          {
+            id: 202,
+            category: "quick",
+            title: "Box Breathing (5 min)",
+            description: "A simple technique to calm your nervous system",
+            steps: [
+              "Inhale for 4 counts",
+              "Hold for 4 counts",
+              "Exhale for 4 counts",
+              "Hold for 4 counts",
+              "Repeat 4-5 times",
+            ],
+          },
+          {
+            id: 203,
+            category: "mindfulness",
+            title: "Progressive Muscle Relaxation",
+            description: "Release physical tension systematically",
+            steps: [
+              "Start with your toes",
+              "Tense muscles for 5 seconds",
+              "Release and feel the relaxation",
+              "Move up to calves, thighs, stomach",
+              "Continue to shoulders and face",
+            ],
+          },
+          {
+            id: 204,
+            category: "financial",
+            title: "Budget Planning",
+            description: "Create a realistic student budget",
+            steps: [
+              "List all income sources",
+              "Track monthly expenses",
+              "Set spending limits",
+              "Plan for emergencies",
+              "Review and adjust monthly",
+            ],
+          },
+        ],
+        pool2: [
+          {
+            id: 205,
+            category: "financial",
+            title: "Student Money Management",
+            description: "Smart financial strategies for students",
+            steps: [
+              "Use student discounts everywhere",
+              "Cook meals instead of eating out",
+              "Share expenses with roommates",
+              "Use public transportation",
+              "Find free campus activities",
+            ],
+          },
+          {
+            id: 206,
+            category: "mindfulness",
+            title: "Body Scan Meditation",
+            description: "Connect with your body and reduce tension",
+            steps: [
+              "Lie down or sit comfortably",
+              "Close your eyes",
+              "Focus on your toes, then feet",
+              "Move attention up your body",
+              "Notice any tension and release it",
+              "Continue to the top of your head",
+            ],
+          },
+          {
+            id: 207,
+            category: "physical",
+            title: "5-Minute Movement Break",
+            description: "Quick physical activity to boost mood and energy",
+            steps: [
+              "Stand up and stretch",
+              "Do 10 jumping jacks",
+              "Walk around your room",
+              "Do 5 push-ups or wall push-ups",
+              "Take 5 deep breaths",
+            ],
+          },
+          {
+            id: 208,
+            category: "financial",
+            title: "Financial Goal Setting",
+            description: "Set and achieve financial goals",
+            steps: [
+              "Define short and long-term goals",
+              "Break goals into smaller steps",
+              "Track progress regularly",
+              "Celebrate small wins",
+              "Adjust goals as needed",
+            ],
+          },
+        ],
+      },
+    },
+    // Confident emotion pools
+    confident: {
+      "exams/tests": {
+        pool1: [
+          {
+            id: 209,
+            category: "academic",
+            title: "Test Confidence Building",
+            description: "Maintain confidence during exams",
+            steps: [
+              "Review your preparation",
+              "Use positive self-talk",
+              "Focus on what you know",
+              "Stay calm and composed",
+              "Trust your abilities",
+            ],
+          },
+          {
+            id: 210,
+            category: "quick",
+            title: "Box Breathing (5 min)",
+            description: "A simple technique to calm your nervous system",
+            steps: [
+              "Inhale for 4 counts",
+              "Hold for 4 counts",
+              "Exhale for 4 counts",
+              "Hold for 4 counts",
+              "Repeat 4-5 times",
+            ],
+          },
+          {
+            id: 211,
+            category: "mindfulness",
+            title: "Progressive Muscle Relaxation",
+            description: "Release physical tension systematically",
+            steps: [
+              "Start with your toes",
+              "Tense muscles for 5 seconds",
+              "Release and feel the relaxation",
+              "Move up to calves, thighs, stomach",
+              "Continue to shoulders and face",
+            ],
+          },
+          {
+            id: 212,
+            category: "academic",
+            title: "Study Environment Optimization",
+            description: "Create a space that supports learning",
+            steps: [
+              "Clear your desk completely",
+              "Add natural light or good lighting",
+              "Keep water and healthy snacks nearby",
+              "Use noise-canceling headphones if needed",
+              "Set phone to Do Not Disturb",
+            ],
+          },
+        ],
+        pool2: [
+          {
+            id: 213,
+            category: "academic",
+            title: "Pomodoro Technique",
+            description: "Improve focus and reduce study stress",
+            steps: [
+              "25 minutes focused work",
+              "5 minute break",
+              "Repeat 4 times",
+              "15-30 minute long break",
+            ],
+          },
+          {
+            id: 214,
+            category: "mindfulness",
+            title: "Body Scan Meditation",
+            description: "Connect with your body and reduce tension",
+            steps: [
+              "Lie down or sit comfortably",
+              "Close your eyes",
+              "Focus on your toes, then feet",
+              "Move attention up your body",
+              "Notice any tension and release it",
+              "Continue to the top of your head",
+            ],
+          },
+          {
+            id: 215,
+            category: "physical",
+            title: "5-Minute Movement Break",
+            description: "Quick physical activity to boost mood and energy",
+            steps: [
+              "Stand up and stretch",
+              "Do 10 jumping jacks",
+              "Walk around your room",
+              "Do 5 push-ups or wall push-ups",
+              "Take 5 deep breaths",
+            ],
+          },
+          {
+            id: 216,
+            category: "academic",
+            title: "Note-Taking Strategy",
+            description: "Improve learning and reduce study stress",
+            steps: [
+              "Use the Cornell method",
+              "Write key points in your own words",
+              "Review notes within 24 hours",
+              "Create visual summaries",
+              "Teach concepts to others",
+            ],
+          },
+        ],
+      },
+      "career/future": {
+        pool1: [
+          {
+            id: 217,
+            category: "academic",
+            title: "Career Development Planning",
+            description: "Build your professional future",
+            steps: [
+              "Research career paths in your field",
+              "Connect with professionals on LinkedIn",
+              "Attend career fairs and networking events",
+              "Develop relevant skills through courses",
+              "Create a professional portfolio",
+            ],
+          },
+          {
+            id: 218,
+            category: "quick",
+            title: "Box Breathing (5 min)",
+            description: "A simple technique to calm your nervous system",
+            steps: [
+              "Inhale for 4 counts",
+              "Hold for 4 counts",
+              "Exhale for 4 counts",
+              "Hold for 4 counts",
+              "Repeat 4-5 times",
+            ],
+          },
+          {
+            id: 219,
+            category: "mindfulness",
+            title: "Progressive Muscle Relaxation",
+            description: "Release physical tension systematically",
+            steps: [
+              "Start with your toes",
+              "Tense muscles for 5 seconds",
+              "Release and feel the relaxation",
+              "Move up to calves, thighs, stomach",
+              "Continue to shoulders and face",
+            ],
+          },
+          {
+            id: 220,
+            category: "academic",
+            title: "Networking Confidence Builder",
+            description: "Build professional relationships with confidence",
+            steps: [
+              "Practice your elevator pitch",
+              "Prepare thoughtful questions to ask",
+              "Follow up with new connections",
+              "Join professional organizations",
+              "Attend industry meetups",
+            ],
+          },
+        ],
+        pool2: [
+          {
+            id: 221,
+            category: "academic",
+            title: "Skill Development Planning",
+            description: "Plan your skill development journey",
+            steps: [
+              "Identify skills needed for your field",
+              "Take online courses",
+              "Practice skills through projects",
+              "Seek feedback from mentors",
+              "Update your resume regularly",
+            ],
+          },
+          {
+            id: 222,
+            category: "mindfulness",
+            title: "Body Scan Meditation",
+            description: "Connect with your body and reduce tension",
+            steps: [
+              "Lie down or sit comfortably",
+              "Close your eyes",
+              "Focus on your toes, then feet",
+              "Move attention up your body",
+              "Notice any tension and release it",
+              "Continue to the top of your head",
+            ],
+          },
+          {
+            id: 223,
+            category: "physical",
+            title: "5-Minute Movement Break",
+            description: "Quick physical activity to boost mood and energy",
+            steps: [
+              "Stand up and stretch",
+              "Do 10 jumping jacks",
+              "Walk around your room",
+              "Do 5 push-ups or wall push-ups",
+              "Take 5 deep breaths",
+            ],
+          },
+          {
+            id: 224,
+            category: "academic",
+            title: "Career Anxiety Management",
+            description: "Handle anxiety about future career",
+            steps: [
+              "Focus on what you can control",
+              "Break career planning into small steps",
+              "Practice self-compassion",
+              "Seek career counseling",
+              "Remember it's okay to change paths",
+            ],
+          },
+        ],
+      },
+    },
+    // Motivated emotion pools
+    motivated: {
+      "exams/tests": {
+        pool1: [
+          {
+            id: 225,
+            category: "academic",
+            title: "Study Momentum Building",
+            description: "Maintain motivation during study sessions",
+            steps: [
+              "Set specific study goals",
+              "Break tasks into smaller chunks",
+              "Reward yourself for progress",
+              "Track your achievements",
+              "Stay focused on your goals",
+            ],
+          },
+          {
+            id: 226,
+            category: "quick",
+            title: "Box Breathing (5 min)",
+            description: "A simple technique to calm your nervous system",
+            steps: [
+              "Inhale for 4 counts",
+              "Hold for 4 counts",
+              "Exhale for 4 counts",
+              "Hold for 4 counts",
+              "Repeat 4-5 times",
+            ],
+          },
+          {
+            id: 227,
+            category: "mindfulness",
+            title: "Progressive Muscle Relaxation",
+            description: "Release physical tension systematically",
+            steps: [
+              "Start with your toes",
+              "Tense muscles for 5 seconds",
+              "Release and feel the relaxation",
+              "Move up to calves, thighs, stomach",
+              "Continue to shoulders and face",
+            ],
+          },
+          {
+            id: 228,
+            category: "academic",
+            title: "Study Environment Optimization",
+            description: "Create a space that supports learning",
+            steps: [
+              "Clear your desk completely",
+              "Add natural light or good lighting",
+              "Keep water and healthy snacks nearby",
+              "Use noise-canceling headphones if needed",
+              "Set phone to Do Not Disturb",
+            ],
+          },
+        ],
+        pool2: [
+          {
+            id: 229,
+            category: "academic",
+            title: "Pomodoro Technique",
+            description: "Improve focus and reduce study stress",
+            steps: [
+              "25 minutes focused work",
+              "5 minute break",
+              "Repeat 4 times",
+              "15-30 minute long break",
+            ],
+          },
+          {
+            id: 230,
+            category: "mindfulness",
+            title: "Body Scan Meditation",
+            description: "Connect with your body and reduce tension",
+            steps: [
+              "Lie down or sit comfortably",
+              "Close your eyes",
+              "Focus on your toes, then feet",
+              "Move attention up your body",
+              "Notice any tension and release it",
+              "Continue to the top of your head",
+            ],
+          },
+          {
+            id: 231,
+            category: "physical",
+            title: "5-Minute Movement Break",
+            description: "Quick physical activity to boost mood and energy",
+            steps: [
+              "Stand up and stretch",
+              "Do 10 jumping jacks",
+              "Walk around your room",
+              "Do 5 push-ups or wall push-ups",
+              "Take 5 deep breaths",
+            ],
+          },
+          {
+            id: 232,
+            category: "academic",
+            title: "Note-Taking Strategy",
+            description: "Improve learning and reduce study stress",
+            steps: [
+              "Use the Cornell method",
+              "Write key points in your own words",
+              "Review notes within 24 hours",
+              "Create visual summaries",
+              "Teach concepts to others",
+            ],
+          },
+        ],
+      },
+      "career/future": {
+        pool1: [
+          {
+            id: 233,
+            category: "academic",
+            title: "Career Development Planning",
+            description: "Build your professional future",
+            steps: [
+              "Research career paths in your field",
+              "Connect with professionals on LinkedIn",
+              "Attend career fairs and networking events",
+              "Develop relevant skills through courses",
+              "Create a professional portfolio",
+            ],
+          },
+          {
+            id: 234,
+            category: "quick",
+            title: "Box Breathing (5 min)",
+            description: "A simple technique to calm your nervous system",
+            steps: [
+              "Inhale for 4 counts",
+              "Hold for 4 counts",
+              "Exhale for 4 counts",
+              "Hold for 4 counts",
+              "Repeat 4-5 times",
+            ],
+          },
+          {
+            id: 235,
+            category: "mindfulness",
+            title: "Progressive Muscle Relaxation",
+            description: "Release physical tension systematically",
+            steps: [
+              "Start with your toes",
+              "Tense muscles for 5 seconds",
+              "Release and feel the relaxation",
+              "Move up to calves, thighs, stomach",
+              "Continue to shoulders and face",
+            ],
+          },
+          {
+            id: 236,
+            category: "academic",
+            title: "Networking Confidence Builder",
+            description: "Build professional relationships with confidence",
+            steps: [
+              "Practice your elevator pitch",
+              "Prepare thoughtful questions to ask",
+              "Follow up with new connections",
+              "Join professional organizations",
+              "Attend industry meetups",
+            ],
+          },
+        ],
+        pool2: [
+          {
+            id: 237,
+            category: "academic",
+            title: "Skill Development Planning",
+            description: "Plan your skill development journey",
+            steps: [
+              "Identify skills needed for your field",
+              "Take online courses",
+              "Practice skills through projects",
+              "Seek feedback from mentors",
+              "Update your resume regularly",
+            ],
+          },
+          {
+            id: 238,
+            category: "mindfulness",
+            title: "Body Scan Meditation",
+            description: "Connect with your body and reduce tension",
+            steps: [
+              "Lie down or sit comfortably",
+              "Close your eyes",
+              "Focus on your toes, then feet",
+              "Move attention up your body",
+              "Notice any tension and release it",
+              "Continue to the top of your head",
+            ],
+          },
+          {
+            id: 239,
+            category: "physical",
+            title: "5-Minute Movement Break",
+            description: "Quick physical activity to boost mood and energy",
+            steps: [
+              "Stand up and stretch",
+              "Do 10 jumping jacks",
+              "Walk around your room",
+              "Do 5 push-ups or wall push-ups",
+              "Take 5 deep breaths",
+            ],
+          },
+          {
+            id: 240,
+            category: "academic",
+            title: "Career Anxiety Management",
+            description: "Handle anxiety about future career",
+            steps: [
+              "Focus on what you can control",
+              "Break career planning into small steps",
+              "Practice self-compassion",
+              "Seek career counseling",
+              "Remember it's okay to change paths",
+            ],
+          },
+        ],
+      },
+    },
+    // Excited emotion pools
+    excited: {
+      "exams/tests": {
+        pool1: [
+          {
+            id: 241,
+            category: "academic",
+            title: "Test Preparation Strategy",
+            description: "Channel excitement into effective preparation",
+            steps: [
+              "Use your energy to review material",
+              "Create study schedules",
+              "Practice with sample questions",
+              "Stay organized and focused",
+              "Maintain positive momentum",
+            ],
+          },
+          {
+            id: 242,
+            category: "quick",
+            title: "Box Breathing (5 min)",
+            description: "A simple technique to calm your nervous system",
+            steps: [
+              "Inhale for 4 counts",
+              "Hold for 4 counts",
+              "Exhale for 4 counts",
+              "Hold for 4 counts",
+              "Repeat 4-5 times",
+            ],
+          },
+          {
+            id: 243,
+            category: "mindfulness",
+            title: "Progressive Muscle Relaxation",
+            description: "Release physical tension systematically",
+            steps: [
+              "Start with your toes",
+              "Tense muscles for 5 seconds",
+              "Release and feel the relaxation",
+              "Move up to calves, thighs, stomach",
+              "Continue to shoulders and face",
+            ],
+          },
+          {
+            id: 244,
+            category: "academic",
+            title: "Study Environment Optimization",
+            description: "Create a space that supports learning",
+            steps: [
+              "Clear your desk completely",
+              "Add natural light or good lighting",
+              "Keep water and healthy snacks nearby",
+              "Use noise-canceling headphones if needed",
+              "Set phone to Do Not Disturb",
+            ],
+          },
+        ],
+        pool2: [
+          {
+            id: 245,
+            category: "academic",
+            title: "Pomodoro Technique",
+            description: "Improve focus and reduce study stress",
+            steps: [
+              "25 minutes focused work",
+              "5 minute break",
+              "Repeat 4 times",
+              "15-30 minute long break",
+            ],
+          },
+          {
+            id: 246,
+            category: "mindfulness",
+            title: "Body Scan Meditation",
+            description: "Connect with your body and reduce tension",
+            steps: [
+              "Lie down or sit comfortably",
+              "Close your eyes",
+              "Focus on your toes, then feet",
+              "Move attention up your body",
+              "Notice any tension and release it",
+              "Continue to the top of your head",
+            ],
+          },
+          {
+            id: 247,
+            category: "physical",
+            title: "5-Minute Movement Break",
+            description: "Quick physical activity to boost mood and energy",
+            steps: [
+              "Stand up and stretch",
+              "Do 10 jumping jacks",
+              "Walk around your room",
+              "Do 5 push-ups or wall push-ups",
+              "Take 5 deep breaths",
+            ],
+          },
+          {
+            id: 248,
+            category: "academic",
+            title: "Note-Taking Strategy",
+            description: "Improve learning and reduce study stress",
+            steps: [
+              "Use the Cornell method",
+              "Write key points in your own words",
+              "Review notes within 24 hours",
+              "Create visual summaries",
+              "Teach concepts to others",
+            ],
+          },
+        ],
+      },
+      "career/future": {
+        pool1: [
+          {
+            id: 249,
+            category: "academic",
+            title: "Career Development Planning",
+            description: "Build your professional future",
+            steps: [
+              "Research career paths in your field",
+              "Connect with professionals on LinkedIn",
+              "Attend career fairs and networking events",
+              "Develop relevant skills through courses",
+              "Create a professional portfolio",
+            ],
+          },
+          {
+            id: 250,
+            category: "quick",
+            title: "Box Breathing (5 min)",
+            description: "A simple technique to calm your nervous system",
+            steps: [
+              "Inhale for 4 counts",
+              "Hold for 4 counts",
+              "Exhale for 4 counts",
+              "Hold for 4 counts",
+              "Repeat 4-5 times",
+            ],
+          },
+          {
+            id: 251,
+            category: "mindfulness",
+            title: "Progressive Muscle Relaxation",
+            description: "Release physical tension systematically",
+            steps: [
+              "Start with your toes",
+              "Tense muscles for 5 seconds",
+              "Release and feel the relaxation",
+              "Move up to calves, thighs, stomach",
+              "Continue to shoulders and face",
+            ],
+          },
+          {
+            id: 252,
+            category: "academic",
+            title: "Networking Confidence Builder",
+            description: "Build professional relationships with confidence",
+            steps: [
+              "Practice your elevator pitch",
+              "Prepare thoughtful questions to ask",
+              "Follow up with new connections",
+              "Join professional organizations",
+              "Attend industry meetups",
+            ],
+          },
+        ],
+        pool2: [
+          {
+            id: 253,
+            category: "academic",
+            title: "Skill Development Planning",
+            description: "Plan your skill development journey",
+            steps: [
+              "Identify skills needed for your field",
+              "Take online courses",
+              "Practice skills through projects",
+              "Seek feedback from mentors",
+              "Update your resume regularly",
+            ],
+          },
+          {
+            id: 254,
+            category: "mindfulness",
+            title: "Body Scan Meditation",
+            description: "Connect with your body and reduce tension",
+            steps: [
+              "Lie down or sit comfortably",
+              "Close your eyes",
+              "Focus on your toes, then feet",
+              "Move attention up your body",
+              "Notice any tension and release it",
+              "Continue to the top of your head",
+            ],
+          },
+          {
+            id: 255,
+            category: "physical",
+            title: "5-Minute Movement Break",
+            description: "Quick physical activity to boost mood and energy",
+            steps: [
+              "Stand up and stretch",
+              "Do 10 jumping jacks",
+              "Walk around your room",
+              "Do 5 push-ups or wall push-ups",
+              "Take 5 deep breaths",
+            ],
+          },
+          {
+            id: 256,
+            category: "academic",
+            title: "Career Anxiety Management",
+            description: "Handle anxiety about future career",
+            steps: [
+              "Focus on what you can control",
+              "Break career planning into small steps",
+              "Practice self-compassion",
+              "Seek career counseling",
+              "Remember it's okay to change paths",
+            ],
+          },
+        ],
+      },
+    },
+    // Frustrated emotion pools
+    frustrated: {
+      "exams/tests": {
+        pool1: [
+          {
+            id: 257,
+            category: "academic",
+            title: "Frustration Management",
+            description: "Handle academic frustration constructively",
+            steps: [
+              "Take a short break to cool down",
+              "Break the problem into smaller parts",
+              "Ask for help from classmates or tutors",
+              "Focus on what you can control",
+              "Practice self-compassion",
+            ],
+          },
+          {
+            id: 258,
+            category: "quick",
+            title: "Box Breathing (5 min)",
+            description: "A simple technique to calm your nervous system",
+            steps: [
+              "Inhale for 4 counts",
+              "Hold for 4 counts",
+              "Exhale for 4 counts",
+              "Hold for 4 counts",
+              "Repeat 4-5 times",
+            ],
+          },
+          {
+            id: 259,
+            category: "mindfulness",
+            title: "Progressive Muscle Relaxation",
+            description: "Release physical tension systematically",
+            steps: [
+              "Start with your toes",
+              "Tense muscles for 5 seconds",
+              "Release and feel the relaxation",
+              "Move up to calves, thighs, stomach",
+              "Continue to shoulders and face",
+            ],
+          },
+          {
+            id: 260,
+            category: "academic",
+            title: "Study Environment Optimization",
+            description: "Create a space that supports learning",
+            steps: [
+              "Clear your desk completely",
+              "Add natural light or good lighting",
+              "Keep water and healthy snacks nearby",
+              "Use noise-canceling headphones if needed",
+              "Set phone to Do Not Disturb",
+            ],
+          },
+        ],
+        pool2: [
+          {
+            id: 261,
+            category: "academic",
+            title: "Pomodoro Technique",
+            description: "Improve focus and reduce study stress",
+            steps: [
+              "25 minutes focused work",
+              "5 minute break",
+              "Repeat 4 times",
+              "15-30 minute long break",
+            ],
+          },
+          {
+            id: 262,
+            category: "mindfulness",
+            title: "Body Scan Meditation",
+            description: "Connect with your body and reduce tension",
+            steps: [
+              "Lie down or sit comfortably",
+              "Close your eyes",
+              "Focus on your toes, then feet",
+              "Move attention up your body",
+              "Notice any tension and release it",
+              "Continue to the top of your head",
+            ],
+          },
+          {
+            id: 263,
+            category: "physical",
+            title: "5-Minute Movement Break",
+            description: "Quick physical activity to boost mood and energy",
+            steps: [
+              "Stand up and stretch",
+              "Do 10 jumping jacks",
+              "Walk around your room",
+              "Do 5 push-ups or wall push-ups",
+              "Take 5 deep breaths",
+            ],
+          },
+          {
+            id: 264,
+            category: "academic",
+            title: "Note-Taking Strategy",
+            description: "Improve learning and reduce study stress",
+            steps: [
+              "Use the Cornell method",
+              "Write key points in your own words",
+              "Review notes within 24 hours",
+              "Create visual summaries",
+              "Teach concepts to others",
+            ],
+          },
+        ],
+      },
+      assignments: {
+        pool1: [
+          {
+            id: 265,
+            category: "academic",
+            title: "Assignment Breakdown Method",
+            description: "Break large assignments into manageable pieces",
+            steps: [
+              "List all requirements",
+              "Break into smaller tasks",
+              "Set deadlines for each task",
+              "Start with easiest part first",
+              "Review and revise",
+            ],
+          },
+          {
+            id: 266,
+            category: "quick",
+            title: "Box Breathing (5 min)",
+            description: "A simple technique to calm your nervous system",
+            steps: [
+              "Inhale for 4 counts",
+              "Hold for 4 counts",
+              "Exhale for 4 counts",
+              "Hold for 4 counts",
+              "Repeat 4-5 times",
+            ],
+          },
+          {
+            id: 267,
+            category: "academic",
+            title: "Study Environment Optimization",
+            description: "Create a space that supports learning",
+            steps: [
+              "Clear your desk completely",
+              "Add natural light or good lighting",
+              "Keep water and healthy snacks nearby",
+              "Use noise-canceling headphones if needed",
+              "Set phone to Do Not Disturb",
+            ],
+          },
+          {
+            id: 268,
+            category: "mindfulness",
+            title: "Progressive Muscle Relaxation",
+            description: "Release physical tension systematically",
+            steps: [
+              "Start with your toes",
+              "Tense muscles for 5 seconds",
+              "Release and feel the relaxation",
+              "Move up to calves, thighs, stomach",
+              "Continue to shoulders and face",
+            ],
+          },
+        ],
+        pool2: [
+          {
+            id: 269,
+            category: "academic",
+            title: "Pomodoro Technique",
+            description: "Improve focus and reduce study stress",
+            steps: [
+              "25 minutes focused work",
+              "5 minute break",
+              "Repeat 4 times",
+              "15-30 minute long break",
+            ],
+          },
+          {
+            id: 270,
+            category: "mindfulness",
+            title: "Body Scan Meditation",
+            description: "Connect with your body and reduce tension",
+            steps: [
+              "Lie down or sit comfortably",
+              "Close your eyes",
+              "Focus on your toes, then feet",
+              "Move attention up your body",
+              "Notice any tension and release it",
+              "Continue to the top of your head",
+            ],
+          },
+          {
+            id: 271,
+            category: "physical",
+            title: "5-Minute Movement Break",
+            description: "Quick physical activity to boost mood and energy",
+            steps: [
+              "Stand up and stretch",
+              "Do 10 jumping jacks",
+              "Walk around your room",
+              "Do 5 push-ups or wall push-ups",
+              "Take 5 deep breaths",
+            ],
+          },
+          {
+            id: 272,
+            category: "academic",
+            title: "Note-Taking Strategy",
+            description: "Improve learning and reduce study stress",
+            steps: [
+              "Use the Cornell method",
+              "Write key points in your own words",
+              "Review notes within 24 hours",
+              "Create visual summaries",
+              "Teach concepts to others",
+            ],
+          },
+        ],
+      },
+    },
+  };
 
   // Get the most recent mood entry to determine current emotion and context
   const recentMoodQuery = `
@@ -3052,41 +3926,66 @@ app.get("/api/strategies", authenticateToken, async (req, res) => {
     ORDER BY created_at DESC 
     LIMIT 1
   `;
-  
+
   db.get(recentMoodQuery, [userId], (err, row) => {
     if (err) {
       console.error("Error fetching recent mood:", err);
-      return res.status(500).json({ error: "Failed to fetch recent mood data" });
+      return res
+        .status(500)
+        .json({ error: "Failed to fetch recent mood data" });
     }
-    
+
     if (!row) {
       return res.json([]);
     }
-    
+
     try {
       const decryptedEmotions = JSON.parse(CryptoUtils.decrypt(row.emotions));
       const decryptedContext = CryptoUtils.decrypt(row.context);
-      
+
       // Get the first emotion (since only one is selected now)
-      const emotion = decryptedEmotions[0]?.toLowerCase();
-      const context = decryptedContext.toLowerCase();
+      const emotion = decryptedEmotions[0]?.toLowerCase().trim();
+      const context = decryptedContext.toLowerCase().trim();
       
+      console.log("🔍 Raw decrypted emotions:", decryptedEmotions);
+      console.log("🔍 Raw decrypted context:", decryptedContext);
+      console.log("🔍 Normalized emotion:", emotion);
+      console.log("🔍 Normalized context:", context);
+
       console.log("🎯 Current emotion:", emotion);
       console.log("🎯 Current context:", context);
+      console.log("🔍 Available emotions in strategyPools:", Object.keys(strategyPools));
       
       // Find the appropriate strategy pools
       const emotionPools = strategyPools[emotion];
       if (!emotionPools) {
         console.log("❌ No pools found for emotion:", emotion);
+        console.log("🔍 Available emotions:", Object.keys(strategyPools));
         return res.json([]);
       }
+
+      console.log("🔍 Available contexts for emotion '", emotion, "':", Object.keys(emotionPools));
       
-      const contextPools = emotionPools[context];
+      let contextPools = emotionPools[context];
       if (!contextPools) {
-        console.log("❌ No pools found for context:", context);
-        return res.json([]);
+        console.log("❌ No exact match found for context:", context);
+        console.log("🔍 Available contexts:", Object.keys(emotionPools));
+        
+        // Try to find a similar context
+        const availableContexts = Object.keys(emotionPools);
+        const similarContext = availableContexts.find(available => 
+          available.includes(context) || context.includes(available)
+        );
+        
+        if (similarContext) {
+          console.log("🔍 Found similar context:", similarContext);
+          contextPools = emotionPools[similarContext];
+        } else {
+          console.log("❌ No similar context found either");
+          return res.json([]);
+        }
       }
-      
+
       // Randomly select 2 strategies from each pool
       const shuffleArray = (array) => {
         const shuffled = [...array];
@@ -3096,16 +3995,20 @@ app.get("/api/strategies", authenticateToken, async (req, res) => {
         }
         return shuffled;
       };
-      
+
       const pool1Strategies = shuffleArray(contextPools.pool1).slice(0, 2);
       const pool2Strategies = shuffleArray(contextPools.pool2).slice(0, 2);
-      
+
       const selectedStrategies = [...pool1Strategies, ...pool2Strategies];
-      
-      console.log("📊 Selected strategies:", selectedStrategies.map(s => s.title));
-      
+
+      console.log("📊 Pool 1 strategies:", pool1Strategies.map((s) => s.title));
+      console.log("📊 Pool 2 strategies:", pool2Strategies.map((s) => s.title));
+      console.log(
+        "📊 Final selected strategies:",
+        selectedStrategies.map((s) => s.title)
+      );
+
       res.json(selectedStrategies);
-      
     } catch (error) {
       console.error("Error processing mood data:", error);
       res.status(500).json({ error: "Failed to process mood data" });
