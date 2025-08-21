@@ -19,6 +19,17 @@ Empowering academic success through intelligent emotional support while maintain
 - **🚨 Crisis Support**: Resources and detection of concerning patterns
 - **📱 Mobile Responsive**: Optimized for smartphone usage between classes
 
+### ✨ Recent Enhancements
+
+- **📖 Clickable Journal Entries**: View full journal content and AI feedback in beautiful modal
+- **🔄 Auto-Refresh After Mood Check-in**: Page refreshes automatically to show updated insights and strategies
+- **🎯 Single Emotion Selection**: Focused emotion selection for more targeted coping strategies
+- **🤖 Enhanced AI Strategy System**: Comprehensive strategy pools with randomization for all emotion-context combinations
+- **🎨 Therapist-Like UI**: Professional, calming design with warm colors and improved UX
+- **🔒 Content Security Policy**: Fixed Google Fonts loading and enhanced security
+- **📊 Mood History View**: Complete history of mood ratings, emotions, and contexts
+- **🎪 Journal Inspirations**: 30+ writing prompts for when users need guidance
+
 ### 🔧 Technical Features
 
 - **🔒 Zero-Knowledge Architecture**: Service cannot decrypt user data
@@ -27,6 +38,8 @@ Empowering academic success through intelligent emotional support while maintain
 - **📊 Data Visualization**: Interactive charts and pattern recognition
 - **🔄 Offline Fallback**: Local storage when API unavailable
 - **🛡️ Security**: JWT authentication, rate limiting, CORS protection
+- **🎨 Modern UI**: Glassmorphism design with smooth animations
+- **📱 Progressive Web App**: App-like experience with offline capabilities
 
 ## 🚀 Quick Start
 
@@ -101,11 +114,12 @@ RATE_LIMIT_MAX_REQUESTS=100
 ### Mood Tracking
 
 - `POST /api/mood` - Save mood entry
-- `GET /api/mood/history` - Get mood history
+- `GET /api/mood/history` - Get mood history with emotions and contexts
 
 ### Journal
 
 - `POST /api/journal` - Save journal entry with AI response
+- `GET /api/journal/history` - Get journal history with AI feedback
 
 ### Insights
 
@@ -114,12 +128,7 @@ RATE_LIMIT_MAX_REQUESTS=100
 
 ### Coping Strategies
 
-- `GET /api/strategies` - Get personalized strategies
-
-### Academic Calendar
-
-- `POST /api/calendar/event` - Add calendar event
-- `GET /api/calendar/events` - Get upcoming events
+- `GET /api/strategies` - Get personalized strategies based on recent mood
 
 ### Privacy
 
@@ -149,7 +158,6 @@ Tests cover:
 - ✅ Journal entries with AI
 - ✅ Insights and analytics
 - ✅ Coping strategies
-- ✅ Academic calendar
 - ✅ Privacy controls
 - ✅ Crisis resources
 - ✅ API health checks
@@ -176,6 +184,7 @@ Tests cover:
 - **CORS protection** for cross-origin requests
 - **SQL injection prevention** with parameterized queries
 - **XSS protection** with content security policies
+- **Content Security Policy** with Google Fonts support
 
 ## 🎯 User Experience
 
@@ -185,6 +194,7 @@ Tests cover:
 - **College-specific emotions** - anxiety, stress, homesickness, etc.
 - **Mobile-optimized** - works perfectly on smartphones
 - **Quick interactions** - designed for between-class usage
+- **Therapist-like interface** - calming, professional design
 
 ### Privacy-First Interface
 
@@ -192,6 +202,13 @@ Tests cover:
 - **Granular controls** - users choose what data to share
 - **Transparency** - clear view of data usage and storage
 - **Easy data management** - one-click export and deletion
+
+### Interactive Features
+
+- **Clickable journal entries** - view full content and AI feedback in modal
+- **Auto-refresh functionality** - updated insights after mood check-ins
+- **Dynamic coping strategies** - personalized recommendations that change
+- **Mood history visualization** - complete emotional journey tracking
 
 ## 🏗️ Architecture
 
@@ -202,6 +219,7 @@ Tests cover:
 - **JWT** authentication
 - **OpenAI API** integration
 - **Rate limiting** and security middleware
+- **Strategy pool system** - comprehensive emotion-context mapping
 
 ### Frontend (Vanilla JavaScript)
 
@@ -209,13 +227,14 @@ Tests cover:
 - **Client-side encryption** using Web Crypto API
 - **Responsive design** with CSS Grid and Flexbox
 - **Progressive enhancement** - works without JavaScript
+- **Modal system** - beautiful overlays for detailed content
+- **Real-time updates** - automatic page refresh for fresh data
 
 ### Database Schema
 
 - **Users** - anonymous user accounts
-- **Mood Entries** - encrypted mood tracking data
+- **Mood Entries** - encrypted mood tracking data with emotions and contexts
 - **Journal Entries** - encrypted journal with AI responses
-- **Academic Events** - calendar events and deadlines
 - **Crisis Logs** - pattern detection and alerts
 
 ## 🚀 Deployment
@@ -243,9 +262,9 @@ NODE_ENV=production npm start
 ### Mood Patterns
 
 - **Trend analysis** - improving, declining, or stable
-- **Common emotions** - most frequent emotional states
-- **Stress patterns** - academic context correlation
-- **Recommendations** - personalized coping strategies
+- **Common emotions** - most frequent emotional states (8 core emotions)
+- **Stress patterns** - academic context correlation (8 contexts)
+- **Recommendations** - personalized coping strategies with randomization
 
 ### Journal Insights
 
@@ -253,6 +272,14 @@ NODE_ENV=production npm start
 - **Common themes** - academic, social, stress, health, future
 - **Entry length** - average characters per entry
 - **Emotional trends** - patterns in journal content
+- **AI feedback** - personalized responses for each entry
+
+### Coping Strategy System
+
+- **8 Core Emotions**: Anxious, Stressed, Lonely, Exhausted, Confident, Motivated, Excited, Frustrated
+- **8 Contexts**: Exams/Tests, Assignments, Social Life, Relationships, Family, Financial, Career/Future, Health
+- **Strategy Pools**: Each emotion-context combination has 2 pools with 4+ strategies each
+- **Randomization**: 2 strategies from each pool (4 total) for variety and personalization
 
 ## 🎓 College Student Features
 
@@ -270,6 +297,14 @@ NODE_ENV=production npm start
 - **Campus integration** - tips for feeling connected
 - **Peer support** - anonymous insights from other students
 
+### Mental Health Tools
+
+- **Mood tracking** - 1-10 scale with emotional context
+- **Journal writing** - AI-powered reflection with 30+ prompts
+- **Coping strategies** - evidence-based techniques for specific situations
+- **Crisis detection** - pattern recognition for concerning trends
+- **Professional resources** - campus and community mental health support
+
 ## 🔮 Future Enhancements
 
 ### Planned Features
@@ -278,13 +313,14 @@ NODE_ENV=production npm start
 - **Financial stress tools** - budget management and stress reduction
 - **Graduation transition** - senior year and post-college support
 - **Anonymous community** - safe space for peer sharing
+- **Integration APIs** - calendar and productivity tool connections
 
 ### Technical Improvements
 
 - **Progressive Web App** - offline functionality and app-like experience
 - **Advanced analytics** - machine learning for better pattern recognition
-- **Integration APIs** - calendar and productivity tool connections
 - **Multi-language support** - international student accessibility
+- **Voice journaling** - speech-to-text for easier journaling
 
 ## 🤝 Contributing
 
@@ -302,6 +338,8 @@ NODE_ENV=production npm start
 - **Proper error handling** with try/catch blocks
 - **Security-first approach** - validate all inputs
 - **Privacy by design** - encryption for all sensitive data
+- **Responsive design** - mobile-first approach
+- **Accessibility** - WCAG compliance
 
 ## 📞 Support & Resources
 
