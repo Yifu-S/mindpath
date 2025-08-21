@@ -1581,13 +1581,54 @@
       }
 
       async function loadJournalHistory() {
+        const historyContainer = document.getElementById("journalHistory");
+        if (!historyContainer) return;
+        
+        historyContainer.innerHTML = "";
+
+        try {
+          const token = localStorage.getItem("token");
+          if (token) {
+            // Try to fetch from API
+            const response = await fetch("/api/journal/history", {
+              headers: {
+                Authorization: `Bearer ${token}`,
+              },
+            });
+
+            if (response.ok) {
+              const journalData = await response.json();
+              
+              // Display last 5 journal entries
+              const recentJournals = journalData.slice(-5).reverse();
+              for (const journal of recentJournals) {
+                const journalItem = document.createElement("div");
+                journalItem.className = "journal-item";
+                journalItem.innerHTML = `
+                  <strong>${new Date(journal.created_at).toLocaleDateString()}</strong>
+                  <p style="margin-top: 5px; color: var(--gray);">
+                    ${journal.text.substring(0, 100)}${journal.text.length > 100 ? "..." : ""}
+                  </p>
+                `;
+                historyContainer.appendChild(journalItem);
+              }
+
+              if (recentJournals.length === 0) {
+                historyContainer.innerHTML =
+                  '<p style="color: var(--gray);">No journal entries yet. Start writing to track your thoughts!</p>';
+              }
+              return;
+            }
+          }
+        } catch (error) {
+          console.error("Error loading journal history:", error);
+        }
+
+        // Fallback to local storage if API fails
         const userData = StorageManager.getItem(
           `user_${currentUser.username}`
         ) || { moods: [], journals: [] };
-        const historyContainer = document.getElementById("journalHistory");
-        historyContainer.innerHTML = "";
-
-        // Load last 5 journal entries
+        
         const recentJournals = userData.journals.slice(-5).reverse();
         for (const encryptedJournal of recentJournals) {
           try {
@@ -1600,11 +1641,11 @@
             const journalItem = document.createElement("div");
             journalItem.className = "journal-item";
             journalItem.innerHTML = `
-                        <strong>${journal.date}</strong>
-                        <p style="margin-top: 5px; color: var(--gray);">
-                            ${journal.text.substring(0, 100)}${journal.text.length > 100 ? "..." : ""}
-                        </p>
-                    `;
+              <strong>${journal.date}</strong>
+              <p style="margin-top: 5px; color: var(--gray);">
+                ${journal.text.substring(0, 100)}${journal.text.length > 100 ? "..." : ""}
+              </p>
+            `;
             historyContainer.appendChild(journalItem);
           } catch (e) {
             console.error("Error decrypting journal entry");
@@ -1753,18 +1794,38 @@
         )
           return;
 
-        const userData = StorageManager.getItem(
-          `user_${currentUser.username}`
-        ) || { moods: [], journals: [] };
-        const dataStr = JSON.stringify(userData, null, 2);
-        const dataBlob = new Blob([dataStr], { type: "application/json" });
+        try {
+          const token = localStorage.getItem("token");
+          if (!token) {
+            showError("Please log in to export data");
+            return;
+          }
 
-        const link = document.createElement("a");
-        link.href = URL.createObjectURL(dataBlob);
-        link.download = `mindpath_backup_${Date.now()}.json`;
-        link.click();
+          const response = await fetch("/api/privacy/export", {
+            method: "POST",
+            headers: {
+              Authorization: `Bearer ${token}`,
+            },
+          });
 
-        showSuccess("Data exported successfully!");
+          if (response.ok) {
+            const userData = await response.json();
+            const dataStr = JSON.stringify(userData, null, 2);
+            const dataBlob = new Blob([dataStr], { type: "application/json" });
+
+            const link = document.createElement("a");
+            link.href = URL.createObjectURL(dataBlob);
+            link.download = `mindpath_backup_${Date.now()}.json`;
+            link.click();
+
+            showSuccess("Data exported successfully!");
+          } else {
+            showError("Failed to export data");
+          }
+        } catch (error) {
+          console.error("Export error:", error);
+          showError("Failed to export data");
+        }
       }
 
       function deleteAllData() {

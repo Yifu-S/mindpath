@@ -373,6 +373,43 @@ app.post('/api/journal', authenticateToken, async (req, res) => {
     }
 });
 
+// Get journal history
+app.get('/api/journal/history', authenticateToken, (req, res) => {
+    const userId = req.user.id;
+    const limit = parseInt(req.query.limit) || 10;
+
+    db.all(
+        `SELECT encrypted_data, iv, ai_response, created_at FROM journal_entries 
+         WHERE user_id = ? ORDER BY created_at DESC LIMIT ?`,
+        [userId, limit],
+        (err, rows) => {
+            if (err) {
+                return res.status(500).json({ error: 'Failed to fetch journal history' });
+            }
+
+            const journalData = rows.map(row => {
+                try {
+                    const decrypted = EncryptionService.decrypt(
+                        row.encrypted_data,
+                        row.iv,
+                        req.user.username
+                    );
+                    const journal = JSON.parse(decrypted);
+                    return {
+                        ...journal,
+                        ai_response: row.ai_response,
+                        created_at: row.created_at
+                    };
+                } catch (e) {
+                    return null;
+                }
+            }).filter(Boolean);
+
+            res.json(journalData);
+        }
+    );
+});
+
 // AI Support Function
 async function getAISupport(journalText, userId) {
     try {
@@ -844,8 +881,59 @@ app.get('/api/strategies', authenticateToken, async (req, res) => {
                     resolve([]);
                     return;
                 }
-                // Simplified - would properly decrypt and analyze in production
-                resolve(['stress', 'anxiety']);
+                
+                // Analyze actual mood data
+                const userPatterns = [];
+                rows.forEach(row => {
+                    try {
+                        const decrypted = EncryptionService.decrypt(
+                            row.encrypted_data,
+                            row.iv,
+                            req.user.username
+                        );
+                        const moodData = JSON.parse(decrypted);
+                        
+                        // Add emotions to patterns
+                        if (moodData.emotions) {
+                            moodData.emotions.forEach(emotion => {
+                                const lowerEmotion = emotion.toLowerCase();
+                                if (lowerEmotion.includes('anxious') || lowerEmotion.includes('stress')) {
+                                    userPatterns.push('anxiety', 'stress');
+                                }
+                                if (lowerEmotion.includes('lonely') || lowerEmotion.includes('alone')) {
+                                    userPatterns.push('loneliness', 'social');
+                                }
+                                if (lowerEmotion.includes('overwhelm') || lowerEmotion.includes('pressure')) {
+                                    userPatterns.push('stress', 'anxiety');
+                                }
+                                if (lowerEmotion.includes('tired') || lowerEmotion.includes('exhaust')) {
+                                    userPatterns.push('sleep', 'health');
+                                }
+                            });
+                        }
+                        
+                        // Add context to patterns
+                        if (moodData.context) {
+                            const lowerContext = moodData.context.toLowerCase();
+                            if (lowerContext.includes('exam') || lowerContext.includes('test') || lowerContext.includes('assignment')) {
+                                userPatterns.push('academic', 'focus');
+                            }
+                            if (lowerContext.includes('social') || lowerContext.includes('relationship')) {
+                                userPatterns.push('social', 'connection');
+                            }
+                        }
+                        
+                        // Add mood level patterns
+                        if (moodData.mood <= 3) {
+                            userPatterns.push('stress', 'anxiety');
+                        }
+                    } catch (e) {
+                        console.error('Error decrypting mood data for strategies');
+                    }
+                });
+                
+                // Remove duplicates and return unique patterns
+                resolve([...new Set(userPatterns)]);
             }
         );
     });
